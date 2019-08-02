@@ -10,7 +10,7 @@ Meteor.startup(() => {
     user = Accounts.createUser({
       email: "customer@food.com",
       password: "password",
-      type: "client"
+      type: "customer"
     });
     user = Accounts.createUser({
       email: "restaurant@food.com",
