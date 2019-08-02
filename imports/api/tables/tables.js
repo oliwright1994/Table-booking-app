@@ -48,7 +48,7 @@ Meteor.methods({
       }
     );
 
-    const booking = Tables.find({ _id: tableid });
+    booking = Tables.find({ _id: tableid });
 
     if (booking.placesAvailable === 0) {
       Tables.update(
