@@ -1,3 +1,3 @@
-import YourBookings from "./YourBookings";
+import YourBookings from "./YourBookingsContainer";
 
 export default YourBookings;

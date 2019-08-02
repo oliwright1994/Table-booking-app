@@ -1,3 +1,3 @@
-import CreateRestaurant from "./CreateRestaurant";
+import CreateRestaurant from "./CreateRestaurantContainer";
 
 export default CreateRestaurant;
