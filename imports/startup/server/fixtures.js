@@ -23,7 +23,8 @@ Meteor.startup(() => {
     Restaurants.insert({
       name: "Vinny's Paradise",
       email: "VP@food.com",
-      bio: "Good food for Vinnies",
+      bio:
+        "Sirloin hamburger jerky venison brisket turkey. Shoulder leberkas ground round swine pastrami picanha prosciutto brisket boudin tri-tip short loin filet mignon. Rump pork jowl pig, beef kielbasa salami pancetta porchetta ribeye frankfurter. Porchetta pork chop filet mignon tongue beef ribs capicola short loin, fatback biltong strip steak pork belly boudin jowl ball tip turducken. Meatloaf porchetta pork, sausage venison drumstick leberkas fatback t-bone strip steak meatball bresaola. Leberkas filet mignon pig turducken, hamburger shoulder t-bone capicola spare ribs shankle cow turkey.",
       capacity: "50",
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
@@ -34,7 +35,8 @@ Meteor.startup(() => {
     Restaurants.insert({
       name: "Jonny's Paradise",
       email: "JP@food.com",
-      bio: "Good food for Jonnies",
+      bio:
+        "Sirloin hamburger jerky venison brisket turkey. Shoulder leberkas ground round swine pastrami picanha prosciutto brisket boudin tri-tip short loin filet mignon. Rump pork jowl pig, beef kielbasa salami pancetta porchetta ribeye frankfurter. Porchetta pork chop filet mignon tongue beef ribs capicola short loin, fatback biltong strip steak pork belly boudin jowl ball tip turducken. Meatloaf porchetta pork, sausage venison drumstick leberkas fatback t-bone strip steak meatball bresaola. Leberkas filet mignon pig turducken, hamburger shoulder t-bone capicola spare ribs shankle cow turkey.",
       capacity: "50",
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
@@ -47,7 +49,8 @@ Meteor.startup(() => {
     Restaurants.insert({
       name: "Vegans Lovers",
       email: "VL@food.com",
-      bio: "Good food for Vegans",
+      bio:
+        "Sirloin hamburger jerky venison brisket turkey. Shoulder leberkas ground round swine pastrami picanha prosciutto brisket boudin tri-tip short loin filet mignon. Rump pork jowl pig, beef kielbasa salami pancetta porchetta ribeye frankfurter. Porchetta pork chop filet mignon tongue beef ribs capicola short loin, fatback biltong strip steak pork belly boudin jowl ball tip turducken. Meatloaf porchetta pork, sausage venison drumstick leberkas fatback t-bone strip steak meatball bresaola. Leberkas filet mignon pig turducken, hamburger shoulder t-bone capicola spare ribs shankle cow turkey.",
       capacity: "50",
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
@@ -60,7 +63,8 @@ Meteor.startup(() => {
     Restaurants.insert({
       name: "Cesar's",
       email: "Cesar@food.com",
-      bio: "Good food for pepolpe",
+      bio:
+        "Sirloin hamburger jerky venison brisket turkey. Shoulder leberkas ground round swine pastrami picanha prosciutto brisket boudin tri-tip short loin filet mignon. Rump pork jowl pig, beef kielbasa salami pancetta porchetta ribeye frankfurter. Porchetta pork chop filet mignon tongue beef ribs capicola short loin, fatback biltong strip steak pork belly boudin jowl ball tip turducken. Meatloaf porchetta pork, sausage venison drumstick leberkas fatback t-bone strip steak meatball bresaola. Leberkas filet mignon pig turducken, hamburger shoulder t-bone capicola spare ribs shankle cow turkey.",
       capacity: "50",
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
