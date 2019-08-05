@@ -9,13 +9,18 @@ Meteor.startup(() => {
   if (Meteor.users.find().count() === 0) {
     user = Accounts.createUser({
       email: "customer@food.com",
-      password: "password",
-      type: "customer"
+      profile: {
+        "usertype": "customer"
+      }
+
     });
     user = Accounts.createUser({
       email: "restaurant@food.com",
       password: "password",
-      type: "restaurant"
+      profile: {
+        "usertype": "restaurant"
+      }
+
     });
   }
 

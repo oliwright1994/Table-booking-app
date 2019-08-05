@@ -24,7 +24,7 @@ export default class AccountsUIWrapper extends Component {
     this.state = {
       formToggle: true,
       error: null,
-      type: 'customer'
+      usertype: 'customer'
     };
   }
   signUp = (user) => {
@@ -59,11 +59,12 @@ export default class AccountsUIWrapper extends Component {
       <Form
         // validate={validate.bind(this)}
         onSubmit={values => {
-          const user = { email: values.email, password: values.password, type: values.usertype };
+          const user = { email: values.email, password: values.password, usertype: this.state.usertype };
           this.state.formToggle
             ? this.logIn(user)
             : this.signUp(user);
-          console.log(values);
+          console.log(user);
+          console.log("usertype is: ", this.state.usertype)
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form onSubmit={handleSubmit}
@@ -78,11 +79,11 @@ export default class AccountsUIWrapper extends Component {
                   {({ input, meta }) => {
                     return (
                       <RadioGroup
-                        aria-label="gender"
-                        name="gender1"
+                        aria-label="usertype"
+                        name="usertype"
                         // className={classes.group}
                         value={input.value}
-                        onChange={this.handleChange.bind(this)}
+                        onChange={this.handleChange}
                       >
                         <FormControlLabel value="restaurant" checked={this.state.type == 'restaurant'} control={<Radio />} label="Restaurant" />
                         <FormControlLabel value="customer" checked={this.state.type == 'customer'} control={<Radio />} label="Customer" />
