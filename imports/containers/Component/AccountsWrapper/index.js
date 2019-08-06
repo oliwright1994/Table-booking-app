@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Accounts } from 'meteor/accounts-base'
 import { Form, Field } from 'react-final-form';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -12,9 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Meteor } from "meteor/meteor"
 
@@ -24,7 +20,7 @@ export default class AccountsUIWrapper extends Component {
     this.state = {
       formToggle: true,
       error: null,
-      usertype: 'customer'
+      usertype: ''
     };
   }
   signUp = (user) => {
@@ -39,25 +35,17 @@ export default class AccountsUIWrapper extends Component {
   logIn = (user) => {
     const { email, password } = user;
     Meteor.call("users.logIn", email, password)
-    // Meteor.loginWithPassword(email, password, function (error) {
-
-    //   if (Meteor.user()) {
-    //     console.log(Meteor.userId());
-    //   } else {
-    //     console.log("ERROR: " + error.reason);
-    //   }
-    // });
   }
 
   handleChange = (event) => {
-    this.setState({ type: event.target.value })
+    this.setState({ usertype: event.target.value })
   }
 
   render() {
     const { classes } = this.props;
     return (
       <Form
-        // validate={validate.bind(this)}
+        // TODO validate={validate.bind(this)}
         onSubmit={values => {
           const user = { email: values.email, password: values.password, usertype: this.state.usertype };
           this.state.formToggle
@@ -85,8 +73,8 @@ export default class AccountsUIWrapper extends Component {
                         value={input.value}
                         onChange={this.handleChange}
                       >
-                        <FormControlLabel value="restaurant" checked={this.state.type == 'restaurant'} control={<Radio />} label="Restaurant" />
-                        <FormControlLabel value="customer" checked={this.state.type == 'customer'} control={<Radio />} label="Customer" />
+                        <FormControlLabel value="restaurant" checked={this.state.usertype == 'restaurant'} control={<Radio />} label="Restaurant" />
+                        <FormControlLabel value="customer" checked={this.state.usertype == 'customer'} control={<Radio />} label="Customer" />
                       </RadioGroup>
                     )
                   }}
@@ -160,7 +148,6 @@ export default class AccountsUIWrapper extends Component {
                     // className={classes.formToggle}
                     type="button"
                     onClick={() => {
-                      // form.reset();
                       this.setState({
                         formToggle: !this.state.formToggle
                       });
