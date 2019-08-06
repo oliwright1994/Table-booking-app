@@ -9,10 +9,18 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
       <img src={imageurl} className={classes.image} />
       <h1 className={classes.restaurantName}>{name}</h1>
       <p>{bio}</p>
-      <div>
-        <p>Cuisines:</p>
-        <ul>{cuisines ? cuisines.map(cuisine => <li>{cuisine}</li>) : null}</ul>
-      </div>
+
+      {cuisines ? (
+        <div>
+          <p>Cuisines:</p>
+          <ul>
+            {cuisines.map(cuisine => (
+              <li>{cuisine}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
       {/* Uncomment this section when review card is finished and imported */}
       {/* <div>
         {reviews ? (
