@@ -11,6 +11,9 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../client/theme";
 // import { Meteor } from "meteor/meteor";
 
+// import Restaurants from "../../api/restaurants";
+import AccountsUIWrapper from "../Component/AccountsWrapper"
+import { Meteor } from "meteor/meteor"
 class App extends Component {
   render() {
     return (
