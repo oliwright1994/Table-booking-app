@@ -11,10 +11,12 @@ import Login from "../pages/Login";
 import Restaurant from "../pages/Restaurant";
 import YourBookings from "../pages/YourBookings";
 import Bookings from "../pages/Bookings";
+import TopBar from "../Component/TopBar";
 
 export default () => {
   return (
     <Fragment>
+      <TopBar />
       <Switch>
         <Route exact path="/welcome" component={Login} />
         <Route exact path="/bookings" component={Bookings} />
