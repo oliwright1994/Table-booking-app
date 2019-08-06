@@ -9,3 +9,16 @@ if (Meteor.isServer) {
     return Reviews.find({});
   });
 }
+
+Meteor.methods({
+  "reviews.createReview"(values, userId, restaurantId) {
+    Reviews.insert({
+      author: userId,
+      restaurantId: restaurantId,
+      date: new Date(),
+      rating: values.rating,
+      text: values.text,
+      impression: values.impression
+    });
+  }
+});

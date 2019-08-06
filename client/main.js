@@ -6,3 +6,4 @@ import App from "../imports/containers/App/index";
 Meteor.startup(() => {
     render(<App />, document.getElementById('root'));
 });
+
