@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
-import { FormControl, TextField } from "@material-ui/core";
+import {
+  FormControl,
+  TextField,
+  Select,
+  MenuItem,
+  FormHelperText
+} from "@material-ui/core";
 class TableForm extends Component {
   state = {
     text: ""
@@ -36,7 +42,7 @@ class TableForm extends Component {
                         inputProps={{ ...input }}
                         label="Insert discount here"
                         value={input.value}
-                        margin="normal"
+                        // margin="normal"
                       />
                     </label>
                   )}
@@ -44,7 +50,6 @@ class TableForm extends Component {
               </div>
 
               <div>
-                {/* <label>Notes</label> */}
                 <Field
                   name="Notes"
                   render={({ input, meta }) => (
@@ -52,27 +57,33 @@ class TableForm extends Component {
                       <TextField
                         id="Notes"
                         inputProps={{ ...input }}
-                        label="Descriptions for tables"
+                        label="Descriptions for table"
                         value={input.value}
-                        margin="noraml"
+                        // margin="noraml"
                       />
                     </label>
                   )}
                 />
               </div>
 
-              <div>
-                <Field
-                  name="bio"
-                  render={({ input, meta }) => (
-                    <div>
-                      <label>Bio</label>
-                      <textarea {...input} />
-                      {meta.touched && meta.error && <span>{meta.error}</span>}
-                    </div>
-                  )}
-                />
-              </div>
+              {/* <div>
+                <FormControl>
+                  <Select
+                    value={values.age}
+                    onChange={handleChange}
+                    displayEmpty
+                    name="age"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                  <FormHelperText>Without label</FormHelperText>
+                </FormControl>
+              </div> */}
 
               {/* <button type="submit" disabled={pristine || invalid}>
                 Submit
