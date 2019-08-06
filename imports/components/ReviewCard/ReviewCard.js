@@ -6,9 +6,9 @@ const ReviewCard = ({ review }) => {
   const { text, date, rating, impression } = review;
   return (
     <Card>
-      <p>{impression}</p>
+      <p>{impression ? impression : "No overall impression yet"}</p>
       <Rating value={rating} readOnly />
-      <p>"{text}"</p>
+      <p>"{text ? text : "No review given"}"</p>
       <p>{date.toLocaleDateString("en-US")}</p>
     </Card>
   );
