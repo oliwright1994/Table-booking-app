@@ -7,7 +7,7 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
   return (
     <div>
       <img src={imageurl} className={classes.image} />
-      <h1>{name}</h1>
+      <h1 className={classes.restaurantName}>{name}</h1>
       <p>{bio}</p>
       <div>
         <p>Cuisines:</p>

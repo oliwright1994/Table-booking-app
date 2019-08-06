@@ -29,6 +29,7 @@ export default withTracker(() => {
   // Meteor.subscribe("users");
   Meteor.subscribe("restaurants");
 
+  //The line below needs to be replaced with the correct id from the url
   const restaurantId = 4;
 
   return {
