@@ -39,11 +39,11 @@ class BookingCard extends Component {
 
     render() {
         const { classes, restaurant, table } = this.props;
+        console.log("imageurl", restaurant.imageurl);
         const tableDefaultNotes = "This is nice restautant, come eat here. We have food and table and seats";
         const spaceDropdown = [];
-        for (let i = 4; i > 0; i--) {
-            // table.placesAvailable
-            // console.log(i);
+
+        for (let i = table.placesAvailable; i > 0; i--) {
             spaceDropdown.push(i);
         }
         return (
@@ -57,8 +57,11 @@ class BookingCard extends Component {
                     <CardActionArea>
                         <CardMedia
                             // className={classes.media}
-                            src={(restaurant.imageurl) ? restaurant.imageurl : "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"}
+                            image={restaurant.imageurl ? restaurant.imageurl : "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"}
                             title="restaurant Image"
+                            height='200'
+                            component='img'
+                            width='200'
                         />
                         <CardContent
                         // className={classes.content}
@@ -76,7 +79,7 @@ class BookingCard extends Component {
                                         {/* restaurant name */}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {/* {restaurant.cuisines.joint(",")} */}
+                                        {restaurant.cuisines.join(", ")}
                                         {/* restaurant cuisine */}
                                     </Typography>
                                 </Typography>
