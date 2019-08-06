@@ -23,7 +23,7 @@ export default withTracker(() => {
   Meteor.subscribe("reviews");
   Meteor.subscribe("tables");
   // Meteor.subscribe("users");
-  Meteor.subscribe("restaurant");
+  Meteor.subscribe("restaurants");
 
   return {
     currentUser: Meteor.user(),
