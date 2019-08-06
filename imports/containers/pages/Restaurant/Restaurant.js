@@ -6,6 +6,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Link from "@material-ui/core/Link";
+// import BookingCard from "../../../components/BookingCard"
+// import ReviewCard from "../../../components/ReviewCard"
 
 const Restaurant = ({ classes, restaurant, reviews, table }) => {
   const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
