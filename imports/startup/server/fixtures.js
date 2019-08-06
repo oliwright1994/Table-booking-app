@@ -126,7 +126,7 @@ Meteor.startup(() => {
       discount: "20%",
       notes: "Lorem ipsum",
       created: new Date(),
-      customers: [],
+      customers: [{ customerId: "zTW5ipq5Z634Li9CC", guests: 2 }],
       placesAvailable: 4,
       available: true,
       owner: 1
