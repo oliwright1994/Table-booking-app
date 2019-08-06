@@ -34,7 +34,8 @@ Meteor.startup(() => {
       email: "vinnie@aol.com",
       website: "vinnies.com",
       id: 1,
-      cuisines: ["Seafood", "Burger", "All American"]
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 4
     });
     Restaurants.insert({
       name: "Jonny's Paradise",
@@ -49,7 +50,8 @@ Meteor.startup(() => {
       imageurl:
         "https://tastet.ca/wp-content/uploads/2018/10/restaurant-lexpress-montreal-3-1024x684.jpg",
       id: 2,
-      cuisines: ["Seafood", "Burger", "All American"]
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 2
     });
     Restaurants.insert({
       name: "Vegans Lovers",
@@ -64,7 +66,8 @@ Meteor.startup(() => {
       imageurl:
         "https://file.videopolis.com/D/9dc9f4ba-0b2d-4cbb-979f-fee7be8a4198/8485.11521.brussels.the-hotel-brussels.amenity.restaurant-AD3WAP2L-13000-853x480.jpeg",
       id: 3,
-      cuisines: ["Seafood", "Burger", "All American"]
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 3.5
     });
     Restaurants.insert({
       name: "Cesar's",
@@ -79,7 +82,8 @@ Meteor.startup(() => {
       imageurl:
         "https://webbox.imgix.net/images/uzmdqklkumcnknpv/b7b8bb9a-7c0a-4d8f-bd8d-e10df7924123.jpg?auto=format,compress&fit=crop&crop=entropy",
       id: 4,
-      cuisines: ["Seafood", "Burger", "All American"]
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 5
     });
   }
 
@@ -88,25 +92,30 @@ Meteor.startup(() => {
       restaurantId: 1,
       rating: 5,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text: "Please tell us your feedback!",
+      impression: "Pretty good!"
     });
     Reviews.insert({
       restaurantId: 1,
       rating: 2,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text: "Had a wondeful time here on our daugthers quinceanera!",
+      impression: "Pretty good!"
     });
     Reviews.insert({
       restaurantId: 3,
       rating: 4,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text:
+        "The best reasons to go to the Paris Café are Saarinen’s glass walls, gliding curves and suspended catwalk, although the dining areas are swell, too, smartly evoking Raymond Loewy’s original design for the space, which looked like a coffee shop on the moon. ",
+      impression: "Bit Pricey!"
     });
     Reviews.insert({
       restaurantId: 4,
       rating: 3,
       date: new Date(),
-      text: "very nice"
+      text: "Very nice",
+      impression: "Decent"
     });
   }
 
