@@ -3,7 +3,7 @@ import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
 const Restaurant = ({ classes, restaurant, reviews, table }) => {
-  const { name, imageurl, bio, cuisines } = restaurant;
+  const { name, imageurl, bio, cuisines, website, adress, phone } = restaurant;
   return (
     <div>
       <img src={imageurl} className={classes.image} />
@@ -29,6 +29,14 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
           <p>No reviews yet</p>
         )}
       </div> */}
+
+      <div>
+        <p>Adress:{adress}</p>
+        <p>
+          Website:<a href={website}>{website}</a>
+        </p>
+        <p>Phone:{phone}</p>
+      </div>
 
       {/* Uncomment line below when booking card component is finished and imported */}
       {/* <div>
