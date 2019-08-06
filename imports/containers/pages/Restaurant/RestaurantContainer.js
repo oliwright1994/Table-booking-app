@@ -30,7 +30,7 @@ export default withTracker(() => {
   Meteor.subscribe("restaurants");
 
   //The line below needs to be replaced with the correct id from the url
-  const restaurantId = 4;
+  const restaurantId = 3;
 
   return {
     currentUser: Meteor.user(),
