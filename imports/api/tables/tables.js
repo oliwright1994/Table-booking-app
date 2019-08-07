@@ -25,14 +25,15 @@ Meteor.methods({
     });
   },
   "tables.updateBooking"(tableId, userId, numberOfGuests) {
-    const booking = Tables.find({ _id: tableId })
+    const booking = Tables.find({ _id: tableId });
+    const placesAvailable = booking.placesAvailable - numberOfGuests;
 
-    // if (booking.customers.includes({ customerId: userId })) {
-    //   throw new Meteor.Error(
-    //     "tables.deleteTable.not-authorized",
-    //     "You are already booked on this table."
-    //   );
-    // }
+    if (booking.customers.includes({ customerId: userId })) {
+      throw new Meteor.Error(
+        "tables.deleteTable.not-authorized",
+        "You are already booked on this table."
+      );
+    }
 
     Tables.update(
       {
@@ -43,14 +44,12 @@ Meteor.methods({
           customers: { customerId: userId, guests: numberOfGuests }
         },
         $inc: {
-          placesAvailable: - numberOfGuests
+          placesAvailable
         }
       }
     );
 
-
-
-    if (booking.placesAvailable === 0) {
+    if (placesAvailable === 0) {
       Tables.update(
         {
           _id: tableId

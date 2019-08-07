@@ -1,3 +1,3 @@
-import Restaurant from "./RestaurantContainer";
+import RestaurantContainer from "./RestaurantContainer";
 
-export default Restaurant;
+export default RestaurantContainer;
