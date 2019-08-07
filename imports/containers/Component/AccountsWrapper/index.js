@@ -1,45 +1,44 @@
 import React, { Component } from "react";
-import { Form, Field } from 'react-final-form';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import { Meteor } from "meteor/meteor"
+import { Form, Field } from "react-final-form";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import { Meteor } from "meteor/meteor";
+import styles from "./styles";
 
-export default class AccountsUIWrapper extends Component {
+class AccountsUIWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
       formToggle: true,
       error: null,
-      usertype: ''
+      usertype: ""
     };
   }
-  signUp = (user) => {
+  signUp = user => {
     const { email, password, usertype } = user;
     Meteor.call("users.createUser", email, password, usertype, (err, res) => {
-      if (err) console.log(err)
-      else console.log(res)
-    })
+      if (err) console.log(err);
+      else console.log(res);
+    });
+  };
 
-  }
-
-  logIn = (user) => {
+  logIn = user => {
     const { email, password } = user;
-    Meteor.call("users.logIn", email, password)
-  }
+    Meteor.call("users.logIn", email, password);
+  };
 
-  handleChange = (event) => {
-    this.setState({ usertype: event.target.value })
-  }
+  handleChange = event => {
+    this.setState({ usertype: event.target.value });
+  };
 
   render() {
     const { classes } = this.props;
@@ -47,20 +46,24 @@ export default class AccountsUIWrapper extends Component {
       <Form
         // TODO validate={validate.bind(this)}
         onSubmit={values => {
-          const user = { email: values.email, password: values.password, usertype: this.state.usertype };
-          this.state.formToggle
-            ? this.logIn(user)
-            : this.signUp(user);
+          const user = {
+            email: values.email,
+            password: values.password,
+            usertype: this.state.usertype
+          };
+          this.state.formToggle ? this.logIn(user) : this.signUp(user);
           console.log(user);
-          console.log("usertype is: ", this.state.usertype)
+          console.log("usertype is: ", this.state.usertype);
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
-          <form onSubmit={handleSubmit}
-          // className={classes.accountForm}
+          <form
+            onSubmit={handleSubmit}
+            // className={classes.accountForm}
           >
             {!this.state.formToggle && (
-              <FormControl fullWidth
-              // className={classes.formControl}
+              <FormControl
+                fullWidth
+                // className={classes.formControl}
               >
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
@@ -69,22 +72,29 @@ export default class AccountsUIWrapper extends Component {
                       <RadioGroup
                         aria-label="usertype"
                         name="usertype"
-                        // className={classes.group}
+                        className={classes.group}
                         value={input.value}
                         onChange={this.handleChange}
                       >
-                        <FormControlLabel value="restaurant" checked={this.state.usertype == 'restaurant'} control={<Radio />} label="Restaurant" />
-                        <FormControlLabel value="customer" checked={this.state.usertype == 'customer'} control={<Radio />} label="Customer" />
+                        <FormControlLabel
+                          value="restaurant"
+                          checked={this.state.usertype == "restaurant"}
+                          control={<Radio />}
+                          label="Restaurant"
+                        />
+                        <FormControlLabel
+                          value="customer"
+                          checked={this.state.usertype == "customer"}
+                          control={<Radio />}
+                          label="Customer"
+                        />
                       </RadioGroup>
-                    )
+                    );
                   }}
                 </Field>
-
               </FormControl>
             )}
-            <FormControl fullWidth
-            // className={classes.formControl}
-            >
+            <FormControl fullWidth className={classes.formControl}>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Field name="email">
                 {({ input, meta }) => {
@@ -94,18 +104,15 @@ export default class AccountsUIWrapper extends Component {
                       type="text"
                       inputProps={{
                         ...input,
-                        autoComplete: 'off'
+                        autoComplete: "off"
                       }}
                       value={input.value}
-
                     />
-                  )
+                  );
                 }}
               </Field>
             </FormControl>
-            <FormControl fullWidth
-            // className={classes.formControl}
-            >
+            <FormControl fullWidth className={classes.formControl}>
               <InputLabel htmlFor="password">Password</InputLabel>
               <Field name="password">
                 {({ input, meta }) => (
@@ -114,17 +121,14 @@ export default class AccountsUIWrapper extends Component {
                     type="password"
                     inputProps={{
                       ...input,
-                      autoComplete: 'off'
+                      autoComplete: "off"
                     }}
                     value={input.value}
                   />
-                )
-                }
+                )}
               </Field>
             </FormControl>
-            <FormControl
-            // className={classes.formControl}
-            >
+            <FormControl className={classes.formControlButtom}>
               <Grid
                 container
                 direction="row"
@@ -133,19 +137,17 @@ export default class AccountsUIWrapper extends Component {
               >
                 <Button
                   type="submit"
-                  // className={classes.formButton}
+                  className={classes.formButton}
                   variant="contained"
                   size="large"
                   color="secondary"
-                  disabled={
-                    pristine || invalid
-                  }
+                  disabled={pristine || invalid}
                 >
-                  {this.state.formToggle ? 'Enter' : 'Create Account'}
+                  {this.state.formToggle ? "Enter" : "Create Account"}
                 </Button>
                 <Typography>
                   <button
-                    // className={classes.formToggle}
+                    className={classes.formToggle}
                     type="button"
                     onClick={() => {
                       this.setState({
@@ -154,20 +156,17 @@ export default class AccountsUIWrapper extends Component {
                     }}
                   >
                     {this.state.formToggle
-                      ? 'Create an account.'
-                      : 'Login to existing account.'}
+                      ? "Create an account."
+                      : "Login to existing account."}
                   </button>
                 </Typography>
               </Grid>
             </FormControl>
           </form>
-        )
-        }
-
+        )}
       />
-
-    )
+    );
   }
-
-
 }
+
+export default withStyles(styles)(AccountsUIWrapper);
