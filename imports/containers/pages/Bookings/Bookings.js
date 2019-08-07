@@ -15,7 +15,7 @@ const Bookings = ({ classes, restaurants, tables }) => {
           restaurant => restaurant.id === table.restaurantId
         );
         return (
-          <BookingCard restaurant={restaurant} table={table} />
+          <BookingCard key={table._id} restaurant={restaurant} table={table} />
 
         );
 

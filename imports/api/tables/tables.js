@@ -25,7 +25,7 @@ Meteor.methods({
     });
   },
   "tables.updateBooking"(tableId, userId, numberOfGuests) {
-    const booking = Tables.find({ _id: tabledId });
+    const booking = Tables.find({ _id: tableId })
 
     // if (booking.customers.includes({ customerId: userId })) {
     //   throw new Meteor.Error(
@@ -36,19 +36,19 @@ Meteor.methods({
 
     Tables.update(
       {
-        _id: tabledId
+        _id: tableId
       },
       {
         $addToSet: {
           customers: { customerId: userId, guests: numberOfGuests }
         },
         $inc: {
-          placesAvailable: -numberOfGuests
+          placesAvailable: - numberOfGuests
         }
       }
     );
 
-    booking = Tables.find({ _id: tableid });
+
 
     if (booking.placesAvailable === 0) {
       Tables.update(
@@ -59,8 +59,8 @@ Meteor.methods({
       );
     }
   },
-  "tables.deleteTable"(tabledId, userId) {
-    const booking = Tables.find({ _id: tabledId });
+  "tables.deleteTable"(tableId, userId) {
+    const booking = Tables.find({ _id: tableId });
 
     // if (booking.owner !== userId) {
     //   throw new Meteor.Error(
