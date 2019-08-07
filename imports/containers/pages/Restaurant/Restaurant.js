@@ -71,7 +71,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
             <div>
               <Typography component="p">Address: {address}</Typography>
               <Typography component="p">
-                Website:{" "}
+                Website:
                 <Link className={classes.website} href={website}>
                   {website}
                 </Link>
@@ -83,7 +83,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {reviews.find(review => review.author == user) ? (
+            {reviews.find(review => review.author === user) ? (
               <Typography component="p">
                 Thanks for leaving a review!
               </Typography>
