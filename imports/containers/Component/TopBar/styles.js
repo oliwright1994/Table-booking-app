@@ -14,6 +14,17 @@ const styles = theme => ({
   logo: {
     height: "80px",
     width: "80px"
+  },
+
+  avatar: {
+    width: "35px",
+    height: "35px"
+  },
+
+  smallcontainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   }
 });
 
