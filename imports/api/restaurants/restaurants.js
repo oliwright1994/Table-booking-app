@@ -23,20 +23,22 @@ Meteor.methods({
       website: ""
     });
   },
-  "restaurants.updateProfile"(values, restaurantId) {
+  "restaurants.updateProfile"(values, userId, restaurantId) {
     Restaurants.update(
-      { _id: restaurantId },
+      { owner: userId },
       {
         $set: {
+          owner: userId,
           name: values.name,
-          description: values.description,
+          bio: values.description,
           imageurl: values.imageurl,
           phone: values.phone,
-          adress: values.adress,
+          adress: values.address,
           email: values.email,
           website: values.website
         }
-      }
+      },
+      { upsert: true }
     );
   }
 });
