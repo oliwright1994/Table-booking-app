@@ -25,7 +25,7 @@ export default withTracker(() => {
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    tables: Tables.find({ available: true }).fetch(),
+    tables: Tables.find({ placesAvailable: { $gt: 0 } }).fetch(),
     restaurants: Restaurants.find({}).fetch()
   };
 })(BookingsContainer);
