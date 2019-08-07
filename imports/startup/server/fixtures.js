@@ -85,6 +85,14 @@ Meteor.startup(() => {
       cuisines: ["Seafood", "Burger", "All American"],
       rating: 5
     });
+    Restaurants.insert({
+      name: "Vinny's Paradise",
+      email: "VP@food.com",
+      bio: "Good food for Vinnies",
+      capacity: "50",
+      phone: "1-(800)-888-0215",
+      address: "1490 Broadway Street, Vancouver"
+    });
   }
 
   if (Reviews.find().count() === 0) {
