@@ -22,13 +22,13 @@ Meteor.methods({
       impression: values.impression
     });
 
-    const restaurantReviews = db.reviews.find(
+    const restaurantReviews = Reviews.find(
       { restaurantId: restaurantId },
       { _id: 0, rating: 1 }
-    );
+    ).fetch();
     const restaurantRaitings = restaurantReviews.map(review => review.rating);
     const newRating =
-      restaurantRaitings.filter((a, b) => a + b, 0) / restauratRaitings.length;
+      restaurantRaitings.filter((a, b) => a + b, 0) / restaurantRaitings.length;
     Restaurants.update({ _id: restaurantId }, { $set: { rating: newRating } });
   }
 });

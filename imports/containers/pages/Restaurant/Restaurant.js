@@ -9,8 +9,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Link from "@material-ui/core/Link";
 import BookingCard from "../../Component/BookingCard";
 import ReviewCard from "../../Component/ReviewCard";
+import ReviewForm from "../../Component/ReviewForm";
 
-const Restaurant = ({ classes, restaurant, reviews, table }) => {
+const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
   return (
     <div className={classes.root}>
@@ -82,7 +83,13 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
                 </Typography>
               </Typography>
             </div>
-            {/* put review form here */}
+            {reviews.find(review => review.author == user) ? (
+              <Typography component="p">
+                Thanks for leaving a review!
+              </Typography>
+            ) : (
+              <ReviewForm restaurantId={restaurant.id} userId={user} />
+            )}
           </div>
         </div>
       </div>
