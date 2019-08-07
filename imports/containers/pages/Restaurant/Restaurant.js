@@ -7,14 +7,21 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Link from "@material-ui/core/Link";
-// import BookingCard from "../../../components/BookingCard"
-// import ReviewCard from "../../../components/ReviewCard"
+import BookingCard from "../../Component/BookingCard";
+import ReviewCard from "../../Component/ReviewCard";
 
 const Restaurant = ({ classes, restaurant, reviews, table }) => {
   const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
   return (
     <div className={classes.root}>
-      <img src={imageurl} className={classes.image} />
+      <img
+        src={
+          imageurl !== undefined
+            ? imageurl
+            : "http://via.placeholder.com/350x250?text=No picture yet!"
+        }
+        className={classes.image}
+      />
       <div className={classes.restaurantContent}>
         <Typography component="h1" className={classes.restaurantName}>
           {name}
@@ -27,7 +34,7 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
                 <Typography>Cuisines: </Typography>
                 <List dense>
                   {cuisines.map(cuisine => (
-                    <ListItem className={classes.cuisineListItem}>
+                    <ListItem className={classes.cuisineListItem} key={cuisine}>
                       <ListItemText primary={`•  ${cuisine}`} />
                     </ListItem>
                   ))}
@@ -36,26 +43,29 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
             ) : null}
 
             <div className={classes.singleColumn}>
-              {/* Uncomment this section when review card is finished and imported */}
-              {/* {reviews ? (
-          reviews.map(review => <ReviewCard review={review} />)
-        ) : (
-          <p>No reviews yet</p>
-        )} */}
+              <Typography className={classes.bookingHeadline} component="h2">
+                Reviews
+              </Typography>
+              {reviews.length !== 0 ? (
+                reviews.map(review => (
+                  <ReviewCard review={review} key={review._id} />
+                ))
+              ) : (
+                <p>No reviews yet, be the first!</p>
+              )}
             </div>
           </div>
 
-          {/* Uncomment line below when booking card component is finished and imported */}
           <div className={classes.singleColumn}>
             <div>
               <Typography className={classes.bookingHeadline} component="h2">
                 Current Booking:
               </Typography>
-              {/* {table ? (
-          <BookingCard restaurant={restaurant} table={table} />
-        ) : (
-          <p>No table available right now.</p>
-        )} */}
+              {table && table.placesAvailable > 0 ? (
+                <BookingCard restaurant={restaurant} table={table} />
+              ) : (
+                <p>No table available right now.</p>
+              )}
             </div>
             <div>
               <Typography component="p">Address: {address}</Typography>
@@ -78,7 +88,6 @@ const Restaurant = ({ classes, restaurant, reviews, table }) => {
       </div>
     </div>
   );
-
 };
 
 export default withStyles(styles)(Restaurant);

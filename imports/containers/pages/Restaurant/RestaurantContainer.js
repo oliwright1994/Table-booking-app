@@ -4,19 +4,29 @@ import { Reviews } from "../../../api/reviews/reviews";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
+import { Redirect } from "react-router";
 
 class RestaurantContainer extends Component {
   render() {
-    console.log(this.props);
-    const { reviews, tables, restaurant } = this.props;
-    if (restaurant.length === 0) {
+    const { reviews, tables, restaurants } = this.props;
+    let restaurantId = this.props.match.params.restaurantId;
+    if (restaurants.length === 0) {
       return <div>Loading...</div>;
+    } else if (
+      restaurants.find(restaurant => restaurant.id == restaurantId) ===
+      undefined
+    ) {
+      return <Redirect to="/bookings" />;
     } else {
       return (
         <Restaurant
-          restaurant={restaurant[0]}
-          table={tables[0]}
-          reviews={reviews}
+          restaurant={restaurants.find(
+            restaurant => restaurant.id == restaurantId
+          )}
+          table={tables.find(table => table.restaurantId == restaurantId)}
+          reviews={reviews.filter(
+            reviews => reviews.restaurantId == restaurantId
+          )}
         />
       );
     }
@@ -30,14 +40,13 @@ export default withTracker(() => {
   Meteor.subscribe("restaurants");
 
   //The line below needs to be replaced with the correct id from the url
-  const restaurantId = 3;
 
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    reviews: Reviews.find({ restaurantId: restaurantId }).fetch(),
-    tables: Tables.find({ restaurantId: restaurantId }).fetch(),
+    reviews: Reviews.find({}).fetch(),
+    tables: Tables.find({}).fetch(),
     // users: Users.find({}).fetch(),
-    restaurant: Restaurants.find({ id: restaurantId }).fetch()
+    restaurants: Restaurants.find({}).fetch()
   };
 })(RestaurantContainer);
