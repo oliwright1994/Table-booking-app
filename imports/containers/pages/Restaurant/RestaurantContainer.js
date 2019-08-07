@@ -9,8 +9,6 @@ import { Redirect } from "react-router";
 class RestaurantContainer extends Component {
   render() {
     const { reviews, tables, restaurants, currentUserId } = this.props;
-    console.log(this.props);
-    console.log(currentUserId);
     let restaurantId = this.props.match.params.restaurantId;
     if (restaurants.length === 0 || currentUserId === undefined) {
       return <div>Loading...</div>;
