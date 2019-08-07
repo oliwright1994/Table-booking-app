@@ -7,20 +7,38 @@ import styles from "./styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import React, { Component } from "react";
 
 class CreateRestaurant extends Component {
   constructor({ props }) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedCuisines: []
+    };
   }
 
   updateRestaurant(values) {
     Meteor.call("restaurants.updateProfile", values, this.props.userId);
   }
+
+  handleSelectCuisine(event) {
+    this.setState({ selectedCuisines: event.target.value });
+  }
+
+  generateTagsText(cuisines, selected) {
+    return cuisines
+      .map(cuisine =>
+        selected.indexOf(cuisine._id) > -1 ? cuisine.title : false
+      )
+      .filter(e => e)
+      .join(", ");
+  }
   render() {
-    const { restaurant, classes } = this.props;
+    const { restaurant, classes, cuisines } = this.props;
     return (
       <div>
         <Form
@@ -144,6 +162,41 @@ class CreateRestaurant extends Component {
                       />
                     )}
                   />
+                </FormControl>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="cuisines">Add some Cuisines</InputLabel>
+                  <Field name="cuisines">
+                    {({ input, meta }) => {
+                      return (
+                        <Select
+                          fullWidth={true}
+                          multiple
+                          value={this.state.selectedCuisines}
+                          onChange={e => this.handleSelectCuisine(e)}
+                          renderValue={selected => {
+                            return this.generateCuisinesText(
+                              cuisines,
+                              selected
+                            );
+                          }}
+                        >
+                          {cuisines &&
+                            cuisines.map(cuisine => (
+                              <MenuItem key={cuisine._id} value={cuisine.title}>
+                                <Checkbox
+                                  checked={
+                                    this.state.selectedCuisines.indexOf(
+                                      cuisine._id
+                                    ) > -1
+                                  }
+                                />
+                                <ListItemText primary={cuisine.title} />
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      );
+                    }}
+                  </Field>
                 </FormControl>
                 <Button
                   variant="contained"
