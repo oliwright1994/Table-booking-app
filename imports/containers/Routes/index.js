@@ -20,7 +20,7 @@ export default () => {
         <Route exact path="/bookings" component={Bookings} />
         <Route exact path="/create-restaurant" component={CreateRestaurant} />
         <Route exact path="/create-table" component={CreateTable} />
-        <Route exact path="/restaurant" component={Restaurant} />
+        <Route exact path="/restaurant/:restaurantId" component={Restaurant} />
         <Route exact path="/your-booknigs" component={YourBookings} />
         <Redirect from="*" to="/bookings" />
       </Switch>
