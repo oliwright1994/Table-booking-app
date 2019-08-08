@@ -13,7 +13,7 @@ import YourBookings from "../pages/YourBookings";
 import Bookings from "../pages/Bookings";
 
 import { Meteor } from "meteor/meteor";
-// import TopBar from "../Component/TopBar";
+import TopBar from "../Component/TopBar";
 import Loader from "../Component/Loader";
 
 export default () => {
@@ -33,7 +33,7 @@ export default () => {
   } else if (Meteor.user().profile.usertype == "customer") {
     return (
       <Fragment>
-        {/* <TopBar /> */}
+        <TopBar />
         <Switch>
           <Route path="/bookings" component={Bookings} />
           <Route
@@ -49,7 +49,7 @@ export default () => {
   } else if (Meteor.user().profile.usertype == "restaurant") {
     return (
       <Fragment>
-        {/* <TopBar /> */}
+        <TopBar />
         <Switch>
           <Route exact path="/create-restaurant" component={CreateRestaurant} />
           <Route exact path="/create-table" component={CreateTable} />
@@ -58,7 +58,7 @@ export default () => {
             path="/restaurant/:restaurantId"
             component={Restaurant}
           />
-          <Redirect from="*" to="/restaurant/:restaurantId" />
+          <Redirect from="*" to="/create-restaurant" />
         </Switch>
       </Fragment>
     );
