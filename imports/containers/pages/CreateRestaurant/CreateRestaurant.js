@@ -23,7 +23,6 @@ class CreateRestaurant extends Component {
   }
 
   updateRestaurant(values) {
-    console.log(values);
     Meteor.call("restaurants.updateProfile", values, this.props.userId);
   }
 
@@ -226,7 +225,6 @@ class CreateRestaurant extends Component {
                 />
                 <Button
                   variant="contained"
-                  // onClick={console.log("submit button")}
                   type="submit"
                   disabled={pristine || invalid}
                 >
