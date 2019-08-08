@@ -5,15 +5,22 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 
+import styles from "./styles";
+import { withStyles } from "@material-ui/core/styles";
+
 class CreateTableContainer extends Component {
   render() {
-    const { tables, currentUserId, restaurants } = this.props;
+    const { tables, currentUserId, restaurants, classes } = this.props;
 
     return (
-      <div>
-        <h1>Lets fill those empty tables!</h1>
-        <TableForm />
-        <CreateTable />
+      <div className={classes.root}>
+        <div className={classes.background}>
+          <h1 className={classes.title}>Lets fill those empty tables!</h1>
+          <div className={classes.container}>
+            <TableForm />
+            <CreateTable />
+          </div>
+        </div>
       </div>
     );
   }
@@ -30,4 +37,4 @@ export default withTracker(() => {
     // users: Users.find({}).fetch(),
     restaurant: Restaurants.find({}).fetch()
   };
-})(CreateTableContainer);
+})(withStyles(styles)(CreateTableContainer));
