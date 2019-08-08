@@ -12,7 +12,7 @@ class RestaurantContainer extends Component {
     const { reviews, tables, restaurants, currentUserId } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
     if (restaurants.length === 0 || currentUserId === undefined) {
-      <div style={{ height: "100vh" }}>
+      return <div style={{ height: "100vh" }}>
         <Loader />
       </div>;
     } else if (

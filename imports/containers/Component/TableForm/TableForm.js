@@ -83,7 +83,7 @@ class TableForm extends Component {
                           <MenuItem value="">
                             <p>Table Expired Time</p>
                           </MenuItem>
-                          <MenuItem value={0.1}>0.1 Hour</MenuItem>
+                          <MenuItem value={1}>1 Hour</MenuItem>
                           <MenuItem value={2}>2 Hours</MenuItem>
                           <MenuItem value={3}>3 Hours</MenuItem>
                           <MenuItem value={4}>4 Hours</MenuItem>
