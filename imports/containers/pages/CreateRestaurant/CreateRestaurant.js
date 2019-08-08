@@ -26,10 +26,6 @@ class CreateRestaurant extends Component {
     Meteor.call("restaurants.updateProfile", values, this.props.userId);
   }
 
-  handleChecked = (name, event) => {
-    this.setState({ ...state, [name]: event.target.checked });
-  };
-
   render() {
     const { restaurant, classes, cuisines } = this.props;
     return (
