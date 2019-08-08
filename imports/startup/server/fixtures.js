@@ -4,6 +4,7 @@ import { Accounts } from "meteor/accounts-base";
 import { Reviews } from "../../api/reviews/reviews";
 import { Tables } from "../../api/tables/tables";
 import { Restaurants } from "../../api/restaurants/restaurants";
+import { Cuisines } from "../../api/cuisines/cuisines";
 
 Meteor.startup(() => {
   if (Meteor.users.find().count() === 0) {
@@ -172,5 +173,14 @@ Meteor.startup(() => {
       available: true,
       owner: 1
     });
+  }
+
+  if (Cuisines.find().count() === 0) {
+    Cuisines.insert({ title: "American" });
+    Cuisines.insert({ title: "Chinese" });
+    Cuisines.insert({ title: "Asian Fusion" });
+    Cuisines.insert({ title: "Indian" });
+    Cuisines.insert({ title: "Japanese" });
+    Cuisines.insert({ title: "Burger" });
   }
 });
