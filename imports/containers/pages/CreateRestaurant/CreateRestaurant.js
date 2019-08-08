@@ -23,6 +23,7 @@ class CreateRestaurant extends Component {
   }
 
   updateRestaurant(values) {
+    console.log(values);
     Meteor.call("restaurants.updateProfile", values, this.props.userId);
   }
 
@@ -32,7 +33,6 @@ class CreateRestaurant extends Component {
 
   render() {
     const { restaurant, classes, cuisines } = this.props;
-    console.log(cuisines);
     return (
       <div>
         <Form
@@ -157,6 +157,73 @@ class CreateRestaurant extends Component {
                     )}
                   />
                 </FormControl>
+                <Typography component="p">
+                  Select some cuisines for your restaurant (max 3)
+                </Typography>
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine1"
+                  render={({ input, meta }) => (
+                    <Select
+                      input={<Input id="select-multiple" />}
+                      id="select-multiple"
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem
+                          id={cuisine._id}
+                          key={cuisine._id}
+                          value={cuisine.title}
+                        >
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine2"
+                  render={({ input, meta }) => (
+                    <Select
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem key={cuisine._id} value={cuisine.title}>
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine3"
+                  formControlProps={{ fullWidth: true }}
+                  render={({ input, meta }) => (
+                    <Select
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem key={cuisine._id} value={cuisine.title}>
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
                 <Button
                   variant="contained"
                   // onClick={console.log("submit button")}

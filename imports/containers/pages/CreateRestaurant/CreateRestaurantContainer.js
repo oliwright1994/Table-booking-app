@@ -7,14 +7,18 @@ import { Cuisines } from "../../../api/cuisines/cuisines";
 class CreateRestaurantContainer extends Component {
   render() {
     console.log(this.props);
-    const { restaurants } = this.props;
-    return (
-      <CreateRestaurant
-        restaurant={restaurants[0]}
-        userId={this.props.currentUserId}
-        cuisines={this.props.cuisines}
-      />
-    );
+    const { restaurants, currentUserId, cuisines } = this.props;
+    if (cuisines.length === 0 || currentUserId === undefined) {
+      return <p>Loading...</p>;
+    } else {
+      return (
+        <CreateRestaurant
+          restaurant={restaurants[0]}
+          userId={this.props.currentUserId}
+          cuisines={this.props.cuisines}
+        />
+      );
+    }
   }
 }
 
