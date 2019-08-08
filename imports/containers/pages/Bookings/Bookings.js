@@ -4,9 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import BookingCard from "../../Component/BookingCard"
 
 const Bookings = ({ classes, restaurants, tables }) => {
-  console.log(restaurants);
-  console.log("tables: ", tables);
-  console.log("hi");
   return (
     <div>
       <p>This is the Bookings page.</p>
@@ -15,7 +12,7 @@ const Bookings = ({ classes, restaurants, tables }) => {
           restaurant => restaurant.id === table.restaurantId
         );
         return (
-          <BookingCard restaurant={restaurant} table={table} />
+          <BookingCard key={table._id} restaurant={restaurant} table={table} />
 
         );
 

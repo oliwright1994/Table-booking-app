@@ -8,7 +8,7 @@ import { Redirect } from "react-router";
 
 class RestaurantContainer extends Component {
   render() {
-    const { reviews, tables, restaurants } = this.props;
+    const { reviews, tables, restaurants, currentUserId } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
     if (restaurants.length === 0) {
       return <div>Loading...</div>;
@@ -27,6 +27,7 @@ class RestaurantContainer extends Component {
           reviews={reviews.filter(
             reviews => reviews.restaurantId == restaurantId
           )}
+          user={currentUserId}
         />
       );
     }

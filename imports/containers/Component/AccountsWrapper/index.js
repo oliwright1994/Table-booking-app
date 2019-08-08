@@ -34,7 +34,14 @@ export default class AccountsUIWrapper extends Component {
 
   logIn = (user) => {
     const { email, password } = user;
+<<<<<<< HEAD
     Meteor.call("users.logIn", email, password)
+=======
+    Meteor.loginWithPassword(email, password, (error) => {
+      if (error) console.log(error)
+      else console.log(Meteor.userId())
+    })
+>>>>>>> b02676d333a5f9185b29c5303b7aef668e9a3290
   }
 
   handleChange = (event) => {
@@ -51,8 +58,11 @@ export default class AccountsUIWrapper extends Component {
           this.state.formToggle
             ? this.logIn(user)
             : this.signUp(user);
+<<<<<<< HEAD
           console.log(user);
           console.log("usertype is: ", this.state.usertype)
+=======
+>>>>>>> b02676d333a5f9185b29c5303b7aef668e9a3290
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form onSubmit={handleSubmit}
