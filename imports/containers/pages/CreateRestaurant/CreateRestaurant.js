@@ -50,6 +50,7 @@ class CreateRestaurant extends Component {
                     required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="name"
                         type="text"
                         inputProps={{ ...input, autoComplete: "off" }}
@@ -79,9 +80,9 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="imageurl">Image URL</InputLabel>
                   <Field
                     name="imageurl"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="imageurl"
                         inputProps={{
                           ...input,
@@ -132,10 +133,10 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="email">Email</InputLabel>
                   <Field
                     name="email"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
                         id="email"
+                        required={true}
                         inputProps={{
                           ...input,
                           autoComplete: "off",
@@ -150,9 +151,9 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="website">Website</InputLabel>
                   <Field
                     name="website"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="website"
                         type="url"
                         inputProps={{

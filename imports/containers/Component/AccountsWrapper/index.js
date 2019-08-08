@@ -103,9 +103,11 @@ class AccountsUIWrapper extends Component {
                   return (
                     <Input
                       id="email"
-                      type="text"
+                      required={true}
+                      autoFocus={true}
                       inputProps={{
                         ...input,
+                        type: "email",
                         autoComplete: "off"
                       }}
                       value={input.value}
@@ -120,10 +122,10 @@ class AccountsUIWrapper extends Component {
                 {({ input, meta }) => (
                   <Input
                     id="password"
-                    type="password"
+                    required={true}
                     inputProps={{
                       ...input,
-                      autoComplete: "off"
+                      type: "password"
                     }}
                     value={input.value}
                   />
