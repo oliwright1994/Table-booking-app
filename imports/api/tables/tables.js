@@ -25,42 +25,24 @@ Meteor.methods({
     });
   },
   "tables.updateBooking"(tableId, userId, numberOfGuests) {
-    const booking = Tables.find({ _id: tabledId });
-
-    // if (booking.customers.includes({ customerId: userId })) {
-    //   throw new Meteor.Error(
-    //     "tables.deleteTable.not-authorized",
-    //     "You are already booked on this table."
-    //   );
-    // }
 
     Tables.update(
       {
-        _id: tabledId
+        _id: tableId
       },
       {
         $addToSet: {
           customers: { customerId: userId, guests: numberOfGuests }
         },
         $inc: {
-          placesAvailable: -numberOfGuests
+          placesAvailable: - numberOfGuests
         }
       }
     );
 
-    booking = Tables.find({ _id: tableid });
-
-    if (booking.placesAvailable === 0) {
-      Tables.update(
-        {
-          _id: tableId
-        },
-        { $set: { available: false } }
-      );
-    }
   },
-  "tables.deleteTable"(tabledId, userId) {
-    const booking = Tables.find({ _id: tabledId });
+  "tables.deleteTable"(tableId, userId) {
+    const booking = Tables.find({ _id: tableId });
 
     // if (booking.owner !== userId) {
     //   throw new Meteor.Error(
@@ -72,37 +54,13 @@ Meteor.methods({
       _id: tableId
     });
   },
-  "tables.cancelBooking"(tableId, userId) {
-    let booking = Tables.find({ _id: tableid });
-
-    let customer = booking.customers.find(
-      customer => customer.customerId === userId
-    );
-
-    // if (booking.customers.includes({ customerId: userId })) {
+  "tables.cancelBooking"(tableId, userId, numberOfGuests) {
     Tables.update(
-      { _id: tabledId },
+      { _id: tableId },
       {
-        $pull: { customers: { customerId: userID } },
-        $inc: { placesAvailable: customer.guests }
+        $inc: { placesAvailable: +numberOfGuests },
+        $pull: { customers: { customerId: userId } },
       }
     );
-
-    booking = Tables.find({ _id: tableid });
-
-    if (booking.placesAvailable > 0) {
-      Tables.update(
-        {
-          _id: tableId
-        },
-        { $set: { available: true } }
-      );
-    }
-    // } else {
-    //   throw new Meteor.Error(
-    //     "tables.cancelBooking.not-authorized",
-    //     "You are not booked on this table."
-    //   );
-    // }
   }
 });
