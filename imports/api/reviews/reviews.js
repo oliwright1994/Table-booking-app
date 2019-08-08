@@ -28,7 +28,7 @@ Meteor.methods({
     ).fetch();
     const restaurantRaitings = restaurantReviews.map(review => review.rating);
     const newRating =
-      restaurantRaitings.filter((a, b) => a + b, 0) / restaurantRaitings.length;
+      restaurantRaitings.reduce(((a, b) => a += b), 0) / restaurantRaitings.length;
     Restaurants.update({ _id: restaurantId }, { $set: { rating: newRating } });
   }
 });

@@ -9,8 +9,9 @@ class YourBookingsContainer extends Component {
     const { restaurants, tables } = this.props;
     if (restaurants.length === 0 || tables.length === 0 || !!Meteor.userId() === false) {
       return <p>Loading......</p>
+    } else {
+      return <YourBookings restaurants={restaurants} tables={tables} />;
     }
-    return <YourBookings restaurants={restaurants} tables={tables} />;
   }
 }
 

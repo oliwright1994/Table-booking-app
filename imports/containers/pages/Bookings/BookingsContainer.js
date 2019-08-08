@@ -3,6 +3,7 @@ import Bookings from "./Bookings";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
+import Loader from "../../Component/Loader";
 
 class BookingsContainer extends Component {
   constructor({ props }) {
@@ -10,12 +11,16 @@ class BookingsContainer extends Component {
     this.state = {};
   }
   render() {
-
     const { restaurants, tables } = this.props;
     if (restaurants.length === 0 || tables.length === 0) {
-      return <p>Loading</p>
+      return (
+        <div style={{ height: "100vh" }}>
+          <Loader />
+        </div>
+      );
+    } else {
+      return <Bookings restaurants={restaurants} tables={tables} />;
     }
-    return <Bookings restaurants={restaurants} tables={tables} />;
   }
 }
 

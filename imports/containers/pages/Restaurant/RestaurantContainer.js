@@ -5,15 +5,18 @@ import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
 import { Redirect } from "react-router";
+import Loader from "../../Component/Loader";
 
 class RestaurantContainer extends Component {
   render() {
     const { reviews, tables, restaurants, currentUserId } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
-    if (restaurants.length === 0) {
-      return <div>Loading...</div>;
+    if (restaurants.length === 0 || currentUserId === undefined) {
+      return <div style={{ height: "100vh" }}>
+        <Loader />
+      </div>;
     } else if (
-      restaurants.find(restaurant => restaurant.id == restaurantId) ===
+      restaurants.find(restaurant => restaurant._id == restaurantId) ===
       undefined
     ) {
       return <Redirect to="/bookings" />;
@@ -21,7 +24,7 @@ class RestaurantContainer extends Component {
       return (
         <Restaurant
           restaurant={restaurants.find(
-            restaurant => restaurant.id == restaurantId
+            restaurant => restaurant._id == restaurantId
           )}
           table={tables.find(table => table.restaurantId == restaurantId)}
           reviews={reviews.filter(
