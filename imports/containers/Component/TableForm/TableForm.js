@@ -10,30 +10,17 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { Meteor } from "meteor/meteor";
+import { withTracker } from "meteor/react-meteor-data";
+import { Restaurants } from "../../../api/restaurants/restaurants";
 
 class TableForm extends Component {
-  state = {
-    seats: "",
-    text: ""
-  };
-
-  handleInput = event => {
-    this.setState({ text: event.target.value });
-  };
-
-  onSubmit = table => {
-    console.log(table);
-    const { values, userId, restaurantId } = table;
-    Meteor.call("tables.createTable", values, userId, restaurantId);
-  };
-
-  handleChange = event => {
-    this.setState({ seats: event.target.value });
+  onSubmit = newTable => {
+    Meteor.call("tables.createTable", newTable, Meteor.userId(), 1);
   };
 
   render() {
-    const { text, seats } = this.state;
-    const { classes } = this.props;
+    const { classes, restaurants } = this.props;
+    // console.log(restaurants);
 
     return (
       <Form
@@ -62,7 +49,7 @@ class TableForm extends Component {
 
               <div>
                 <Field
-                  name="Notes"
+                  name="description"
                   render={({ input, meta }) => (
                     <label>
                       <TextField
@@ -80,22 +67,29 @@ class TableForm extends Component {
 
               <div>
                 <FormControl>
-                  <Select
-                    value={seats}
-                    onChange={this.handleChange}
-                    displayEmpty
-                    name="seats"
-                    id="seats"
-                  >
-                    <MenuItem value="">
-                      <em>0</em>
-                    </MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                  </Select>
-                  <FormHelperText>Number of Seats</FormHelperText>
+                  <Field
+                    name="maxPlaces"
+                    render={({ input, meta }) => (
+                      <div>
+                        <Select
+                          onChange={this.handleChange}
+                          inputProps={{ ...input }}
+                          displayEmpty
+                          name="seats"
+                          id="seats"
+                        >
+                          <MenuItem value="">
+                            <em>0</em>
+                          </MenuItem>
+                          <MenuItem value={1}>1</MenuItem>
+                          <MenuItem value={2}>2</MenuItem>
+                          <MenuItem value={3}>3</MenuItem>
+                          <MenuItem value={4}>4</MenuItem>
+                        </Select>
+                        <FormHelperText>Number of Seats</FormHelperText>
+                      </div>
+                    )}
+                  />
                 </FormControl>
               </div>
 
@@ -110,4 +104,9 @@ class TableForm extends Component {
   }
 }
 
-export default withStyles(styles)(TableForm);
+export default withTracker(() => {
+  Meteor.subscribe("restaurant");
+  return {
+    // restaurants: Restaurants.find({}).fetch()
+  };
+})(withStyles(styles)(TableForm));
