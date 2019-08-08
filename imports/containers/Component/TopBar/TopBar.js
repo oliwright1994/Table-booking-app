@@ -6,7 +6,7 @@ import styles from "./styles";
 import logo from "../../assets/images/logo.svg";
 import HamburgerMenu from "@material-ui/icons/fastfood";
 import Gravatar from "react-gravatar";
-
+import { Meteor } from "meteor/meteor";
 const TopBar = ({ classes }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
