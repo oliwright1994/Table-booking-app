@@ -13,6 +13,7 @@ import ReviewForm from "../../Component/ReviewForm";
 
 const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
+
   return (
     <div className={classes.root}>
       <img
@@ -30,7 +31,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
         <Typography component="p">{bio}</Typography>
         <div className={classes.doubleColumn}>
           <div className={classes.singleColumn}>
-            {cuisines ? (
+            {cuisines.length > 0 ? (
               <div className={classes.cuisineList}>
                 <Typography>Cuisines: </Typography>
                 <List dense>

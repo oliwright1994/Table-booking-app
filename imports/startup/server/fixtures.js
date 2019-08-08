@@ -4,6 +4,7 @@ import { Accounts } from "meteor/accounts-base";
 import { Reviews } from "../../api/reviews/reviews";
 import { Tables } from "../../api/tables/tables";
 import { Restaurants } from "../../api/restaurants/restaurants";
+import { Cuisines } from "../../api/cuisines/cuisines";
 
 Meteor.startup(() => {
   // if (Meteor.users.find().count() === 0) {
@@ -132,6 +133,16 @@ Meteor.startup(() => {
   //   });
   // }
 
+
+  if (Cuisines.find().count() === 0) {
+    Cuisines.insert({ title: "American" });
+    Cuisines.insert({ title: "Chinese" });
+    Cuisines.insert({ title: "Asian Fusion" });
+    Cuisines.insert({ title: "Indian" });
+    Cuisines.insert({ title: "Japanese" });
+    Cuisines.insert({ title: "Burger" });
+  }
+
   // if (Tables.find().count() === 0) {
   //   const now = new Date()
   //   Tables.insert({
@@ -183,4 +194,5 @@ Meteor.startup(() => {
   //     expireTime: now.setHours(now.getHours() + 0.5)
   //   });
   // }
+
 });
