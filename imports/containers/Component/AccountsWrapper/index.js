@@ -26,20 +26,19 @@ class AccountsUIWrapper extends Component {
   signUp = user => {
     const { email, password, usertype } = user;
     Meteor.call("users.createUser", email, password, usertype, (err, res) => {
-      if (err) console.log(err)
-      else console.log(res)
+      if (err) console.log(err);
+      else console.log(res);
     });
     this.logIn(user);
-
+  };
 
   logIn = user => {
     const { email, password } = user;
-    Meteor.loginWithPassword(email, password, (error) => {
-      if (error) console.log(error)
-      else console.log(Meteor.userId())
-    })
-  }
-
+    Meteor.loginWithPassword(email, password, error => {
+      if (error) console.log(error);
+      else console.log(Meteor.userId());
+    });
+  };
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -51,10 +50,12 @@ class AccountsUIWrapper extends Component {
       <Form
         // TODO validate={validate.bind(this)}
         onSubmit={values => {
-          const user = { email: values.email, password: values.password, usertype: this.state.usertype };
-          this.state.formToggle
-            ? this.logIn(user)
-            : this.signUp(user);
+          const user = {
+            email: values.email,
+            password: values.password,
+            usertype: this.state.usertype
+          };
+          this.state.formToggle ? this.logIn(user) : this.signUp(user);
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form
