@@ -83,8 +83,11 @@ class CreateRestaurant extends Component {
                     render={({ input, meta }) => (
                       <Input
                         id="imageurl"
-                        type="text"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "url"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -98,8 +101,11 @@ class CreateRestaurant extends Component {
                     render={({ input, meta }) => (
                       <Input
                         id="phone"
-                        type="tel"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "tel"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -130,8 +136,11 @@ class CreateRestaurant extends Component {
                     render={({ input, meta }) => (
                       <Input
                         id="email"
-                        type="email"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "email"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -146,7 +155,11 @@ class CreateRestaurant extends Component {
                       <Input
                         id="website"
                         type="url"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "website"
+                        }}
                         value={input.value}
                       />
                     )}
