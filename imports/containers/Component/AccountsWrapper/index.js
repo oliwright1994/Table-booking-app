@@ -5,16 +5,16 @@ import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Meteor } from "meteor/meteor";
+import styles from "./styles";
 
-export default class AccountsUIWrapper extends Component {
+class AccountsUIWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +29,7 @@ export default class AccountsUIWrapper extends Component {
       if (err) console.log(err);
       else console.log(res);
     });
+    this.logIn(user);
   };
 
   logIn = user => {
@@ -79,7 +80,7 @@ export default class AccountsUIWrapper extends Component {
                       <RadioGroup
                         aria-label="usertype"
                         name="usertype"
-                        // className={classes.group}
+                        className={classes.group}
                         value={input.value}
                         onChange={this.handleChange}
                       >
@@ -101,10 +102,7 @@ export default class AccountsUIWrapper extends Component {
                 </Field>
               </FormControl>
             )}
-            <FormControl
-              fullWidth
-              // className={classes.formControl}
-            >
+            <FormControl fullWidth className={classes.formControl}>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Field name="email">
                 {({ input, meta }) => {
@@ -122,10 +120,7 @@ export default class AccountsUIWrapper extends Component {
                 }}
               </Field>
             </FormControl>
-            <FormControl
-              fullWidth
-              // className={classes.formControl}
-            >
+            <FormControl fullWidth className={classes.formControl}>
               <InputLabel htmlFor="password">Password</InputLabel>
               <Field name="password">
                 {({ input, meta }) => (
@@ -141,9 +136,7 @@ export default class AccountsUIWrapper extends Component {
                 )}
               </Field>
             </FormControl>
-            <FormControl
-            // className={classes.formControl}
-            >
+            <FormControl className={classes.formControlButtom}>
               <Grid
                 container
                 direction="row"
@@ -152,7 +145,7 @@ export default class AccountsUIWrapper extends Component {
               >
                 <Button
                   type="submit"
-                  // className={classes.formButton}
+                  className={classes.formButton}
                   variant="contained"
                   size="large"
                   color="secondary"
@@ -162,7 +155,7 @@ export default class AccountsUIWrapper extends Component {
                 </Button>
                 <Typography>
                   <button
-                    // className={classes.formToggle}
+                    className={classes.formToggle}
                     type="button"
                     onClick={() => {
                       this.setState({
@@ -183,3 +176,5 @@ export default class AccountsUIWrapper extends Component {
     );
   }
 }
+
+export default withStyles(styles)(AccountsUIWrapper);

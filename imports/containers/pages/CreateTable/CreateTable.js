@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-// import WelcomeBanner from "../../assets/images/welcome.svg";
+import tableBanner from "../../assets/images/restaurant-tables.jpg";
 
 const CreateTable = ({ classes }) => {
   return (
-    <div>
-      {/* <img src={WelcomeBanner} alt="Welcome Banner" /> */}
-      <p>This is the CreateTable page.</p>
+    <div className={classes.container}>
+      <img src={tableBanner} className={classes.tableBanner} />
     </div>
   );
 };

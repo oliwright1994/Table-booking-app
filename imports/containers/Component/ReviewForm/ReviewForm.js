@@ -20,10 +20,9 @@ class ReviewForm extends Component {
     Meteor.call(
       "reviews.createReview",
       { ...values, rating: rating },
-      this.props.user,
+      this.props.userId,
       this.props.restaurantId
     );
-    this.resetForm();
   }
   setValue(event, value) {
     this.setState({ starRating: +event.target.value });
@@ -34,6 +33,7 @@ class ReviewForm extends Component {
   }
   render() {
     const { classes } = this.props;
+
     return (
       <div>
         <Form
@@ -109,7 +109,7 @@ class ReviewForm extends Component {
                   type="submit"
                   variant="contained"
                   disabled={submitting || pristine}
-                  onClick={() => this.resetForm(form)}
+                  // onClick={() => this.resetForm(form)}
                 >
                   Post Review
                 </Button>
