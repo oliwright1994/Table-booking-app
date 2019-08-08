@@ -30,6 +30,7 @@ class AccountsUIWrapper extends Component {
       else console.log(res)
     });
     this.logIn(user);
+  }
 
 
   logIn = user => {
@@ -41,6 +42,17 @@ class AccountsUIWrapper extends Component {
   }
 
 
+  validate = (values) => {
+    const errors = {};
+    if (!values.email || !/@.*\./i.test(values.email)) {
+      errors.email = 'Required';
+    }
+    if (!values.password) {
+      errors.password = 'Required';
+    }
+    return errors;
+  }
+
   handleChange = event => {
     this.setState({ usertype: event.target.value });
   };
@@ -49,7 +61,7 @@ class AccountsUIWrapper extends Component {
     const { classes } = this.props;
     return (
       <Form
-        // TODO validate={validate.bind(this)}
+        validate={this.validate}
         onSubmit={values => {
           const user = { email: values.email, password: values.password, usertype: this.state.usertype };
           this.state.formToggle
@@ -59,12 +71,12 @@ class AccountsUIWrapper extends Component {
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form
             onSubmit={handleSubmit}
-            // className={classes.accountForm}
+            className={classes.accountForm}
           >
             {!this.state.formToggle && (
               <FormControl
                 fullWidth
-                // className={classes.formControl}
+                className={classes.formControl}
               >
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
@@ -78,16 +90,16 @@ class AccountsUIWrapper extends Component {
                         onChange={this.handleChange}
                       >
                         <FormControlLabel
-                          value="restaurant"
-                          checked={this.state.usertype == "restaurant"}
-                          control={<Radio />}
-                          label="Restaurant"
-                        />
-                        <FormControlLabel
                           value="customer"
                           checked={this.state.usertype == "customer"}
                           control={<Radio />}
                           label="Customer"
+                        />
+                        <FormControlLabel
+                          value="restaurant"
+                          checked={this.state.usertype == "restaurant"}
+                          control={<Radio />}
+                          label="Restaurant"
                         />
                       </RadioGroup>
                     );
@@ -146,7 +158,7 @@ class AccountsUIWrapper extends Component {
                 >
                   {this.state.formToggle ? "Enter" : "Create Account"}
                 </Button>
-                <Typography>
+                <div>
                   <button
                     className={classes.formToggle}
                     type="button"
@@ -160,7 +172,7 @@ class AccountsUIWrapper extends Component {
                       ? "Create an account."
                       : "Login to existing account."}
                   </button>
-                </Typography>
+                </div>
               </Grid>
             </FormControl>
           </form>
