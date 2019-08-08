@@ -7,6 +7,9 @@ import { withTracker } from "meteor/react-meteor-data";
 class YourBookingsContainer extends Component {
   render() {
     const { restaurants, tables } = this.props;
+    if (restaurants.length === 0 || tables.length === 0 || !!Meteor.userId() === false) {
+      return <p>Loading......</p>
+    }
     return <YourBookings restaurants={restaurants} tables={tables} />;
   }
 }
