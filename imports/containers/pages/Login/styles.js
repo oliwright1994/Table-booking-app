@@ -3,9 +3,9 @@ const styles = theme => ({
     textAlign: "center"
   },
 
-  logo: {
+  banner: {
     display: "flex",
-    justifyContent: "center"
+    flexDirection: "row"
   },
 
   loginWrapper: {

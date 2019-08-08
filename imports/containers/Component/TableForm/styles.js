@@ -2,12 +2,11 @@ const styles = theme => ({
   tableForm: {
     width: "400px",
     height: "300px",
-    // border: " 1px solid red",
-    // backgroundColor: "white",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgb(255,250,205, 0.7)"
+    backgroundColor: "rgb(255,250,205, 0.8)",
+    borderRadius: "50px"
   },
 
   discount: {
