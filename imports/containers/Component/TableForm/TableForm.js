@@ -14,8 +14,10 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 
 class TableForm extends Component {
-  onSubmit = newTable => {
-    Meteor.call("tables.createTable", newTable, Meteor.userId(), 1);
+  onSubmit = (newTable, restaurants) => {
+    Meteor.call("tables.createTable", newTable, Meteor.userId(), restaurants[0]._id);
+    // console.log(restaurants);
+    // console.log(restaurants._id);
   };
 
   render() {
@@ -24,7 +26,7 @@ class TableForm extends Component {
 
     return (
       <Form
-        onSubmit={table => this.onSubmit(table)}
+        onSubmit={table => this.onSubmit(table, restaurants)}
         // validate={validate}
         render={({ handleSubmit, pristine, invalid }) => (
           <form onSubmit={handleSubmit}>
@@ -68,6 +70,34 @@ class TableForm extends Component {
               <div>
                 <FormControl>
                   <Field
+                    name="expire"
+                    render={({ input, meta }) => (
+                      <div>
+                        <Select
+                          onChange={this.handleChange}
+                          inputProps={{ ...input }}
+                          displayEmpty
+                          name="expireTime"
+                          id="expireTime"
+                        >
+                          <MenuItem value="">
+                            <p>Table Expired Time</p>
+                          </MenuItem>
+                          <MenuItem value={0.1}>0.1 Hour</MenuItem>
+                          <MenuItem value={2}>2 Hours</MenuItem>
+                          <MenuItem value={3}>3 Hours</MenuItem>
+                          <MenuItem value={4}>4 Hours</MenuItem>
+                        </Select>
+                        {/* <FormHelperText>Table Expired Time</FormHelperText> */}
+                      </div>
+                    )}
+                  />
+                </FormControl>
+              </div>
+
+              <div>
+                <FormControl>
+                  <Field
                     name="maxPlaces"
                     render={({ input, meta }) => (
                       <div>
@@ -79,14 +109,14 @@ class TableForm extends Component {
                           id="seats"
                         >
                           <MenuItem value="">
-                            <em>0</em>
+                            <p>Number of Seats</p>
                           </MenuItem>
                           <MenuItem value={1}>1</MenuItem>
                           <MenuItem value={2}>2</MenuItem>
                           <MenuItem value={3}>3</MenuItem>
                           <MenuItem value={4}>4</MenuItem>
                         </Select>
-                        <FormHelperText>Number of Seats</FormHelperText>
+                        {/* <FormHelperText>Number of Seats</FormHelperText> */}
                       </div>
                     )}
                   />
@@ -107,6 +137,6 @@ class TableForm extends Component {
 export default withTracker(() => {
   Meteor.subscribe("restaurant");
   return {
-    // restaurants: Restaurants.find({}).fetch()
+    restaurants: Restaurants.find({ owner: Meteor.userId() }).fetch()
   };
 })(withStyles(styles)(TableForm));

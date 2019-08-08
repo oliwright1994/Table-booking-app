@@ -52,8 +52,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                <p>No reviews yet, be the first!</p>
-              )}
+                  <p>No reviews yet, be the first!</p>
+                )}
             </div>
           </div>
 
@@ -65,8 +65,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                <p>No table available right now.</p>
-              )}
+                  <p>No table available right now.</p>
+                )}
             </div>
             <div>
               <Typography component="p">Address: {address}</Typography>
@@ -88,8 +88,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 Thanks for leaving a review!
               </Typography>
             ) : (
-              <ReviewForm restaurantId={restaurant.id} userId={user} />
-            )}
+                <ReviewForm restaurantId={restaurant._id} userId={user} />
+              )}
           </div>
         </div>
       </div>

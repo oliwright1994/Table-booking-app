@@ -16,7 +16,7 @@ class RestaurantContainer extends Component {
         <Loader />
       </div>;
     } else if (
-      restaurants.find(restaurant => restaurant.id == restaurantId) ===
+      restaurants.find(restaurant => restaurant._id == restaurantId) ===
       undefined
     ) {
       return <Redirect to="/bookings" />;
@@ -24,7 +24,7 @@ class RestaurantContainer extends Component {
       return (
         <Restaurant
           restaurant={restaurants.find(
-            restaurant => restaurant.id == restaurantId
+            restaurant => restaurant._id == restaurantId
           )}
           table={tables.find(table => table.restaurantId == restaurantId)}
           reviews={reviews.filter(

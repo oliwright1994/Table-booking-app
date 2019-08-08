@@ -30,6 +30,7 @@ class AccountsUIWrapper extends Component {
       else console.log(res)
     });
     this.logIn(user);
+  }
 
 
   logIn = user => {
@@ -59,12 +60,12 @@ class AccountsUIWrapper extends Component {
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form
             onSubmit={handleSubmit}
-            // className={classes.accountForm}
+          // className={classes.accountForm}
           >
             {!this.state.formToggle && (
               <FormControl
                 fullWidth
-                // className={classes.formControl}
+              // className={classes.formControl}
               >
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
@@ -78,16 +79,16 @@ class AccountsUIWrapper extends Component {
                         onChange={this.handleChange}
                       >
                         <FormControlLabel
-                          value="restaurant"
-                          checked={this.state.usertype == "restaurant"}
-                          control={<Radio />}
-                          label="Restaurant"
-                        />
-                        <FormControlLabel
                           value="customer"
                           checked={this.state.usertype == "customer"}
                           control={<Radio />}
                           label="Customer"
+                        />
+                        <FormControlLabel
+                          value="restaurant"
+                          checked={this.state.usertype == "restaurant"}
+                          control={<Radio />}
+                          label="Restaurant"
                         />
                       </RadioGroup>
                     );
