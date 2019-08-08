@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+
+
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+
 
 import InputLabel from "@material-ui/core/InputLabel";
 import { withStyles } from "@material-ui/core/styles";
@@ -50,6 +53,7 @@ class BookingCard extends Component {
 
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes = "This is nice restautant, come eat here. We have food and table and seats";
+
     const spaceDropdown = [];
     for (let i = table.placesAvailable; i > 0; i--) {
       spaceDropdown.push(i);
@@ -83,6 +87,7 @@ class BookingCard extends Component {
                   >
                     {restaurant.name}
                   </Typography>
+
                   {restaurant.cuisines ? (
                     <Typography
                       variant="body2"
@@ -93,6 +98,7 @@ class BookingCard extends Component {
                     </Typography>
                   ) : null}
 
+
                 </div>
                 <div className={classes.discountContainer}>
                   <Typography
@@ -101,7 +107,9 @@ class BookingCard extends Component {
                     component="p"
                     className={classes.discount}
                   >
-                    {table.discount ? table.discount : null}
+
+                    {table.discount ? `${table.discount}%` : null}
+
                   </Typography>
                 </div>
               </div>
@@ -138,6 +146,7 @@ class BookingCard extends Component {
                   ? `${table.placesAvailable} seats left`
                   : `${table.placesAvailable} seat left`}
               </Typography>
+
               {(Meteor.user().profile.usertype == "customer") && (table.customers.find(customer => customer.customerId == Meteor.userId())) &&
                 <div className={classes.cancle}>
                   <CardActions>
@@ -193,6 +202,7 @@ class BookingCard extends Component {
         </Card>
       </div >
     )
+
   }
 }
 export default withStyles(styles)(BookingCard);

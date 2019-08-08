@@ -38,8 +38,9 @@ class TableForm extends Component {
                     <label>
                       <TextField
                         id="Discount"
-                        inputProps={{ ...input }}
-                        label="Insert discount here..."
+                        required={true}
+                        inputProps={{ ...input, type: "number" }}
+                        label="Insert discount..."
                         value={input.value}
                         margin="normal"
                         className={classes.discount}
