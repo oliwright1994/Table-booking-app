@@ -46,7 +46,17 @@ const TopBar = ({ classes }) => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          {Meteor.user() && Meteor.user().profile.usertype == "customer" && (
+            <Link to="/your-booknigs">
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+            </Link>
+          )}
+          {Meteor.user() && Meteor.user().profile.usertype == "restaurant" && (
+            <Link to="/create-restaurant">
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+            </Link>
+          )}
+
           <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
         </Menu>
       </div>
