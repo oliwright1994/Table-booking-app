@@ -21,30 +21,37 @@ export default () => {
         <Route exact path="/welcome" component={Login} />
         <Redirect from="*" to="/welcome" />
       </Switch>
-    )
+    );
   } else if (Meteor.user() === undefined) {
-    return (<p>Loading</p>)
+    return <p>Loading</p>;
   } else if (Meteor.user().profile.usertype == "customer") {
     return (
       <Fragment>
         {/* <TopBar /> */}
         <Switch>
           <Route path="/bookings" component={Bookings} />
-          <Route exact path="/restaurant/:restaurantId" component={Restaurant} />
+          <Route
+            exact
+            path="/restaurant/:restaurantId"
+            component={Restaurant}
+          />
           <Route exact path="/your-bookings" component={YourBookings} />
           <Redirect from="*" to="/bookings" />
         </Switch>
       </Fragment>
     );
-  }
-  else if (Meteor.user().profile.usertype == "restaurant") {
+  } else if (Meteor.user().profile.usertype == "restaurant") {
     return (
       <Fragment>
         {/* <TopBar /> */}
         <Switch>
           <Route exact path="/create-restaurant" component={CreateRestaurant} />
           <Route exact path="/create-table" component={CreateTable} />
-          <Route exact path="/restaurant/:restaurantId" component={Restaurant} />
+          <Route
+            exact
+            path="/restaurant/:restaurantId"
+            component={Restaurant}
+          />
           <Redirect from="*" to="/restaurant/:restaurantId" />
         </Switch>
       </Fragment>

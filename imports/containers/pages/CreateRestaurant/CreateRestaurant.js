@@ -18,12 +18,21 @@ class CreateRestaurant extends Component {
   constructor({ props }) {
     super(props);
     this.state = {
-      selectedCuisines: []
+      selectedCuisines: [],
+      bookingsRes: null
     };
   }
 
-  updateRestaurant(values) {
-    Meteor.call("restaurants.updateProfile", values, this.props.userId);
+  async updateRestaurant(values) {
+    let booking = Meteor.call(
+      await "restaurants.updateProfile",
+      values,
+      this.props.userId,
+      (err, res) => {
+        console.log(res[0]._id);
+        this.props.history.push(`/restaurant/${res[0]._id}`);
+      }
+    );
   }
 
   render() {

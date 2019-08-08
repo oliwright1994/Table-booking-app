@@ -6,15 +6,16 @@ import { Cuisines } from "../../../api/cuisines/cuisines";
 
 class CreateRestaurantContainer extends Component {
   render() {
-    const { restaurants, currentUserId, cuisines } = this.props;
+    const { restaurants, currentUserId, cuisines, history } = this.props;
     if (cuisines.length === 0 || currentUserId === undefined) {
       return <p>Loading...</p>;
     } else {
       return (
         <CreateRestaurant
           restaurant={restaurants[0]}
-          userId={this.props.currentUserId}
-          cuisines={this.props.cuisines}
+          userId={currentUserId}
+          cuisines={cuisines}
+          history={history}
         />
       );
     }

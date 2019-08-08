@@ -24,7 +24,7 @@ Meteor.methods({
     });
   },
   "restaurants.updateProfile"(values, userId, restaurantId) {
-    Restaurants.update(
+    let res = Restaurants.update(
       { owner: userId },
       {
         $set: {
@@ -44,5 +44,9 @@ Meteor.methods({
       },
       { upsert: true }
     );
+
+    let booking = Restaurants.find({ owner: userId }).fetch();
+    // console.log(booking);
+    return booking;
   }
 });
