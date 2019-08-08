@@ -54,101 +54,102 @@ class BookingCard extends Component {
     return (
       <div className={classes.root}>
         <Card className={classes.root}>
-          <CardActionArea>
-            <Link component={RouterLink} to={`/restaurant/${restaurant.id}`}>
-              {/* ${restaurant._id} */}
-              <CardMedia
-                className={classes.media}
-                image={restaurant.imageurl ? restaurant.imageurl : "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"}
-                title="restaurant Image"
-                height='200'
-                component='img'
-                width='200'
-              />
-            </Link>
+          {/* <CardActionArea> */}
+          <Link component={RouterLink} to={`/restaurant/${restaurant.id}`}>
+            {/* ${restaurant._id} */}
+            <CardMedia
+              className={classes.media}
+              image={restaurant.imageurl ? restaurant.imageurl : "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"}
+              title="restaurant Image"
+              height='200'
+              component='img'
+              width='200'
+            />
+
             <CardContent className={classes.content}>
-              <Typography gutterBottom variant="h5" component="span" className={classes.resInfo}>
-                <Typography variant="body2" color="textSecondary" component="div" className={classes.meta}>
+              <div className={classes.resInfo}>
+                <div className={classes.meta}>
                   <Typography variant="body2" color="textSecondary" component="h3" className={classes.resName}>
                     {restaurant.name}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {restaurant.cuisines.join(", ")}
                   </Typography>
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="div" className={classes.discountContainer}>
+                </div>
+                <div className={classes.discountContainer}>
                   <Typography variant="body2" color="textSecondary" component="p" className={classes.discount}>
                     {table.discount ? table.discount : null}
                   </Typography>
-                </Typography>
-              </Typography>
+                </div>
+              </div>
               <Typography variant="body2" color="textSecondary" component="div" className={classes.resBio}>
                 {table.notes ? table.notes : tableDefaultNotes}
               </Typography>
-
-              <Typography variant="body2" color="textSecondary" component="div" className={classes.bookingInfo}>
-                <Typography variant="body2" color="textSecondary" component="p" className={classes.rating}>
-                  <Box component="fieldset" mb={3} borderColor="transparent">
-                    <Rating value={restaurant.rating} readOnly />
-                  </Box>
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p" className={classes.bookingContainer}>
-                  <Typography variant="body2" color="textSecondary" component="p" className={classes.seatAvailable}>
-                    {table.placesAvailable > 1 ? `${table.placesAvailable} seats left` : `${table.placesAvailable} seat left`}
-                  </Typography>
-
-                  {(Meteor.user().profile.usertype == "customer") && (table.customers.find(customer => customer.customerId == Meteor.userId())) &&
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.cancle}>
-                      <CardActions>
-
-                        <Button
-                          size="small"
-                          className={classes.cancelBookingButton}
-                          onClick={() =>
-
-                            this.cancleTable(table, table._id, Meteor.userId())
-                          }
-                        >
-                          Cancel Book
-                  </Button>
-                      </CardActions>
-                    </Typography>
-                  }
-                  {(Meteor.user().profile.usertype == "customer") && (!table.customers.find(customer => customer.customerId == Meteor.userId())) &&
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.booking}>
-                      <FormControl variant="filled" className={classes.formControl}>
-                        <InputLabel htmlFor="book"></InputLabel>
-                        <Select
-                          value={this.state.selectSeats}
-                          onChange={this.handleChange}
-                          input={<FilledInput name="book" id="numOfPeopleBook" />}
-
-                        >
-                          {spaceDropdown.map((i) => <MenuItem key={i} value={i} > {i}</MenuItem>)}
-
-                        </Select>
-                      </FormControl>
-                      <CardActions>
-
-                        <Button
-                          size="small"
-                          className={classes.bookingButton}
-                          disabled={
-                            !this.state.selectSeats
-                          }
-                          onClick={() =>
-                            this.bookTable(table._id, Meteor.userId(), this.state.selectSeats)
-                          }
-                        >
-                          Book
-                </Button>
-                      </CardActions>
-                    </Typography>
-                  }
-                </Typography>
-              </Typography>
+              <div variant="body2" color="textSecondary" component="p" className={classes.rating}>
+                <Box component="fieldset" mb={3} borderColor="transparent">
+                  <Rating value={restaurant.rating} readOnly />
+                </Box>
+              </div>
             </CardContent>
-          </CardActionArea>
+          </Link>
+
+          <div className={classes.bookingInfo}>
+            <div className={classes.bookingContainer}>
+              <Typography variant="body2" color="textSecondary" component="p" className={classes.seatAvailable}>
+                {table.placesAvailable > 1 ? `${table.placesAvailable} seats left` : `${table.placesAvailable} seat left`}
+              </Typography>
+
+              {(Meteor.user().profile.usertype == "customer") && (table.customers.find(customer => customer.customerId == Meteor.userId())) &&
+                <div className={classes.cancle}>
+                  <CardActions>
+
+                    <Button
+                      size="small"
+                      className={classes.cancelBookingButton}
+                      onClick={() =>
+
+                        this.cancleTable(table, table._id, Meteor.userId())
+                      }
+                    >
+                      Cancel Book
+                  </Button>
+                  </CardActions>
+                </div>
+              }
+              {(Meteor.user().profile.usertype == "customer") && (!table.customers.find(customer => customer.customerId == Meteor.userId())) &&
+                <div className={classes.booking}>
+                  <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel htmlFor="book"></InputLabel>
+                    <Select
+                      value={this.state.selectSeats}
+                      onChange={this.handleChange}
+                      input={<FilledInput name="book" id="numOfPeopleBook" />}
+                    >
+                      {spaceDropdown.map((i) => <MenuItem key={i} value={i} > {i}</MenuItem>)}
+
+                    </Select>
+                  </FormControl>
+                  <CardActions>
+
+                    <Button
+                      size="small"
+                      className={classes.bookingButton}
+                      disabled={
+                        !this.state.selectSeats
+                      }
+                      onClick={() =>
+                        this.bookTable(table._id, Meteor.userId(), this.state.selectSeats)
+                      }
+                    >
+                      Book
+                  </Button>
+                  </CardActions>
+                </div>
+              }
+            </div>
+          </div>
+
+          {/* </CardActionArea> */}
 
         </Card>
       </div>

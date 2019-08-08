@@ -10,7 +10,11 @@ class BookingsContainer extends Component {
     this.state = {};
   }
   render() {
+
     const { restaurants, tables } = this.props;
+    if (restaurants.length === 0 || tables.length === 0) {
+      return <p>Loading</p>
+    }
     return <Bookings restaurants={restaurants} tables={tables} />;
   }
 }

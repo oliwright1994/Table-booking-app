@@ -15,19 +15,21 @@ import { Meteor } from "meteor/meteor";
 // import TopBar from "../Component/TopBar";
 
 export default () => {
-  if (!Meteor.user()) {
+  if (Meteor.user() === null) {
     return (
       <Switch>
         <Route exact path="/welcome" component={Login} />
         <Redirect from="*" to="/welcome" />
       </Switch>
     )
+  } else if (Meteor.user() === undefined) {
+    return (<p>Loading</p>)
   } else if (Meteor.user().profile.usertype == "customer") {
     return (
       <Fragment>
         {/* <TopBar /> */}
         <Switch>
-          <Route exact path="/bookings" component={Bookings} />
+          <Route path="/bookings" component={Bookings} />
           <Route exact path="/restaurant/:restaurantId" component={Restaurant} />
           <Route exact path="/your-bookings" component={YourBookings} />
           <Redirect from="*" to="/bookings" />
@@ -38,7 +40,7 @@ export default () => {
   else if (Meteor.user().profile.usertype == "restaurant") {
     return (
       <Fragment>
-        <TopBar />
+        {/* <TopBar /> */}
         <Switch>
           <Route exact path="/create-restaurant" component={CreateRestaurant} />
           <Route exact path="/create-table" component={CreateTable} />

@@ -28,7 +28,8 @@ export default class AccountsUIWrapper extends Component {
     Meteor.call("users.createUser", email, password, usertype, (err, res) => {
       if (err) console.log(err)
       else console.log(res)
-    })
+    });
+    this.logIn(user);
 
   }
 
