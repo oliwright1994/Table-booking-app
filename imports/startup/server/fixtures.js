@@ -32,8 +32,10 @@ Meteor.startup(() => {
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
       email: "vinnie@aol.com",
-      wbesite: "vinnies.com",
-      id: 1
+      website: "vinnies.com",
+      id: 1,
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 4
     });
     Restaurants.insert({
       name: "Jonny's Paradise",
@@ -44,10 +46,12 @@ Meteor.startup(() => {
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
       email: "jonny@aol.com",
-      wbesite: "jonnies.com",
+      website: "jonnies.com",
       imageurl:
         "https://tastet.ca/wp-content/uploads/2018/10/restaurant-lexpress-montreal-3-1024x684.jpg",
-      id: 2
+      id: 2,
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 2
     });
     Restaurants.insert({
       name: "Vegans Lovers",
@@ -58,10 +62,12 @@ Meteor.startup(() => {
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
       email: "vegans@aol.com",
-      wbesite: "vegans.com",
+      website: "vegans.com",
       imageurl:
         "https://file.videopolis.com/D/9dc9f4ba-0b2d-4cbb-979f-fee7be8a4198/8485.11521.brussels.the-hotel-brussels.amenity.restaurant-AD3WAP2L-13000-853x480.jpeg",
-      id: 3
+      id: 3,
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 3.5
     });
     Restaurants.insert({
       name: "Cesar's",
@@ -72,10 +78,20 @@ Meteor.startup(() => {
       phone: "1-(800)-888-0215",
       address: "1490 Broadway Street, Vancouver",
       email: "jonny@aol.com",
-      wbesite: "cesars.com",
+      website: "cesars.com",
       imageurl:
         "https://webbox.imgix.net/images/uzmdqklkumcnknpv/b7b8bb9a-7c0a-4d8f-bd8d-e10df7924123.jpg?auto=format,compress&fit=crop&crop=entropy",
-      id: 4
+      id: 4,
+      cuisines: ["Seafood", "Burger", "All American"],
+      rating: 5
+    });
+    Restaurants.insert({
+      name: "Vinny's Paradise",
+      email: "VP@food.com",
+      bio: "Good food for Vinnies",
+      capacity: "50",
+      phone: "1-(800)-888-0215",
+      address: "1490 Broadway Street, Vancouver"
     });
   }
 
@@ -84,25 +100,30 @@ Meteor.startup(() => {
       restaurantId: 1,
       rating: 5,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text: "Please tell us your feedback!",
+      impression: "Pretty good!"
     });
     Reviews.insert({
       restaurantId: 1,
       rating: 2,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text: "Had a wondeful time here on our daugthers quinceanera!",
+      impression: "Pretty good!"
     });
     Reviews.insert({
       restaurantId: 3,
       rating: 4,
       date: new Date(),
-      text: "Please tell us your feedback!"
+      text:
+        "The best reasons to go to the Paris Café are Saarinen’s glass walls, gliding curves and suspended catwalk, although the dining areas are swell, too, smartly evoking Raymond Loewy’s original design for the space, which looked like a coffee shop on the moon. ",
+      impression: "Bit Pricey!"
     });
     Reviews.insert({
       restaurantId: 4,
       rating: 3,
       date: new Date(),
-      text: "very nice"
+      text: "Very nice",
+      impression: "Decent"
     });
   }
 
@@ -113,7 +134,7 @@ Meteor.startup(() => {
       discount: "20%",
       notes: "Lorem ipsum",
       created: new Date(),
-      customers: [],
+      customers: [{ customerId: "zTW5ipq5Z634Li9CC", guests: 2 }],
       placesAvailable: 4,
       available: true,
       owner: 1
