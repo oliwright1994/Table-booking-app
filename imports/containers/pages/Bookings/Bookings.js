@@ -5,8 +5,7 @@ import BookingCard from "../../Component/BookingCard";
 
 const Bookings = ({ classes, restaurants, tables }) => {
   return (
-    <div>
-      <p>This is the Bookings page.</p>
+    <div className={classes.root}>
       {tables.map(table => {
         const now = new Date();
         const newDate = new Date(table.expireTime);
@@ -14,6 +13,7 @@ const Bookings = ({ classes, restaurants, tables }) => {
           const restaurant = restaurants.find(
             restaurant => restaurant._id === table.restaurantId
           );
+
           {
             restaurant && restaurant._id ? (
               <BookingCard
@@ -23,6 +23,7 @@ const Bookings = ({ classes, restaurants, tables }) => {
               />
             ) : null;
           }
+
         }
       })}
     </div>

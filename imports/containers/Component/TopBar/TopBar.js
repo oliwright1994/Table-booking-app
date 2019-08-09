@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { Button, Menu, MenuItem, Fade, Avatar } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
-import logo from "../../assets/images/logo.svg";
 import HamburgerMenu from "@material-ui/icons/fastfood";
 import Gravatar from "react-gravatar";
 import { Meteor } from "meteor/meteor";
@@ -45,17 +44,19 @@ const TopBarContent = props => {
   return (
     <div className={classes.container}>
       <div>
+
         {Meteor.user().profile.usertype === "customer" ? (
           <Link to="/bookings">
-            <img src={logo} alt="Food Logo" className={classes.logo} />
+            <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
           </Link>
         ) : restaurants.length > 0 ? (
           <Link to={`/restaurant/${restaurants[0]._id}`}>
-            <img src={logo} alt="Food Logo" className={classes.logo} />
+            <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
           </Link>
         ) : (
-          <img src={logo} alt="Food Logo" className={classes.logo} />
+          <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
         )}
+
       </div>
       <div className={classes.smallcontainer}>
         <Avatar round="true" className={classes.avatar}>
