@@ -14,15 +14,15 @@ const YourBookings = ({ classes, restaurants, tables }) => {
         tables.map(table => {
           if (table.customers.find(customer => (customer.customerId == Meteor.userId()))) {
             const now = new Date();
-            const newDate = new Date(table.expireTime);
-            if (table.expireTime && now <= newDate && restaurants.length !== 0) {
+            const tableExpiryDate = new Date(table.expireTime);
+            const expired = !!(now > tableExpiryDate);
+            if (table.expireTime && now <= tableExpiryDate && restaurants.length !== 0) {
               const restaurant = restaurants.find(
                 restaurant => restaurant._id === table.restaurantId
               );
               return (
-                <div>
-                  <BookingCard key={table._id} restaurant={restaurant} table={table} />
-                </div>
+                <BookingCard key={table._id} restaurant={restaurant} table={table} expired={expired} />
+
               );
             }
 
@@ -35,8 +35,8 @@ const YourBookings = ({ classes, restaurants, tables }) => {
         tables.map(table => {
           if (table.customers.find(customer => (customer.customerId == Meteor.userId()))) {
             const now = new Date();
-            const newDate = new Date(table.expireTime);
-            if (table.expireTime && now > newDate && restaurants.length !== 0) {
+            const tableExpiryDate = new Date(table.expireTime);
+            if (table.expireTime && now > tableExpiryDate && restaurants.length !== 0) {
               const restaurant = restaurants.find(
                 restaurant => restaurant._id === table.restaurantId
               );
