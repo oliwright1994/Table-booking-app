@@ -20,7 +20,7 @@ class AccountsUIWrapper extends Component {
     this.state = {
       formToggle: true,
       error: null,
-      usertype: ""
+      usertype: "customer"
     };
   }
   signUp = user => {
@@ -32,7 +32,6 @@ class AccountsUIWrapper extends Component {
     this.logIn(user);
   };
 
-
   logIn = user => {
     const { email, password } = user;
     Meteor.loginWithPassword(email, password, error => {
@@ -41,16 +40,16 @@ class AccountsUIWrapper extends Component {
     });
   };
 
-  validate = (values) => {
+  validate = values => {
     const errors = {};
     if (!values.email || !/@.*\./i.test(values.email)) {
-      errors.email = 'Required';
+      errors.email = "Required";
     }
     if (!values.password) {
-      errors.password = 'Required';
+      errors.password = "Required";
     }
     return errors;
-  }
+  };
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -70,15 +69,9 @@ class AccountsUIWrapper extends Component {
           this.state.formToggle ? this.logIn(user) : this.signUp(user);
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
-          <form
-            onSubmit={handleSubmit}
-            className={classes.accountForm}
-          >
+          <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <FormControl fullWidth className={classes.formControl}>
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
                   {({ input, meta }) => {
