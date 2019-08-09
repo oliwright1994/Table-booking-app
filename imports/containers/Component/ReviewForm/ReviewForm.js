@@ -20,7 +20,7 @@ class ReviewForm extends Component {
     Meteor.call(
       "reviews.createReview",
       { ...values, rating: rating },
-      this.props.userId,
+      this.props.user._id,
       this.props.restaurantId
     );
   }
@@ -32,7 +32,7 @@ class ReviewForm extends Component {
     this.setState({ starRating: 0 });
   }
   render() {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
 
     return (
       <div>
@@ -54,7 +54,7 @@ class ReviewForm extends Component {
               <div className={classes.reviewHeader}>
                 <Gravatar
                   className={classes.profilePic}
-                  email="o@m.com"
+                  email={user.emails[0].address}
                   size={40}
                 />
                 <Field

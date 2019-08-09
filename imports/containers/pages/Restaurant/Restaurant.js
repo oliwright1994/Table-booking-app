@@ -97,12 +97,12 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {reviews.find(review => review.author === user) ? (
+            {reviews.find(review => review.author === user._id) ? (
               <Typography component="p">
                 Thanks for leaving a review!
               </Typography>
             ) : (
-              <ReviewForm restaurantId={restaurant._id} userId={user} />
+              <ReviewForm restaurantId={restaurant._id} user={user} />
             )}
           </div>
         </div>
