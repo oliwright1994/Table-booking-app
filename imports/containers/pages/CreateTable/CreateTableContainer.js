@@ -7,12 +7,12 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 
 class CreateTableContainer extends Component {
   render() {
-    const { tables, currentUserId, restaurants } = this.props;
+    const { tables, currentUserId, restaurants, history } = this.props;
 
     return (
       <div>
         <h1>Lets fill those empty tables!</h1>
-        <TableForm />
+        <TableForm history={history} />
         <CreateTable />
       </div>
     );

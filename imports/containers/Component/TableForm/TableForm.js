@@ -14,15 +14,25 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 
 class TableForm extends Component {
-  onSubmit = (newTable, restaurants) => {
-    Meteor.call("tables.createTable", newTable, Meteor.userId(), restaurants[0]._id);
-    // console.log(restaurants);
-    // console.log(restaurants._id);
-  };
+  async onSubmit(newTable, restaurants) {
+    const restaurantId = restaurants[0]._id;
+    Meteor.call(
+      await "tables.createTable",
+      newTable,
+      Meteor.userId(),
+      restaurantId,
+      (err, res) => {
+        if (err) {
+          throw err;
+        } else {
+          this.props.history.push(`/restaurant/${restaurantId}`);
+        }
+      }
+    );
+  }
 
   render() {
     const { classes, restaurants } = this.props;
-    // console.log(restaurants);
 
     return (
       <Form
