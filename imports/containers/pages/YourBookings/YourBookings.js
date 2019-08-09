@@ -8,56 +8,48 @@ const YourBookings = ({ classes, restaurants, tables }) => {
     <div>
       <p>This is the YourBookings page.</p>
       <p>Current Booking</p>
-      {tables.map(table => {
-        if (
-          table.customers.find(
-            customer => customer.customerId == Meteor.userId()
-          )
-        ) {
-          const now = new Date();
-          const newDate = new Date(table.expireTime);
-          if (table.expireTime && now <= newDate) {
-            const restaurant = restaurants.find(
-              restaurant => restaurant._id === table.restaurantId
-            );
-            {
-              restaurant && restaurant._id ? (
-                <BookingCard
-                  key={table._id}
-                  restaurant={restaurant}
-                  table={table}
-                />
-              ) : null;
+
+      {(tables.length !== 0) ?
+
+        tables.map(table => {
+          if (table.customers.find(customer => (customer.customerId == Meteor.userId()))) {
+            const now = new Date();
+            const newDate = new Date(table.expireTime);
+            if (table.expireTime && now <= newDate && restaurants.length !== 0) {
+              const restaurant = restaurants.find(
+                restaurant => restaurant._id === table.restaurantId
+              );
+              return (
+                <div>
+                  <BookingCard key={table._id} restaurant={restaurant} table={table} />
+                </div>
+              );
+            }
+
+
+          }
+        }) : null
+      }
+      <p>Past Booking</p>
+      {(tables.length !== 0) ?
+        tables.map(table => {
+          if (table.customers.find(customer => (customer.customerId == Meteor.userId()))) {
+            const now = new Date();
+            const newDate = new Date(table.expireTime);
+            if (table.expireTime && now > newDate && restaurants.length !== 0) {
+              const restaurant = restaurants.find(
+                restaurant => restaurant._id === table.restaurantId
+              );
+              return (
+                <div>
+                  <BookingCard key={table._id} restaurant={restaurant} table={table} expired={true} />
+                </div>
+              );
             }
           }
         }
-      })}
-      <p>Past Booking</p>
-      {tables.map(table => {
-        if (
-          table.customers.find(
-            customer => customer.customerId == Meteor.userId()
-          )
-        ) {
-          const now = new Date();
-          const newDate = new Date(table.expireTime);
-          if (table.expireTime && now > newDate) {
-            const restaurant = restaurants.find(
-              restaurant => restaurant.id === table.restaurantId
-            );
-            return (
-              <div>
-                <BookingCard
-                  key={table._id}
-                  restaurant={restaurant}
-                  table={table}
-                  expired={true}
-                />
-              </div>
-            );
-          }
-        }
-      })}
+        ) : null
+      }
     </div>
   );
 };
