@@ -23,14 +23,15 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     address,
     phone
   } = restaurant;
+
   const cuisines = [cuisine1, cuisine2, cuisine3].filter(e => !!e);
 
   showReviewForm = (reviews, user, restaurant) => {
-    if (reviews.find(review => review.author === user._id)) {
+    if (reviews && reviews.find(review => review.author === user._id)) {
       return (
         <Typography component="p">Thanks for leaving a review!</Typography>
       );
-    } else if (restaurant.owner === user._id) {
+    } else if (user && restaurant && restaurant.owner === user._id) {
       return null;
     } else {
       return <ReviewForm restaurantId={restaurant._id} user={user} />;
