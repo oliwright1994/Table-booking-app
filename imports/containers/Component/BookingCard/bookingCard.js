@@ -46,6 +46,7 @@ class BookingCard extends Component {
   };
 
   render() {
+    console.log("this is the booking card");
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
@@ -60,6 +61,7 @@ class BookingCard extends Component {
 
     return (
       <div>
+        {console.log("this is the booking card")}
         <Card className={classes.root}>
           <Link component={RouterLink} to={`/restaurant/${restaurant._id}`}>
             <CardMedia
@@ -76,20 +78,16 @@ class BookingCard extends Component {
             />
           </Link>
           <div className={classes.bookingWrapper}>
-            {/* <div className={classes.bookingInfo}> */}
             <Link
               component={RouterLink}
               to={`/restaurant/${restaurant._id}`}
               className={classes.bookingInfo}
             >
               <CardContent className={classes.content}>
-                {/* <div className={classes.resInfo}> */}
-                {/* <div className={classes.meta}> */}
                 <Typography
                   variant="body2"
                   color="textSecondary"
                   component="h3"
-                  // className={classes.contentInfo}
                   className={classes.contentInfoTitle}
                 >
                   {restaurant.name}
@@ -114,8 +112,7 @@ class BookingCard extends Component {
                     className={classes.contentInfo}
                   >
                     {`Discount: `}
-                    {table.discount ? table.discount : null}
-                    {` %`}
+                    {table.discount ? table.discount : null}%
                   </Typography>
                 </div>
 
@@ -149,14 +146,16 @@ class BookingCard extends Component {
                   component="p"
                   className={classes.seatAvailable}
                 >
-                  {table.placesAvailable > 1 ? (
-                    <div>
-                      {table.placesAvailable}
-                      <p> seats left</p>
-                    </div>
-                  ) : (
-                    `${table.placesAvailable} seat left`
-                  )}
+                  {!expired ? (
+                    table.placesAvailable > 1 ? (
+                      <p>
+                        {table.placesAvailable}
+                        <p> seats left</p>
+                      </p>
+                    ) : (
+                      `${table.placesAvailable} seat left`
+                    )
+                  ) : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&
@@ -173,7 +172,10 @@ class BookingCard extends Component {
                           }
                           disabled={expired}
                         >
-                          {expired === true ? "Table Expired" : "Cancel Book"}
+                          {console.log(expired)}
+                          {expired || expired === undefined
+                            ? "Table Expired"
+                            : "Cancel Book"}
                         </Button>
                       </CardActions>
                     </div>
