@@ -11,18 +11,6 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  "restaurants.createRestaurant"(userId) {
-    Restaurants.insert({
-      owner: userId,
-      name: "This restaurant has no name yet",
-      description: "No bio yet",
-      imageurl: "No image added",
-      phone: "",
-      adress: "",
-      email: "",
-      website: ""
-    });
-  },
   "restaurants.updateProfile"(values, userId, restaurantId) {
     const res = Restaurants.update(
       { owner: userId },
