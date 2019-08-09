@@ -24,6 +24,19 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     phone
   } = restaurant;
   const cuisines = [cuisine1, cuisine2, cuisine3].filter(e => !!e);
+
+  showReviewForm = (reviews, user, restaurant) => {
+    if (reviews.find(review => review.author === user._id)) {
+      return (
+        <Typography component="p">Thanks for leaving a review!</Typography>
+      );
+    } else if (restaurant.owner === user._id) {
+      return null;
+    } else {
+      return <ReviewForm restaurantId={restaurant._id} user={user} />;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <img
@@ -97,13 +110,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {reviews.find(review => review.author === user._id) ? (
-              <Typography component="p">
-                Thanks for leaving a review!
-              </Typography>
-            ) : (
-              <ReviewForm restaurantId={restaurant._id} user={user} />
-            )}
+            {showReviewForm(reviews, user, restaurant)}
           </div>
         </div>
       </div>
