@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-import BookingCard from "../../Component/BookingCard"
+import BookingCard from "../../Component/BookingCard";
 
 const Bookings = ({ classes, restaurants, tables }) => {
   return (
@@ -14,16 +14,19 @@ const Bookings = ({ classes, restaurants, tables }) => {
           const restaurant = restaurants.find(
             restaurant => restaurant._id === table.restaurantId
           );
-          return (
-            <BookingCard key={table._id} restaurant={restaurant} table={table} />
-          );
+          {
+            restaurant && restaurant._id ? (
+              <BookingCard
+                key={table._id}
+                restaurant={restaurant}
+                table={table}
+              />
+            ) : null;
+          }
         }
-
-
       })}
     </div>
   );
-
 };
 
 export default withStyles(styles)(Bookings);
