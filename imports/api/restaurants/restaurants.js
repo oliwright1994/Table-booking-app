@@ -12,7 +12,9 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   "restaurants.updateProfile"(values, userId, restaurantId) {
-    const res = Restaurants.update(
+
+    Restaurants.update(
+
       { owner: userId },
       {
         $set: {
@@ -32,8 +34,8 @@ Meteor.methods({
       { upsert: true }
     );
 
-    let booking = Restaurants.find({ owner: userId }).fetch();
-    // console.log(booking);
-    return booking;
+    let updatedRestaurant = Restaurants.find({ owner: userId }).fetch();
+
+    return updatedRestaurant;
   }
 });
