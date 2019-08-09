@@ -25,32 +25,31 @@ class AccountsUIWrapper extends Component {
   }
   signUp = user => {
     const { email, password, usertype } = user;
-    Meteor.call("users.createUser", email, password, usertype, (err, res) => {
-      if (err) console.log(err);
+    Meteor.call("users.createUser", email, password, usertype, (error, res) => {
+      if (error) this.setState({ error: error.reason });
       else console.log(res);
     });
     this.logIn(user);
   };
 
-
   logIn = user => {
     const { email, password } = user;
     Meteor.loginWithPassword(email, password, error => {
-      if (error) console.log(error);
+      if (error) this.setState({ error: error.reason });
       else console.log(Meteor.userId());
     });
   };
 
-  validate = (values) => {
+  validate = values => {
     const errors = {};
     if (!values.email || !/@.*\./i.test(values.email)) {
-      errors.email = 'Required';
+      errors.email = "Required";
     }
     if (!values.password) {
-      errors.password = 'Required';
+      errors.password = "Required";
     }
     return errors;
-  }
+  };
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -70,15 +69,9 @@ class AccountsUIWrapper extends Component {
           this.state.formToggle ? this.logIn(user) : this.signUp(user);
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
-          <form
-            onSubmit={handleSubmit}
-            className={classes.accountForm}
-          >
+          <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <FormControl fullWidth className={classes.formControl}>
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
                   {({ input, meta }) => {
@@ -144,6 +137,9 @@ class AccountsUIWrapper extends Component {
                 )}
               </Field>
             </FormControl>
+            {!!this.state.error ? (
+              <Typography color="primary">{this.state.error}</Typography>
+            ) : null}
             <FormControl className={classes.formControlButtom}>
               <Grid
                 container
