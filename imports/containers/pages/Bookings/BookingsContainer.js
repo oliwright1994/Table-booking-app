@@ -6,10 +6,6 @@ import { withTracker } from "meteor/react-meteor-data";
 import Loader from "../../Component/Loader";
 
 class BookingsContainer extends Component {
-  constructor({ props }) {
-    super(props);
-    this.state = {};
-  }
   render() {
     const { restaurants, tables } = this.props;
     if (restaurants.length === 0 || tables.length === 0) {

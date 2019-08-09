@@ -40,16 +40,6 @@ class AccountsUIWrapper extends Component {
     });
   };
 
-  validate = values => {
-    const errors = {};
-    if (!values.email || !/@.*\./i.test(values.email)) {
-      errors.email = "Required";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    }
-    return errors;
-  };
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -59,7 +49,6 @@ class AccountsUIWrapper extends Component {
     const { classes } = this.props;
     return (
       <Form
-        validate={this.validate}
         onSubmit={values => {
           const user = {
             email: values.email,
@@ -130,7 +119,8 @@ class AccountsUIWrapper extends Component {
                     required={true}
                     inputProps={{
                       ...input,
-                      type: "password"
+                      type: "password",
+                      autoComplete: "off"
                     }}
                     value={input.value}
                   />
