@@ -95,7 +95,7 @@ const TopBarContent = props => {
             restaurants.length > 0 &&
             location.pathname !== "/create-table" && (
               <MenuItem onClick={handleClose}>
-                <Link to="/create-table">Create Table</Link>
+                <Link to="/create-table">Create A Table</Link>
               </MenuItem>
             )}
           <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
