@@ -4,6 +4,7 @@ import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
 import Loader from "../../Component/Loader";
+import BookingFilter from "../../Component/BookingFilter";
 
 class BookingsContainer extends Component {
   render() {
@@ -15,7 +16,12 @@ class BookingsContainer extends Component {
         </div>
       );
     } else {
-      return <Bookings restaurants={restaurants} tables={tables} />;
+      return (
+        <div>
+          <BookingFilter />
+          <Bookings restaurants={restaurants} tables={tables} />;
+        </div>
+      );
     }
   }
 }
