@@ -17,7 +17,8 @@ const styles = theme => ({
     height: "42px",
     border: "none",
     cursor: "pointer",
-    color: "red"
+    color: "red",
+    background: "none"
   }
 });
 

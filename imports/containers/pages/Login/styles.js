@@ -3,23 +3,18 @@ const styles = theme => ({
     textAlign: "center"
   },
 
-  logo: {
+  banner: {
     display: "flex",
-    justifyContent: "center"
+    flexDirection: "row"
   },
 
   loginWrapper: {
     margin: "0 30%"
-  },
-
-  formControl: {
-    marginButton: "40px"
-  },
-
-  test: {
-    margin: "40px",
-    width: "100%"
   }
+
+  // formControl: {
+  //   marginButton: "40px"
+  // }
 });
 
 export default styles;

@@ -20,18 +20,17 @@ class AccountsUIWrapper extends Component {
     this.state = {
       formToggle: true,
       error: null,
-      usertype: ""
+      usertype: "customer"
     };
   }
   signUp = user => {
     const { email, password, usertype } = user;
-    Meteor.call("users.createUser", email, password, usertype, (err, res) => {
-      if (err) console.log(err);
+    Meteor.call("users.createUser", email, password, usertype, (error, res) => {
+      if (error) this.setState({ error: error.reason });
       else console.log(res);
     });
     this.logIn(user);
   };
-<<<<<<< HEAD
 
   logIn = user => {
     const { email, password } = user;
@@ -43,28 +42,25 @@ class AccountsUIWrapper extends Component {
       else console.log(Meteor.userId());
     });
   };
-=======
-
 
   logIn = user => {
     const { email, password } = user;
     Meteor.loginWithPassword(email, password, error => {
-      if (error) console.log(error);
+      if (error) this.setState({ error: error.reason });
       else console.log(Meteor.userId());
     });
   };
 
-  validate = (values) => {
+  validate = values => {
     const errors = {};
     if (!values.email || !/@.*\./i.test(values.email)) {
-      errors.email = 'Required';
+      errors.email = "Required";
     }
     if (!values.password) {
-      errors.password = 'Required';
+      errors.password = "Required";
     }
     return errors;
-  }
->>>>>>> fbcf0fac4d33d9ff5cd8c7d8743afd49a3f4a345
+  };
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -82,23 +78,14 @@ class AccountsUIWrapper extends Component {
             usertype: this.state.usertype
           };
           this.state.formToggle ? this.logIn(user) : this.signUp(user);
-<<<<<<< HEAD
 
           console.log(user);
           console.log("usertype is: ", this.state.usertype);
-=======
->>>>>>> fbcf0fac4d33d9ff5cd8c7d8743afd49a3f4a345
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
-          <form
-            onSubmit={handleSubmit}
-            className={classes.accountForm}
-          >
+          <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
-              <FormControl
-                fullWidth
-                className={classes.formControl}
-              >
+              <FormControl fullWidth className={classes.formControl}>
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
                   {({ input, meta }) => {
@@ -164,6 +151,9 @@ class AccountsUIWrapper extends Component {
                 )}
               </Field>
             </FormControl>
+            {!!this.state.error ? (
+              <Typography color="primary">{this.state.error}</Typography>
+            ) : null}
             <FormControl className={classes.formControlButtom}>
               <Grid
                 container

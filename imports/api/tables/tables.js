@@ -23,11 +23,10 @@ Meteor.methods({
       placesAvailable: values.maxPlaces,
       available: true,
       owner: userId,
-      expireTime: ed.setHours(ed.getHours() + values.expire),
+      expireTime: ed.setHours(ed.getHours() + values.expire)
     });
   },
   "tables.updateBooking"(tableId, userId, numberOfGuests) {
-
     Tables.update(
       {
         _id: tableId
@@ -37,21 +36,12 @@ Meteor.methods({
           customers: { customerId: userId, guests: numberOfGuests }
         },
         $inc: {
-          placesAvailable: - numberOfGuests
+          placesAvailable: -numberOfGuests
         }
       }
     );
-
   },
   "tables.deleteTable"(tableId, userId) {
-    const booking = Tables.find({ _id: tableId });
-
-    // if (booking.owner !== userId) {
-    //   throw new Meteor.Error(
-    //     "tables.deleteTable.not-authorized",
-    //     "You cannot delete tables from other restaurants."
-    //   );
-    // }
     Tables.remove({
       _id: tableId
     });
@@ -61,7 +51,7 @@ Meteor.methods({
       { _id: tableId },
       {
         $inc: { placesAvailable: +numberOfGuests },
-        $pull: { customers: { customerId: userId } },
+        $pull: { customers: { customerId: userId } }
       }
     );
   }

@@ -9,12 +9,14 @@ import Loader from "../../Component/Loader";
 
 class RestaurantContainer extends Component {
   render() {
-    const { reviews, tables, restaurants, currentUserId } = this.props;
+    const { reviews, tables, restaurants, currentUser } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
-    if (restaurants.length === 0 || currentUserId === undefined) {
-      return <div style={{ height: "100vh" }}>
-        <Loader />
-      </div>;
+    if (restaurants.length === 0 || currentUser === undefined) {
+      return (
+        <div style={{ height: "100vh" }}>
+          <Loader />
+        </div>
+      );
     } else if (
       restaurants.find(restaurant => restaurant._id == restaurantId) ===
       undefined
@@ -30,7 +32,7 @@ class RestaurantContainer extends Component {
           reviews={reviews.filter(
             reviews => reviews.restaurantId == restaurantId
           )}
-          user={currentUserId}
+          user={currentUser}
         />
       );
     }

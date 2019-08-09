@@ -12,125 +12,143 @@ import {
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import { Restaurants } from "../../../api/restaurants/restaurants";
+import SubmitIcon from "@material-ui/icons/checkcircle";
 
 class TableForm extends Component {
-  onSubmit = (newTable, restaurants) => {
-    Meteor.call("tables.createTable", newTable, Meteor.userId(), restaurants[0]._id);
-    // console.log(restaurants);
-    // console.log(restaurants._id);
-  };
+
+  async onSubmit(newTable, restaurants) {
+    const restaurantId = restaurants[0]._id;
+    Meteor.call(
+      await "tables.createTable",
+      newTable,
+      Meteor.userId(),
+      restaurantId,
+      (err, res) => {
+        if (err) {
+          throw err;
+        } else {
+          this.props.history.push(`/restaurant/${restaurantId}`);
+        }
+      }
+    );
+  }
 
   render() {
     const { classes, restaurants } = this.props;
-    // console.log(restaurants);
 
     return (
-      <Form
-        onSubmit={table => this.onSubmit(table, restaurants)}
-        // validate={validate}
-        render={({ handleSubmit, pristine, invalid }) => (
-          <form onSubmit={handleSubmit}>
-            <FormControl>
-              <div>
-                <Field
-                  name="Discount"
-                  render={({ input, meta }) => (
-                    <label>
-                      <TextField
-                        id="Discount"
-                        required={true}
-                        inputProps={{ ...input, type: "number" }}
-                        label="Insert discount..."
-                        value={input.value}
-                        margin="normal"
-                        className={classes.discount}
-                      />
-                    </label>
-                  )}
-                />
-              </div>
-
-              <div>
-                <Field
-                  name="description"
-                  render={({ input, meta }) => (
-                    <label>
-                      <TextField
-                        id="Notes"
-                        inputProps={{ ...input }}
-                        label="Descriptions for table..."
-                        value={input.value}
-                        margin="normal"
-                        className={classes.notes}
-                      />
-                    </label>
-                  )}
-                />
-              </div>
-
-              <div>
-                <FormControl>
+      <div className={classes.tableForm}>
+        <Form
+          onSubmit={table => this.onSubmit(table, restaurants)}
+          // validate={validate}
+          render={({ handleSubmit, pristine, invalid }) => (
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <div>
                   <Field
-                    name="expire"
+                    name="discount"
                     render={({ input, meta }) => (
-                      <div>
-                        <Select
-                          onChange={this.handleChange}
+                      <label>
+                        <TextField
+                          id="discount"
                           inputProps={{ ...input }}
-                          displayEmpty
-                          name="expireTime"
-                          id="expireTime"
-                        >
-                          <MenuItem value="">
-                            <p>Table Expired Time</p>
-                          </MenuItem>
-                          <MenuItem value={1}>1 Hour</MenuItem>
-                          <MenuItem value={2}>2 Hours</MenuItem>
-                          <MenuItem value={3}>3 Hours</MenuItem>
-                          <MenuItem value={4}>4 Hours</MenuItem>
-                        </Select>
-                        {/* <FormHelperText>Table Expired Time</FormHelperText> */}
-                      </div>
+                          label="Insert discount here..."
+                          value={input.value}
+                          margin="normal"
+                          type="number"
+                          className={classes.discount}
+                        />
+                      </label>
                     )}
                   />
-                </FormControl>
-              </div>
+                </div>
 
-              <div>
-                <FormControl>
+                <div>
                   <Field
-                    name="maxPlaces"
+                    name="notes"
                     render={({ input, meta }) => (
-                      <div>
-                        <Select
-                          onChange={this.handleChange}
+                      <label>
+                        <TextField
+                          id="notes"
                           inputProps={{ ...input }}
-                          displayEmpty
-                          name="seats"
-                          id="seats"
-                        >
-                          <MenuItem value="">
-                            <p>Number of Seats</p>
-                          </MenuItem>
-                          <MenuItem value={1}>1</MenuItem>
-                          <MenuItem value={2}>2</MenuItem>
-                          <MenuItem value={3}>3</MenuItem>
-                          <MenuItem value={4}>4</MenuItem>
-                        </Select>
-                        {/* <FormHelperText>Number of Seats</FormHelperText> */}
-                      </div>
+                          label="Descriptions for table..."
+                          value={input.value}
+                          margin="normal"
+                          className={classes.description}
+                        />
+                      </label>
                     )}
                   />
-                </FormControl>
-              </div>
+                </div>
+                <div>
+                  <FormControl>
+                    <Field
+                      name="expire"
+                      render={({ input, meta }) => (
+                        <div>
+                          <Select
+                            onChange={this.handleChange}
+                            inputProps={{ ...input }}
+                            displayEmpty
+                            name="expireTime"
+                            id="expireTime"
+                          >
+                            <MenuItem value="">
+                              <p>Table Expired Time</p>
+                            </MenuItem>
+                            <MenuItem value={1}>1 Hour</MenuItem>
+                            <MenuItem value={2}>2 Hours</MenuItem>
+                            <MenuItem value={3}>3 Hours</MenuItem>
+                            <MenuItem value={4}>4 Hours</MenuItem>
+                          </Select>
+                          {/* <FormHelperText>Table Expired Time</FormHelperText> */}
+                        </div>
+                      )}
+                    />
+                  </FormControl>
+                </div>
 
-              <button type="submit" disabled={pristine || invalid}>
-                Submit
-              </button>
-            </FormControl>
-          </form>
-        )}
-      />
+                <div className={classes.bottomWrapper}>
+                  <FormControl>
+                    <Field
+                      name="maxPlaces"
+                      render={({ input, meta }) => (
+                        <div>
+                          <Select
+                            className={classes.seats}
+                            onChange={this.handleChange}
+                            inputProps={{ ...input }}
+                            displayEmpty
+                            name="seats"
+                            id="seats"
+                          >
+                            <MenuItem value="">
+                              <em>0</em>
+                            </MenuItem>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                          </Select>
+                          <FormHelperText>Number of Seats</FormHelperText>
+                        </div>
+                      )}
+                    />
+                  </FormControl>
+
+                  <button
+                    className={classes.button}
+                    type="submit"
+                    disabled={pristine || invalid}
+                  >
+                    <SubmitIcon />
+                  </button>
+                </div>
+              </FormControl>
+            </form>
+          )}
+        />
+      </div>
     );
   }
 }
