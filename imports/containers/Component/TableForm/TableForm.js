@@ -16,13 +16,13 @@ import SubmitIcon from "@material-ui/icons/checkcircle";
 
 class TableForm extends Component {
   onSubmit = (newTable, restaurants) => {
+    console.log(this.props.restaurants);
     Meteor.call(
       "tables.createTable",
       newTable,
       Meteor.userId(),
       restaurants[0]._id
     );
-    // console.log(restaurants);
     // console.log(restaurants._id);
   };
 
@@ -33,18 +33,18 @@ class TableForm extends Component {
     return (
       <div className={classes.tableForm}>
         <Form
-          onSubmit={table => this.onSubmit(table)}
+          onSubmit={table => this.onSubmit(table, restaurants)}
           // validate={validate}
           render={({ handleSubmit, pristine, invalid }) => (
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <div>
                   <Field
-                    name="Discount"
+                    name="discount"
                     render={({ input, meta }) => (
                       <label>
                         <TextField
-                          id="Discount"
+                          id="discount"
                           inputProps={{ ...input }}
                           label="Insert discount here..."
                           value={input.value}
@@ -58,11 +58,11 @@ class TableForm extends Component {
 
                 <div>
                   <Field
-                    name="description"
+                    name="notes"
                     render={({ input, meta }) => (
                       <label>
                         <TextField
-                          id="description"
+                          id="notes"
                           inputProps={{ ...input }}
                           label="Descriptions for table..."
                           value={input.value}

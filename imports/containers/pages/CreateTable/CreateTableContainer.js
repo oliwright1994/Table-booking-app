@@ -17,7 +17,7 @@ class CreateTableContainer extends Component {
         <div className={classes.background}>
           <h1 className={classes.title}>Lets fill those empty tables!</h1>
           <div className={classes.container}>
-            <TableForm />
+            <TableForm restaurant={restaurants} />
             <CreateTable />
           </div>
         </div>
