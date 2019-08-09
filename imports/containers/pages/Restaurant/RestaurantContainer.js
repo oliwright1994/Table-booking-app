@@ -12,11 +12,11 @@ class RestaurantContainer extends Component {
     const { reviews, tables, restaurants, currentUserId } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
     if (restaurants.length === 0 || currentUserId === undefined) {
-      <div style={{ height: "100vh" }}>
+      return <div style={{ height: "100vh" }}>
         <Loader />
       </div>;
     } else if (
-      restaurants.find(restaurant => restaurant.id == restaurantId) ===
+      restaurants.find(restaurant => restaurant._id == restaurantId) ===
       undefined
     ) {
       return <Redirect to="/bookings" />;
@@ -24,7 +24,7 @@ class RestaurantContainer extends Component {
       return (
         <Restaurant
           restaurant={restaurants.find(
-            restaurant => restaurant.id == restaurantId
+            restaurant => restaurant._id == restaurantId
           )}
           table={tables.find(table => table.restaurantId == restaurantId)}
           reviews={reviews.filter(

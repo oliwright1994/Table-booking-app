@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-
 import InputLabel from "@material-ui/core/InputLabel";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -46,9 +43,10 @@ class BookingCard extends Component {
   };
 
   render() {
-    const { classes, restaurant, table } = this.props;
+    const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
+
     const spaceDropdown = [];
     for (let i = table.placesAvailable; i > 0; i--) {
       spaceDropdown.push(i);
@@ -57,9 +55,7 @@ class BookingCard extends Component {
     return (
       <div>
         <Card className={classes.root}>
-          {/* <CardActionArea> */}
-          <Link component={RouterLink} to={`/restaurant/${restaurant.id}`}>
-            {/* ${restaurant._id} */}
+          <Link component={RouterLink} to={`/restaurant/${restaurant._id}`}>
             <CardMedia
               className={classes.media}
               image={
@@ -92,15 +88,17 @@ class BookingCard extends Component {
                 >
                   {restaurant.name}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  component="p"
-                  className={classes.contentInfo}
-                >
-                  {restaurant.cuisines.join(", ")}
-                </Typography>
-                {/* </div> */}
+
+                {restaurant.cuisines ? (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                    className={classes.contentInfo}
+                  >
+                    {restaurant.cuisines.join(", ")}
+                  </Typography>
+                ) : null}
 
                 <div className={classes.discountContainer}>
                   <Typography
@@ -168,8 +166,9 @@ class BookingCard extends Component {
                           onClick={() =>
                             this.cancleTable(table, table._id, Meteor.userId())
                           }
+                          disabled={expired}
                         >
-                          Cancel Book
+                          {expired === true ? "Table Expired" : "Cancel Book"}
                         </Button>
                       </CardActions>
                     </div>

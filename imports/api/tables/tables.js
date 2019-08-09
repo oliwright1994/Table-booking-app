@@ -12,6 +12,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   "tables.createTable"(values, userId, restaurantId) {
+    const ed = new Date();
     Tables.insert({
       restaurantId: restaurantId,
       maxPlaces: values.maxPlaces,
@@ -21,7 +22,8 @@ Meteor.methods({
       customers: [],
       placesAvailable: values.maxPlaces,
       available: true,
-      owner: userId
+      owner: userId,
+      expireTime: ed.setHours(ed.getHours() + values.expire),
     });
   },
   "tables.updateBooking"(tableId, userId, numberOfGuests) {

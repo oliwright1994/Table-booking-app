@@ -58,7 +58,7 @@ export default () => {
             path="/restaurant/:restaurantId"
             component={Restaurant}
           />
-          <Redirect from="*" to="/restaurant/:restaurantId" />
+          <Redirect from="*" to="/create-restaurant" />
         </Switch>
       </Fragment>
     );

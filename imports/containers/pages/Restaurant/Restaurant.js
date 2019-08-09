@@ -13,6 +13,7 @@ import ReviewForm from "../../Component/ReviewForm";
 
 const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
+
   return (
     <div className={classes.root}>
       <img
@@ -30,7 +31,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
         <Typography component="p">{bio}</Typography>
         <div className={classes.doubleColumn}>
           <div className={classes.singleColumn}>
-            {cuisines ? (
+            {cuisines.length > 0 ? (
               <div className={classes.cuisineList}>
                 <Typography>Cuisines: </Typography>
                 <List dense>
@@ -52,8 +53,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                <p>No reviews yet, be the first!</p>
-              )}
+                  <p>No reviews yet, be the first!</p>
+                )}
             </div>
           </div>
 
@@ -65,8 +66,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                <p>No table available right now.</p>
-              )}
+                  <p>No table available right now.</p>
+                )}
             </div>
             <div>
               <Typography component="p">Address: {address}</Typography>
@@ -88,8 +89,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 Thanks for leaving a review!
               </Typography>
             ) : (
-              <ReviewForm restaurantId={restaurant.id} userId={user} />
-            )}
+                <ReviewForm restaurantId={restaurant._id} userId={user} />
+              )}
           </div>
         </div>
       </div>

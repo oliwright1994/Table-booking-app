@@ -6,20 +6,26 @@ import { Cuisines } from "../../../api/cuisines/cuisines";
 
 class CreateRestaurantContainer extends Component {
   render() {
-    const { restaurants } = this.props;
-    return (
-      <CreateRestaurant
-        restaurant={restaurants[0]}
-        userId={this.props.currentUserId}
-        cusisines={this.props.cuisines}
-      />
-    );
+    const { restaurants, currentUserId, cuisines, history } = this.props;
+    if (cuisines.length === 0 || currentUserId === undefined) {
+      return <p>Loading...</p>;
+    } else {
+      return (
+        <CreateRestaurant
+          restaurant={restaurants[0]}
+          userId={currentUserId}
+          cuisines={cuisines}
+          history={history}
+        />
+      );
+    }
   }
 }
 
 export default withTracker(() => {
   Meteor.subscribe("tables");
   Meteor.subscribe("restaurants");
+  Meteor.subscribe("cuisines");
 
   return {
     currentUser: Meteor.user(),

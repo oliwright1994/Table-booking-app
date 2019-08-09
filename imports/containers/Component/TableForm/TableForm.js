@@ -15,8 +15,15 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 import SubmitIcon from "@material-ui/icons/checkcircle";
 
 class TableForm extends Component {
-  onSubmit = newTable => {
-    Meteor.call("tables.createTable", newTable, Meteor.userId(), 1);
+  onSubmit = (newTable, restaurants) => {
+    Meteor.call(
+      "tables.createTable",
+      newTable,
+      Meteor.userId(),
+      restaurants[0]._id
+    );
+    // console.log(restaurants);
+    // console.log(restaurants._id);
   };
 
   render() {
@@ -65,6 +72,33 @@ class TableForm extends Component {
                       </label>
                     )}
                   />
+                </div>
+                <div>
+                  <FormControl>
+                    <Field
+                      name="expire"
+                      render={({ input, meta }) => (
+                        <div>
+                          <Select
+                            onChange={this.handleChange}
+                            inputProps={{ ...input }}
+                            displayEmpty
+                            name="expireTime"
+                            id="expireTime"
+                          >
+                            <MenuItem value="">
+                              <p>Table Expired Time</p>
+                            </MenuItem>
+                            <MenuItem value={1}>1 Hour</MenuItem>
+                            <MenuItem value={2}>2 Hours</MenuItem>
+                            <MenuItem value={3}>3 Hours</MenuItem>
+                            <MenuItem value={4}>4 Hours</MenuItem>
+                          </Select>
+                          {/* <FormHelperText>Table Expired Time</FormHelperText> */}
+                        </div>
+                      )}
+                    />
+                  </FormControl>
                 </div>
 
                 <div className={classes.bottomWrapper}>
@@ -115,6 +149,6 @@ class TableForm extends Component {
 export default withTracker(() => {
   Meteor.subscribe("restaurant");
   return {
-    // restaurants: Restaurants.find({}).fetch()
+    restaurants: Restaurants.find({ owner: Meteor.userId() }).fetch()
   };
 })(withStyles(styles)(TableForm));
