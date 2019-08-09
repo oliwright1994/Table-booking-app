@@ -27,7 +27,6 @@ export default withTracker(() => {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
     tables: Tables.find({}).fetch(),
-    // users: Users.find({}).fetch(),
     restaurant: Restaurants.find({}).fetch()
   };
 })(CreateTableContainer);

@@ -24,21 +24,29 @@ Meteor.methods({
     });
   },
   "restaurants.updateProfile"(values, userId, restaurantId) {
-    Restaurants.update(
+    let res = Restaurants.update(
       { owner: userId },
       {
         $set: {
           owner: userId,
           name: values.name,
-          bio: values.description,
+          description: values.description,
           imageurl: values.imageurl,
           phone: values.phone,
-          adress: values.address,
+          address: values.address,
           email: values.email,
-          website: values.website
+          website: values.website,
+          cuisines: [values.cuisine1, values.cuisine2, values.cuisine3],
+          cuisine1: values.cuisine1,
+          cuisine2: values.cuisine2,
+          cuisine3: values.cuisine3
         }
       },
       { upsert: true }
     );
+
+    let booking = Restaurants.find({ owner: userId }).fetch();
+    // console.log(booking);
+    return booking;
   }
 });

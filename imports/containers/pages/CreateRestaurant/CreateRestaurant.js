@@ -18,12 +18,21 @@ class CreateRestaurant extends Component {
   constructor({ props }) {
     super(props);
     this.state = {
-      selectedCuisines: []
+      selectedCuisines: [],
+      bookingsRes: null
     };
   }
 
-  updateRestaurant(values) {
-    Meteor.call("restaurants.updateProfile", values, this.props.userId);
+  async updateRestaurant(values) {
+    let booking = Meteor.call(
+      await "restaurants.updateProfile",
+      values,
+      this.props.userId,
+      (err, res) => {
+        console.log(res[0]._id);
+        this.props.history.push(`/restaurant/${res[0]._id}`);
+      }
+    );
   }
 
   render() {
@@ -50,6 +59,7 @@ class CreateRestaurant extends Component {
                     required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="name"
                         type="text"
                         inputProps={{ ...input, autoComplete: "off" }}
@@ -79,12 +89,15 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="imageurl">Image URL</InputLabel>
                   <Field
                     name="imageurl"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="imageurl"
-                        type="text"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "url"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -98,8 +111,11 @@ class CreateRestaurant extends Component {
                     render={({ input, meta }) => (
                       <Input
                         id="phone"
-                        type="tel"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "tel"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -126,12 +142,15 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="email">Email</InputLabel>
                   <Field
                     name="email"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
                         id="email"
-                        type="email"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        required={true}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "email"
+                        }}
                         value={input.value}
                       />
                     )}
@@ -141,20 +160,90 @@ class CreateRestaurant extends Component {
                   <InputLabel htmlFor="website">Website</InputLabel>
                   <Field
                     name="website"
-                    required={true}
                     render={({ input, meta }) => (
                       <Input
+                        required={true}
                         id="website"
                         type="url"
-                        inputProps={{ ...input, autoComplete: "off" }}
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off",
+                          type: "website"
+                        }}
                         value={input.value}
                       />
                     )}
                   />
                 </FormControl>
+                <Typography component="p">
+                  Select some cuisines for your restaurant (max 3)
+                </Typography>
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine1"
+                  render={({ input, meta }) => (
+                    <Select
+                      input={<Input id="select-multiple" />}
+                      id="select-multiple"
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem
+                          id={cuisine._id}
+                          key={cuisine._id}
+                          value={cuisine.title}
+                        >
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine2"
+                  render={({ input, meta }) => (
+                    <Select
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem key={cuisine._id} value={cuisine.title}>
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Field
+                  fullWidth
+                  inputProps={{ autoComplete: "off" }}
+                  name="cuisine3"
+                  formControlProps={{ fullWidth: true }}
+                  render={({ input, meta }) => (
+                    <Select
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                    >
+                      {cuisines.map(cuisine => (
+                        <MenuItem key={cuisine._id} value={cuisine.title}>
+                          {cuisine.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
                 <Button
                   variant="contained"
-                  // onClick={console.log("submit button")}
                   type="submit"
                   disabled={pristine || invalid}
                 >

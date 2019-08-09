@@ -31,6 +31,7 @@ class AccountsUIWrapper extends Component {
     });
     this.logIn(user);
   };
+<<<<<<< HEAD
 
   logIn = user => {
     const { email, password } = user;
@@ -42,6 +43,28 @@ class AccountsUIWrapper extends Component {
       else console.log(Meteor.userId());
     });
   };
+=======
+
+
+  logIn = user => {
+    const { email, password } = user;
+    Meteor.loginWithPassword(email, password, error => {
+      if (error) console.log(error);
+      else console.log(Meteor.userId());
+    });
+  };
+
+  validate = (values) => {
+    const errors = {};
+    if (!values.email || !/@.*\./i.test(values.email)) {
+      errors.email = 'Required';
+    }
+    if (!values.password) {
+      errors.password = 'Required';
+    }
+    return errors;
+  }
+>>>>>>> fbcf0fac4d33d9ff5cd8c7d8743afd49a3f4a345
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });
@@ -51,7 +74,7 @@ class AccountsUIWrapper extends Component {
     const { classes } = this.props;
     return (
       <Form
-        // TODO validate={validate.bind(this)}
+        validate={this.validate}
         onSubmit={values => {
           const user = {
             email: values.email,
@@ -59,19 +82,22 @@ class AccountsUIWrapper extends Component {
             usertype: this.state.usertype
           };
           this.state.formToggle ? this.logIn(user) : this.signUp(user);
+<<<<<<< HEAD
 
           console.log(user);
           console.log("usertype is: ", this.state.usertype);
+=======
+>>>>>>> fbcf0fac4d33d9ff5cd8c7d8743afd49a3f4a345
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form
             onSubmit={handleSubmit}
-            // className={classes.accountForm}
+            className={classes.accountForm}
           >
             {!this.state.formToggle && (
               <FormControl
                 fullWidth
-                // className={classes.formControl}
+                className={classes.formControl}
               >
                 <FormLabel component="legend">UserType</FormLabel>
                 <Field name="usertype">
@@ -85,16 +111,16 @@ class AccountsUIWrapper extends Component {
                         onChange={this.handleChange}
                       >
                         <FormControlLabel
-                          value="restaurant"
-                          checked={this.state.usertype == "restaurant"}
-                          control={<Radio />}
-                          label="Restaurant"
-                        />
-                        <FormControlLabel
                           value="customer"
                           checked={this.state.usertype == "customer"}
                           control={<Radio />}
                           label="Customer"
+                        />
+                        <FormControlLabel
+                          value="restaurant"
+                          checked={this.state.usertype == "restaurant"}
+                          control={<Radio />}
+                          label="Restaurant"
                         />
                       </RadioGroup>
                     );
@@ -109,9 +135,11 @@ class AccountsUIWrapper extends Component {
                   return (
                     <Input
                       id="email"
-                      type="text"
+                      required={true}
+                      autoFocus={true}
                       inputProps={{
                         ...input,
+                        type: "email",
                         autoComplete: "off"
                       }}
                       value={input.value}
@@ -126,10 +154,10 @@ class AccountsUIWrapper extends Component {
                 {({ input, meta }) => (
                   <Input
                     id="password"
-                    type="password"
+                    required={true}
                     inputProps={{
                       ...input,
-                      autoComplete: "off"
+                      type: "password"
                     }}
                     value={input.value}
                   />
@@ -153,7 +181,7 @@ class AccountsUIWrapper extends Component {
                 >
                   {this.state.formToggle ? "Enter" : "Create Account"}
                 </Button>
-                <Typography>
+                <div>
                   <button
                     className={classes.formToggle}
                     type="button"
@@ -167,7 +195,7 @@ class AccountsUIWrapper extends Component {
                       ? "Create an account."
                       : "Login to existing account."}
                   </button>
-                </Typography>
+                </div>
               </Grid>
             </FormControl>
           </form>
