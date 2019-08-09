@@ -42,14 +42,6 @@ Meteor.methods({
     );
   },
   "tables.deleteTable"(tableId, userId) {
-    const booking = Tables.find({ _id: tableId });
-
-    // if (booking.owner !== userId) {
-    //   throw new Meteor.Error(
-    //     "tables.deleteTable.not-authorized",
-    //     "You cannot delete tables from other restaurants."
-    //   );
-    // }
     Tables.remove({
       _id: tableId
     });
