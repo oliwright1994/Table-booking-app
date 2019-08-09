@@ -20,7 +20,7 @@ class AccountsUIWrapper extends Component {
     this.state = {
       formToggle: true,
       error: null,
-      usertype: ""
+      usertype: "customer"
     };
   }
   signUp = user => {

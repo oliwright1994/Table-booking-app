@@ -59,6 +59,7 @@ class CreateRestaurant extends Component {
                     required={true}
                     render={({ input, meta }) => (
                       <Input
+                        autoFocus={true}
                         required={true}
                         id="name"
                         type="text"
