@@ -15,20 +15,26 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 import SubmitIcon from "@material-ui/icons/checkcircle";
 
 class TableForm extends Component {
-  onSubmit = (newTable, restaurants) => {
-    console.log(this.props.restaurants);
+
+  async onSubmit(newTable, restaurants) {
+    const restaurantId = restaurants[0]._id;
     Meteor.call(
-      "tables.createTable",
+      await "tables.createTable",
       newTable,
       Meteor.userId(),
-      restaurants[0]._id
+      restaurantId,
+      (err, res) => {
+        if (err) {
+          throw err;
+        } else {
+          this.props.history.push(`/restaurant/${restaurantId}`);
+        }
+      }
     );
-    // console.log(restaurants._id);
-  };
+  }
 
   render() {
     const { classes, restaurants } = this.props;
-    // console.log(restaurants);
 
     return (
       <div className={classes.tableForm}>
@@ -49,6 +55,7 @@ class TableForm extends Component {
                           label="Insert discount here..."
                           value={input.value}
                           margin="normal"
+                          type="number"
                           className={classes.discount}
                         />
                       </label>

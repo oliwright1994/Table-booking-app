@@ -35,10 +35,34 @@ class CreateRestaurant extends Component {
     );
   }
 
+  displayHeaderText(restaurant) {
+    console.log(restaurant);
+    if (!restaurant) {
+      return (
+        <div>
+          <Typography component="h1">Welcome!</Typography>
+          <Typography>
+            Before you get started, lets get a few details about your restaurant
+            to help you get setup.
+          </Typography>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Typography component="h1">
+            Update your restaurants profile.
+          </Typography>
+        </div>
+      );
+    }
+  }
+
   render() {
     const { restaurant, classes, cuisines } = this.props;
     return (
       <div>
+        {this.displayHeaderText(restaurant)}
         <Form
           onSubmit={values => this.updateRestaurant(values)}
           initialValues={restaurant ? { ...restaurant } : null}
@@ -59,6 +83,7 @@ class CreateRestaurant extends Component {
                     required={true}
                     render={({ input, meta }) => (
                       <Input
+                        autoFocus={true}
                         required={true}
                         id="name"
                         type="text"

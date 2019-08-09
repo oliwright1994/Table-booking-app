@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+
+
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+
+
 import InputLabel from "@material-ui/core/InputLabel";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -46,6 +51,9 @@ class BookingCard extends Component {
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
+
+    const { cuisine1, cuisine2, cuisine3 } = restaurant;
+    const cuisines = [cuisine1, cuisine2, cuisine3].filter(e => !!e);
 
     const spaceDropdown = [];
     for (let i = table.placesAvailable; i > 0; i--) {
@@ -100,6 +108,18 @@ class BookingCard extends Component {
                   </Typography>
                 ) : null}
 
+
+                  {cuisines ? (
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {cuisines.join(", ")}
+                    </Typography>
+                  ) : null}
+                </div>
+
                 <div className={classes.discountContainer}>
                   <Typography
                     variant="body2"
@@ -108,7 +128,7 @@ class BookingCard extends Component {
                     className={classes.contentInfo}
                   >
                     {`Discount: `}
-                    {table.discount ? table.discount : null}
+                    {table.discount ? table.discount : null}{` %`}
                   </Typography>
                 </div>
                 {/* </div> */}
@@ -217,6 +237,7 @@ class BookingCard extends Component {
                     </div>
                   )}
               </div>
+
             </div>
           </div>
           {/* </CardActionArea> */}

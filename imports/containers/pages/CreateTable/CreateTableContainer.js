@@ -4,23 +4,24 @@ import TableForm from "../../Component/TableForm";
 import { withTracker } from "meteor/react-meteor-data";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
-
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
 class CreateTableContainer extends Component {
   render() {
-    const { tables, currentUserId, restaurants, classes } = this.props;
+
+    const { tables, currentUserId, restaurants, classes,  history  } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.background}>
           <h1 className={classes.title}>Lets fill those empty tables!</h1>
           <div className={classes.container}>
-            <TableForm restaurant={restaurants} />
+            <TableForm history={history} />
             <CreateTable />
           </div>
         </div>
+
       </div>
     );
   }

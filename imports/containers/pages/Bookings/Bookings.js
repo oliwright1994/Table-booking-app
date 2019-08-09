@@ -13,13 +13,17 @@ const Bookings = ({ classes, restaurants, tables }) => {
           const restaurant = restaurants.find(
             restaurant => restaurant._id === table.restaurantId
           );
-          return (
-            <BookingCard
-              key={table._id}
-              restaurant={restaurant}
-              table={table}
-            />
-          );
+
+          {
+            restaurant && restaurant._id ? (
+              <BookingCard
+                key={table._id}
+                restaurant={restaurant}
+                table={table}
+              />
+            ) : null;
+          }
+
         }
       })}
     </div>

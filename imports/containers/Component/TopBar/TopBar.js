@@ -15,7 +15,13 @@ class TopBar extends Component {
     this.state = {};
   }
   render() {
-    return <TopBarContent classes={this.props.classes} restaurants={this.props.restaurants} location={this.props.location}></TopBarContent>;
+    return (
+      <TopBarContent
+        classes={this.props.classes}
+        restaurants={this.props.restaurants}
+        location={this.props.location}
+      />
+    );
   }
 }
 export default withTracker(() => {
@@ -25,7 +31,7 @@ export default withTracker(() => {
   };
 })(withRouter(withStyles(styles)(TopBar)));
 
-const TopBarContent = (props) => {
+const TopBarContent = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   function handleClick(event) {
@@ -38,20 +44,19 @@ const TopBarContent = (props) => {
   return (
     <div className={classes.container}>
       <div>
-        
-        {
-          Meteor.user().profile.usertype === "customer" ?
-            <Link to="/bookings">
-              <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
-            </Link>
-            :
-            restaurants.length > 0 ?
-              <Link to={`/restaurant/${restaurants[0]._id}`}>
-                <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
-              </Link>
-              :
-              <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
-        }
+
+        {Meteor.user().profile.usertype === "customer" ? (
+          <Link to="/bookings">
+            <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
+          </Link>
+        ) : restaurants.length > 0 ? (
+          <Link to={`/restaurant/${restaurants[0]._id}`}>
+            <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
+          </Link>
+        ) : (
+          <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
+        )}
+
       </div>
       <div className={classes.smallcontainer}>
         <Avatar round="true" className={classes.avatar}>
@@ -72,18 +77,28 @@ const TopBarContent = (props) => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          {Meteor.user() && Meteor.user().profile.usertype === "customer" &&
-            location.pathname !== "/your-bookings" &&
-            <MenuItem onClick={handleClose}><Link to="/your-bookings">Profile</Link></MenuItem>
-          }
-          {
-            Meteor.user() && Meteor.user().profile.usertype === "restaurant" &&
-            location.pathname !== "/create-restaurant" &&
-            <MenuItem onClick={handleClose}><Link to="/create-restaurant">Profile</Link></MenuItem>
-          }
-          {Meteor.user() && Meteor.user().profile.usertype === "restaurant" && restaurants.length > 0 &&
-            location.pathname !== "/create-table" &&
-            <MenuItem onClick={handleClose}><Link to="/create-table">Create Table</Link></MenuItem>}
+          {Meteor.user() &&
+            Meteor.user().profile.usertype === "customer" &&
+            location.pathname !== "/your-bookings" && (
+              <MenuItem onClick={handleClose}>
+                <Link to="/your-bookings">Profile</Link>
+              </MenuItem>
+            )}
+          {Meteor.user() &&
+            Meteor.user().profile.usertype === "restaurant" &&
+            location.pathname !== "/create-restaurant" && (
+              <MenuItem onClick={handleClose}>
+                <Link to="/create-restaurant">Edit Restaurant</Link>
+              </MenuItem>
+            )}
+          {Meteor.user() &&
+            Meteor.user().profile.usertype === "restaurant" &&
+            restaurants.length > 0 &&
+            location.pathname !== "/create-table" && (
+              <MenuItem onClick={handleClose}>
+                <Link to="/create-table">Create A Table</Link>
+              </MenuItem>
+            )}
           <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
         </Menu>
       </div>

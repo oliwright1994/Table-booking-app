@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-import BookingCard from "../../Component/BookingCard"
+import BookingCard from "../../Component/BookingCard";
 
 const YourBookings = ({ classes, restaurants, tables }) => {
   return (
     <div>
       <p>This is the YourBookings page.</p>
       <p>Current Booking</p>
+
       {(tables.length !== 0) ?
 
         tables.map(table => {

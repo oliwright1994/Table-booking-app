@@ -12,7 +12,31 @@ import ReviewCard from "../../Component/ReviewCard";
 import ReviewForm from "../../Component/ReviewForm";
 
 const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
-  const { name, imageurl, bio, cuisines, website, address, phone } = restaurant;
+  const {
+    name,
+    imageurl,
+    bio,
+    cuisine1,
+    cuisine2,
+    cuisine3,
+    website,
+    address,
+    phone
+  } = restaurant;
+
+  const cuisines = [cuisine1, cuisine2, cuisine3].filter(e => !!e);
+
+  showReviewForm = (reviews, user, restaurant) => {
+    if (reviews && reviews.find(review => review.author === user._id)) {
+      return (
+        <Typography component="p">Thanks for leaving a review!</Typography>
+      );
+    } else if (user && restaurant && restaurant.owner === user._id) {
+      return null;
+    } else {
+      return <ReviewForm restaurantId={restaurant._id} user={user} />;
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -36,7 +60,10 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 <Typography>Cuisines: </Typography>
                 <List dense>
                   {cuisines.map(cuisine => (
-                    <ListItem className={classes.cuisineListItem} key={cuisine}>
+                    <ListItem
+                      className={classes.cuisineListItem}
+                      key={cuisine._id}
+                    >
                       <ListItemText primary={`•  ${cuisine}`} />
                     </ListItem>
                   ))}
@@ -53,8 +80,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                  <p>No reviews yet, be the first!</p>
-                )}
+                <p>No reviews yet, be the first!</p>
+              )}
             </div>
           </div>
 
@@ -66,8 +93,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                  <p>No table available right now.</p>
-                )}
+                <p>No table available right now.</p>
+              )}
             </div>
             <div>
               <Typography component="p">Address: {address}</Typography>
@@ -84,13 +111,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {reviews.find(review => review.author === user) ? (
-              <Typography component="p">
-                Thanks for leaving a review!
-              </Typography>
-            ) : (
-                <ReviewForm restaurantId={restaurant._id} userId={user} />
-              )}
+            {showReviewForm(reviews, user, restaurant)}
           </div>
         </div>
       </div>
