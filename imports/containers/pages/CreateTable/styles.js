@@ -1,5 +1,3 @@
-import { withTheme } from "@material-ui/styles";
-
 const styles = theme => ({
   root: {
     textAlign: "center"
