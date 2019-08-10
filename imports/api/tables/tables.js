@@ -54,5 +54,14 @@ Meteor.methods({
         $pull: { customers: { customerId: userId } }
       }
     );
+  },
+  "tables.setTableToExpired"(tableId) {
+    const newDate = new Date()
+    Tables.update(
+      { _id: tableId },
+      {
+        $set: { expireTime: newDate.setMinutes(newDate.getMinutes()-1) }
+      }
+    );
   }
 });

@@ -18,10 +18,10 @@ import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import Select from "@material-ui/core/Select";
 import { Link as RouterLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import MenuItem from "@material-ui/core/MenuItem";
 import styles from "./styles";
 import FilledInput from "@material-ui/core/FilledInput";
-import Link from "@material-ui/core/Link";
 
 class BookingCard extends Component {
   constructor(props) {
@@ -34,21 +34,19 @@ class BookingCard extends Component {
     this.setState({ selectSeats: event.target.value });
   };
   bookTable = (tableId, userId, numberOfGuests) => {
-    console.log("submit:", tableId, numberOfGuests, userId);
     Meteor.call("tables.updateBooking", tableId, userId, numberOfGuests);
   };
   cancleTable = (table, tableId, userId) => {
-    console.log("guests", table.customers[0].guests);
-    console.log(Meteor.userId());
-    console.log(table.customers[0].customerId == Meteor.userId());
     const numberofGuests = table.customers.find(
       customer => customer.customerId == Meteor.userId()
     ).guests;
     Meteor.call("tables.cancelBooking", tableId, userId, numberofGuests);
   };
+  setToExpire = (tableId) => {
+    Meteor.call("tables.setTableToExpired", tableId);
+  };
 
   render() {
-    console.log("this is the booking card")
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
@@ -63,7 +61,6 @@ class BookingCard extends Component {
 
     return (
       <div>
-        {console.log("this is the booking card")}
         <Card className={classes.root}>
           <Link component={RouterLink} to={`/restaurant/${restaurant._id}`}>
             <CardMedia
@@ -223,11 +220,28 @@ class BookingCard extends Component {
                       </CardActions>
                     </div>
                   )}
+
+                {Meteor.user().profile.usertype == "restaurant" && (
+                  <div>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        className={classes.Button}
+                        disabled={expired}
+                        onClick={() =>
+                          this.setToExpire(
+                            table._id,
+                          )
+                        }
+                      >
+                        Set Table To Expire
+                  </Button>
+                    </CardActions>
+                  </div>)}
               </div>
 
             </div>
           </div>
-          {/* </CardActionArea> */}
         </Card>
       </div>
     );

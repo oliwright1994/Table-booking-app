@@ -11,6 +11,12 @@ class RestaurantContainer extends Component {
   render() {
     const { reviews, tables, restaurants, currentUser } = this.props;
     let restaurantId = this.props.match.params.restaurantId;
+    const now = new Date();
+    const table = tables.find(table => {
+      const tableExpiryDate = new Date(table.expireTime);
+      const expired = !!(now > tableExpiryDate);
+      return (table.restaurantId == restaurantId && !expired)
+    })
     if (restaurants.length === 0 || currentUser === undefined) {
       return (
         <div style={{ height: "100vh" }}>
@@ -28,7 +34,7 @@ class RestaurantContainer extends Component {
           restaurant={restaurants.find(
             restaurant => restaurant._id == restaurantId
           )}
-          table={tables.find(table => table.restaurantId == restaurantId)}
+          table={table}
           reviews={reviews.filter(
             reviews => reviews.restaurantId == restaurantId
           )}
