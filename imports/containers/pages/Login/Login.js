@@ -10,7 +10,14 @@ const Login = ({ classes }) => {
         <img src="/assets/images/welcome.svg" alt="Login-Banner" />
         <img src="/assets/images/welcome-2.svg" alt="Login-Banner" />
       </div>
-      <h1>Welcome to Food</h1>
+      <div className={classes.header}>
+        <h1>Welcome to Food</h1>
+        <img
+          src="/assets/images/logo.svg"
+          alt="logo"
+          className={classes.logo}
+        />
+      </div>
       <div className={classes.loginWrapper}>
         <AccountsUIWrapper />
       </div>
