@@ -3,7 +3,7 @@ const styles = theme => ({
     border: "solid 1px grey",
     padding: 20,
     paddingRight: 30,
-    paddingleft: 30,
+    paddingLeft: 30,
     marginTop: 30
   },
   textArea: {

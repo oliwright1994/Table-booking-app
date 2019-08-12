@@ -3,18 +3,10 @@ import { flexbox } from "@material-ui/system";
 const styles = theme => ({
   root: { width: "100%", padding: 0 },
 
-  container: {
-    background: "url('/assets/images/Restaurant.jpg')"
-  },
-
   image: {
     width: "100vw",
     height: "300px",
     objectFit: "cover"
-  },
-
-  restaurantContent: {
-    padding: 50
   },
 
   restaurantName: {
@@ -32,11 +24,8 @@ const styles = theme => ({
   wrapperLeft: {
     display: "flex",
     flexDirection: "column",
-    width: "50%"
-  },
-
-  cuisine: {
-    padding: "20px"
+    width: "50%",
+    marginLeft: "50px"
   },
 
   cuisineList: {
@@ -44,12 +33,15 @@ const styles = theme => ({
   },
 
   cuisineListItem: {
-    padding: 0,
+    paddingLeft: "20px",
     listStyleType: "disc"
   },
 
   reviews: {
-    padding: "20px"
+    padding: "20px",
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gridGap: "25px"
   },
 
   reviewHead: {
@@ -61,13 +53,20 @@ const styles = theme => ({
   wrapperRight: {
     display: "flex",
     flexDirection: "column",
-    width: "50%"
+    width: "50%",
+    marginRight: "50px",
+    alignItems: "center"
   },
 
   bookingHead: {
     fontSize: 25,
     marginBottom: 20,
-    color: "#AA0054"
+    color: "#AA0054",
+    textAlign: "center"
+  },
+
+  resInfo: {
+    padding: "20px"
   },
 
   rightTitle: {
@@ -76,19 +75,24 @@ const styles = theme => ({
   },
 
   address: {
-    color: "lightslategrey",
+    color: "grey",
     paddingLeft: "5px"
   },
 
   website: {
-    color: "lightslategrey",
+    color: "grey",
     paddingLeft: "5px"
   },
 
   phone: {
     textDecoration: "underline",
-    color: "lightslategrey",
+    color: "grey",
     paddingLeft: "5px"
+  },
+
+  reviewForm: {
+    width: "400px",
+    textAlign: "center"
   }
 });
 

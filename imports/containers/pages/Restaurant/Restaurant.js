@@ -39,7 +39,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       <img
         src={
           imageurl !== undefined
@@ -73,10 +73,10 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               </div>
             ) : null}
 
+            <Typography className={classes.reviewHead} component="h2">
+              Reviews
+            </Typography>
             <div className={classes.reviews}>
-              <Typography className={classes.reviewHead} component="h2">
-                Reviews
-              </Typography>
               {reviews.length !== 0 ? (
                 reviews.map(review => (
                   <ReviewCard review={review} key={review._id} />
@@ -98,7 +98,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 <p>No table available right now.</p>
               )}
             </div>
-            <div>
+            <div className={classes.resInfo}>
               <Typography component="p" className={classes.rightTitle}>
                 Address:
                 <Typography component="span" className={classes.address}>
@@ -118,7 +118,9 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {showReviewForm(reviews, user, restaurant)}
+            <div className={classes.reviewForm}>
+              {showReviewForm(reviews, user, restaurant)}
+            </div>
           </div>
         </div>
       </div>
