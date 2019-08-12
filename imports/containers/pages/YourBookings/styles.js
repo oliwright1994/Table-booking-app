@@ -24,7 +24,7 @@ const styles = theme => ({
 
   booking: {
     marginBottom: "50px"
-  }
+  },
 });
 
 export default styles;
