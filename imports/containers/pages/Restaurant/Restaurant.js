@@ -39,7 +39,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       <img
         src={
           imageurl !== undefined
@@ -53,11 +53,13 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
           {name}
         </Typography>
         <Typography component="p">{bio}</Typography>
-        <div className={classes.doubleColumn}>
-          <div className={classes.singleColumn}>
+        <div className={classes.resWrapper}>
+          <div className={classes.wrapperLeft}>
             {cuisines.length > 0 ? (
-              <div className={classes.cuisineList}>
-                <Typography>Cuisines: </Typography>
+              <div className={classes.cuisine}>
+                <Typography className={classes.cuisineList}>
+                  Cuisines:{" "}
+                </Typography>
                 <List dense>
                   {cuisines.map(cuisine => (
                     <ListItem
@@ -71,8 +73,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               </div>
             ) : null}
 
-            <div className={classes.singleColumn}>
-              <Typography className={classes.bookingHeadline} component="h2">
+            <div className={classes.reviews}>
+              <Typography className={classes.reviewHead} component="h2">
                 Reviews
               </Typography>
               {reviews.length !== 0 ? (
@@ -85,9 +87,9 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
             </div>
           </div>
 
-          <div className={classes.singleColumn}>
+          <div className={classes.wrapperRight}>
             <div>
-              <Typography className={classes.bookingHeadline} component="h2">
+              <Typography className={classes.bookingHead} component="h2">
                 Current Booking:
               </Typography>
               {table && table.placesAvailable > 0 ? (
@@ -97,14 +99,19 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               )}
             </div>
             <div>
-              <Typography component="p">Address: {address}</Typography>
-              <Typography component="p">
+              <Typography component="p" className={classes.rightTitle}>
+                Address:
+                <Typography component="span" className={classes.address}>
+                  {address}
+                </Typography>
+              </Typography>
+              <Typography component="p" className={classes.rightTitle}>
                 Website:
                 <Link className={classes.website} href={website}>
                   {website}
                 </Link>
               </Typography>
-              <Typography component="p">
+              <Typography component="p" className={classes.rightTitle}>
                 Phone:
                 <Typography component="span" className={classes.phone}>
                   {phone}
