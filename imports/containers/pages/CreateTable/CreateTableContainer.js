@@ -9,8 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 class CreateTableContainer extends Component {
   render() {
-
-    const { tables, currentUserId, restaurants, classes,  history  } = this.props;
+    const { tables, currentUserId, restaurants, classes, history } = this.props;
 
     return (
       <div className={classes.root}>
@@ -21,11 +20,41 @@ class CreateTableContainer extends Component {
             <CreateTable />
           </div>
         </div>
-
       </div>
     );
   }
 }
+
+CreateTableContainer.propTypes = {
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      address: PropTypes.string,
+      address: PropTypes.string,
+      description: PropTypes.string,
+      email: PropTypes.string,
+      imageurl: PropTypes.string,
+      phone: PropTypes.string,
+      website: PropTypes.string,
+      cuisine1: PropTypes.string,
+      cuisine2: PropTypes.string,
+      cuisine3: PropTypes.string
+    })
+  ),
+  tables: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      restaurantId: PropTypes.string.isRequired,
+      placesAvailable: PropTypes.number.isRequired,
+      expireTime: PropTypes.number.isRequired,
+      maxPlaces: PropTypes.number.isRequired
+    })
+  )
+};
+
 export default withTracker(() => {
   Meteor.subscribe("tables");
   Meteor.subscribe("users");

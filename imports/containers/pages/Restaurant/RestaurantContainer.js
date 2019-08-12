@@ -15,8 +15,8 @@ class RestaurantContainer extends Component {
     const table = tables.find(table => {
       const tableExpiryDate = new Date(table.expireTime);
       const expired = !!(now > tableExpiryDate);
-      return (table.restaurantId == restaurantId && !expired)
-    })
+      return table.restaurantId == restaurantId && !expired;
+    });
     if (restaurants.length === 0 || currentUser === undefined) {
       return (
         <div style={{ height: "100vh" }}>
@@ -44,6 +44,46 @@ class RestaurantContainer extends Component {
     }
   }
 }
+
+RestaurantContainer.propTypes = {
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      address: PropTypes.string,
+      address: PropTypes.string,
+      description: PropTypes.string,
+      email: PropTypes.string,
+      imageurl: PropTypes.string,
+      phone: PropTypes.string,
+      website: PropTypes.string,
+      cuisine1: PropTypes.string,
+      cuisine2: PropTypes.string,
+      cuisine3: PropTypes.string
+    })
+  ),
+  tables: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      restaurantId: PropTypes.string.isRequired,
+      placesAvailable: PropTypes.string.isRequired,
+      expireTime: PropTypes.number.isRequired,
+      maxPlaces: PropTypes.number.isRequired
+    })
+  ),
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      restaurantId: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      string: PropTypes.string,
+      impression: PropTypes.string
+    })
+  )
+};
 
 export default withTracker(() => {
   Meteor.subscribe("reviews");

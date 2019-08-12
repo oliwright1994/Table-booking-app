@@ -5,6 +5,7 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
 import Loader from "../../Component/Loader";
 import BookingFilter from "../../Component/BookingFilter";
+import PropTypes from "prop-types";
 
 class BookingsContainer extends Component {
   constructor({ props }) {
@@ -71,6 +72,35 @@ class BookingsContainer extends Component {
     }
   }
 }
+BookingsContainer.propTypes = {
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      address: PropTypes.string,
+      address: PropTypes.string,
+      description: PropTypes.string,
+      email: PropTypes.string,
+      imageurl: PropTypes.string,
+      phone: PropTypes.string,
+      website: PropTypes.string,
+      cuisine1: PropTypes.string,
+      cuisine2: PropTypes.string,
+      cuisine3: PropTypes.string
+    })
+  ),
+  tables: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      restaurantId: PropTypes.string.isRequired,
+      placesAvailable: PropTypes.number.isRequired,
+      expireTime: PropTypes.number.isRequired,
+      maxPlaces: PropTypes.number.isRequired
+    })
+  )
+};
 
 export default withTracker(() => {
   // Meteor.subscribe("reviews");
