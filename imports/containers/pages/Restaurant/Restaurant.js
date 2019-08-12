@@ -10,6 +10,8 @@ import Link from "@material-ui/core/Link";
 import BookingCard from "../../Component/BookingCard";
 import ReviewCard from "../../Component/ReviewCard";
 import ReviewForm from "../../Component/ReviewForm";
+import GoogleMap from "../../Component/GoogleMap";
+import Geocode from "react-geocode";
 
 const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const {
@@ -38,7 +40,14 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     }
   };
 
-
+  displayMap = () => {
+    Geocode.setApiKey("AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo");
+    Geocode.fromAddress({ address }).then(response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(lat, lng);
+      return <GoogleMap lat={lat} lng={lng} />;
+    });
+  };
   return (
     <div className={classes.root}>
       <img
@@ -54,11 +63,13 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
           {name}
         </Typography>
         <Typography component="p">{bio}</Typography>
-        <div className={classes.doubleColumn}>
-          <div className={classes.singleColumn}>
+        <div className={classes.resWrapper}>
+          <div className={classes.wrapperLeft}>
             {cuisines.length > 0 ? (
-              <div className={classes.cuisineList}>
-                <Typography>Cuisines: </Typography>
+              <div className={classes.cuisine}>
+                <Typography className={classes.cuisineList}>
+                  Cuisines:{" "}
+                </Typography>
                 <List dense>
                   {cuisines.map(cuisine => (
                     <ListItem
@@ -72,47 +83,57 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               </div>
             ) : null}
 
-            <div className={classes.singleColumn}>
-              <Typography className={classes.bookingHeadline} component="h2">
-                Reviews
-              </Typography>
+            <Typography className={classes.reviewHead} component="h2">
+              Reviews
+            </Typography>
+            <div className={classes.reviews}>
               {reviews.length !== 0 ? (
                 reviews.map(review => (
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                  <p>No reviews yet, be the first!</p>
-                )}
+                <p>No reviews yet, be the first!</p>
+              )}
             </div>
           </div>
 
-          <div className={classes.singleColumn}>
+          <div className={classes.wrapperRight}>
             <div>
-              <Typography className={classes.bookingHeadline} component="h2">
+              <Typography className={classes.bookingHead} component="h2">
                 Current Booking:
               </Typography>
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                  <p>No table available right now.</p>
-                )}
+                <p>No table available right now.</p>
+              )}
             </div>
-            <div>
-              <Typography component="p">Address: {address}</Typography>
-              <Typography component="p">
+            <div className={classes.resInfo}>
+              <Typography component="p" className={classes.rightTitle}>
+                Address:
+                <Typography component="span" className={classes.address}>
+                  {address}
+                </Typography>
+              </Typography>
+              <Typography component="p" className={classes.rightTitle}>
                 Website:
                 <Link className={classes.website} href={website}>
                   {website}
                 </Link>
               </Typography>
-              <Typography component="p">
+              <Typography component="p" className={classes.rightTitle}>
                 Phone:
                 <Typography component="span" className={classes.phone}>
                   {phone}
                 </Typography>
               </Typography>
             </div>
-            {showReviewForm(reviews, user, restaurant)}
+
+            <div className={classes.reviewForm}>
+              {showReviewForm(reviews, user, restaurant)}
+              <GoogleMap address={address} />
+            </div>
+
           </div>
         </div>
       </div>

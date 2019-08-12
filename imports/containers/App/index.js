@@ -9,9 +9,10 @@ import { Restaurants } from "../../api/restaurants/restaurants";
 import AppRoutes from "../Routes";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../client/theme";
-// import { Meteor } from "meteor/meteor";
+
 import AccountsUIWrapper from "../Component/AccountsWrapper";
 import { Meteor } from "meteor/meteor";
+
 class App extends Component {
   render() {
     return (
