@@ -143,16 +143,11 @@ class BookingCard extends Component {
                   component="p"
                   className={classes.seatAvailable}
                 >
-                  {!expired ? (
-                    table.placesAvailable > 1 ? (
-                      <p>
-                        {table.placesAvailable}
-                        <p> seats left</p>
-                      </p>
-                    ) : (
-                      `${table.placesAvailable} seat left`
-                    )
-                  ) : null}
+                  {!expired
+                    ? table.placesAvailable > 1
+                      ? `${table.placesAvailable} seats left`
+                      : `${table.placesAvailable} seat left`
+                    : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&

@@ -8,12 +8,14 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    background: "#8B2323"
+    background: "#8B2323",
+    height: "55px",
+    alignItems: "center"
   },
 
   logo: {
-    height: "80px",
-    width: "80px"
+    height: "50px",
+    width: "50px"
   },
 
   avatar: {

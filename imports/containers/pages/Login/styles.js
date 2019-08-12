@@ -3,6 +3,18 @@ const styles = theme => ({
     textAlign: "center"
   },
 
+  header: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  logo: {
+    width: "50px",
+    height: "50px",
+    paddingLeft: "10px"
+  },
+
   banner: {
     display: "flex",
     flexDirection: "row"
@@ -11,10 +23,6 @@ const styles = theme => ({
   loginWrapper: {
     margin: "0 30%"
   }
-
-  // formControl: {
-  //   marginButton: "40px"
-  // }
 });
 
 export default styles;
