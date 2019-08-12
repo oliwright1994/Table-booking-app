@@ -121,6 +121,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
+            {showReviewForm(reviews, user, restaurant)}
             <GoogleMap address={address} />
           </div>
         </div>
