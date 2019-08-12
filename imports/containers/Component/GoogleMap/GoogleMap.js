@@ -2,50 +2,60 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Geocode from "react-geocode";
 import Loader from "../../Component/Loader";
+import LocationOn from "@material-ui/icons/LocationOn";
+import { GOOGLE_API_KEY } from "../../../../googleapi";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
+const MapMarker = () => (
+  <div>
+    <LocationOn />
+  </div>
+);
 class GoogleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-  };
+  constructor({ props }) {
+    super(props);
+    this.state = {
+      center: {
+        lat: null,
+        lng: null
+      },
+      zoom: 15
+    };
+  }
 
-  render() {
-    Geocode.setApiKey("AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo");
-    Geocode.fromAddress({ address }).then(
+  componentDidMount() {
+    const { address } = this.props;
+    console.log(address);
+    Geocode.setApiKey(GOOGLE_API_KEY);
+    Geocode.fromAddress(address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
-        return (
-          <div>
-            <GoogleMap lat={lat} lng={lng} />
-          </div>
-        );
+
+        this.setState({ center: { lat: lat, lng: lng } });
       },
-      error => {
-        console.error(error);
-      }
+      error => {}
     );
-    if (this.state.lat === null || this.state.lng === null) {
-      return <Loader />;
+  }
+
+  render() {
+    if (this.state.center.lat === null || this.state.center.lng === null) {
+      return (
+        <div style={{ height: 400, width: 300 }}>
+          <Loader />
+        </div>
+      );
     } else {
       return (
         <div style={{ height: 400, width: 300 }}>
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: "AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo"
+              key: GOOGLE_API_KEY
             }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
+            defaultCenter={this.state.center}
+            defaultZoom={this.state.zoom}
           >
-            <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
+            <MapMarker
+              lat={this.state.center.lat}
+              lng={this.state.center.lng}
             />
           </GoogleMapReact>
         </div>

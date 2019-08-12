@@ -1,3 +1,3 @@
-import GoogleMapContainer from "./GoogleMapContainer";
+import GoogleMap from "./GoogleMap";
 
-export default GoogleMapContainer;
+export default GoogleMap;

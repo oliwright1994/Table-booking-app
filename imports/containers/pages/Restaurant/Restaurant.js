@@ -10,7 +10,6 @@ import Link from "@material-ui/core/Link";
 import BookingCard from "../../Component/BookingCard";
 import ReviewCard from "../../Component/ReviewCard";
 import ReviewForm from "../../Component/ReviewForm";
-import GoogleMapContainer from "../../Component/GoogleMap";
 import GoogleMap from "../../Component/GoogleMap";
 import Geocode from "react-geocode";
 
@@ -122,11 +121,10 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 </Typography>
               </Typography>
             </div>
-            {showReviewForm(reviews, user, restaurant)}
+            <GoogleMap address={address} />
           </div>
         </div>
       </div>
-      {displayMap()}
     </div>
   );
 };
