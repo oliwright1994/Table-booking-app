@@ -86,6 +86,9 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
             <Typography className={classes.reviewHead} component="h2">
               Reviews
             </Typography>
+            <div className={classes.reviewForm}>
+              {showReviewForm(reviews, user, restaurant)}
+            </div>
             <div className={classes.reviews}>
               {reviews.length !== 0 ? (
                 reviews.map(review => (
@@ -129,8 +132,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               </Typography>
             </div>
 
-            <div className={classes.reviewForm}>
-              {showReviewForm(reviews, user, restaurant)}
+            <div className={classes.map}>
               <GoogleMap address={address} />
             </div>
           </div>
