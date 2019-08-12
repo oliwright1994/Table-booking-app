@@ -43,8 +43,8 @@ class CreateRestaurant extends Component {
         <div>
           <Typography component="h1">Welcome!</Typography>
           <Typography>
-            Before you get started, lets get a few details about your restaurant
-            to help you get setup.
+            Before you get started, <br />
+            lets get a few details about your restaurant to help you get setup.
           </Typography>
         </div>
       );
