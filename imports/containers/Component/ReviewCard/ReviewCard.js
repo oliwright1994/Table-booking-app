@@ -7,12 +7,16 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 const ReviewCard = ({ classes, review }) => {
-  const { text, date, rating, impression } = review;
+  const { text, date, rating, impression, authorEmail } = review;
   return (
     <Card className={classes.root}>
       <div className={classes.reviewHeader}>
         <div className={classes.reviewHeadline}>
-          {/* <Gravatar email={`"${user.email}"`} size={40} /> */}
+          <Gravatar
+            className={classes.profilePic}
+            email={`"${authorEmail}"`}
+            size={40}
+          />
           <p>{impression ? impression : "No overall impression yet"}</p>
         </div>
         <Rating value={rating} readOnly />

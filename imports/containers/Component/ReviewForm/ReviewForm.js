@@ -21,7 +21,8 @@ class ReviewForm extends Component {
       "reviews.createReview",
       { ...values, rating: rating },
       this.props.user._id,
-      this.props.restaurantId
+      this.props.restaurantId,
+      this.props.user.emails[0].address
     );
   }
   setValue(event, value) {
