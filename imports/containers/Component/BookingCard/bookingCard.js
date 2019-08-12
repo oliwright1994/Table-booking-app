@@ -45,6 +45,10 @@ class BookingCard extends Component {
   };
 
   render() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 519ed83851282cbcc32cf06763f6624a4b750692
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
@@ -219,6 +223,10 @@ class BookingCard extends Component {
                       </CardActions>
                     </div>
                   )}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 519ed83851282cbcc32cf06763f6624a4b750692
 
                 {Meteor.user().profile.usertype == "restaurant" && (
                   <div>
@@ -232,8 +240,13 @@ class BookingCard extends Component {
                         Set Table To Expire
                       </Button>
                     </CardActions>
+<<<<<<< HEAD
                   </div>
                 )}
+=======
+                  </div>)}
+
+>>>>>>> 519ed83851282cbcc32cf06763f6624a4b750692
               </div>
             </div>
           </div>
