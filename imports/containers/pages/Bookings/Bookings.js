@@ -9,18 +9,22 @@ const Bookings = ({ classes, restaurants, tables }) => {
       {tables.map(table => {
         const now = new Date();
         const newDate = new Date(table.expireTime);
+
         const expired = !!(now > newDate);
         if (table.expireTime && !expired) {
           const restaurant = restaurants.find(
             restaurant => restaurant._id === table.restaurantId
           );
-          return restaurant &&
-            <BookingCard
-              key={table._id}
-              restaurant={restaurant}
-              table={table}
-              expired={expired}
-            />
+          return (
+            restaurant && (
+              <BookingCard
+                key={table._id}
+                restaurant={restaurant}
+                table={table}
+                expired={expired}
+              />
+            )
+          );
         }
       })}
     </div>
