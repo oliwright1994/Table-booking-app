@@ -11,6 +11,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import ListItemText from "@material-ui/core/ListItemText";
+import Restaurant from "@material-ui/icons/restaurantmenu";
 
 import React, { Component } from "react";
 
@@ -61,8 +62,11 @@ class CreateRestaurant extends Component {
   render() {
     const { restaurant, classes, cuisines } = this.props;
     return (
-      <div>
-        {this.displayHeaderText(restaurant)}
+      <div className={classes.pageContainer}>
+        <div className={classes.title}>
+          {this.displayHeaderText(restaurant)}
+        </div>
+        {/* <div className={classes.forms}> */}
         <Form
           onSubmit={values => this.updateRestaurant(values)}
           initialValues={restaurant ? { ...restaurant } : null}
@@ -75,25 +79,108 @@ class CreateRestaurant extends Component {
             invalid
           }) => {
             return (
-              <form onSubmit={handleSubmit} className={classes.root}>
-                <FormControl>
-                  <InputLabel htmlFor="name">Restaurant Name</InputLabel>
-                  <Field
-                    name="name"
-                    required={true}
-                    render={({ input, meta }) => (
-                      <Input
-                        autoFocus={true}
+              <form onSubmit={handleSubmit} className={classes.form}>
+                <div className={classes.resInfo}>
+                  <div className={classes.resInfoLeft}>
+                    <FormControl className={classes.resInfoLeftField}>
+                      <InputLabel htmlFor="name">Restaurant Name</InputLabel>
+                      <Field
+                        name="name"
                         required={true}
-                        id="name"
-                        type="text"
-                        inputProps={{ ...input, autoComplete: "off" }}
-                        value={input.value}
+                        render={({ input, meta }) => (
+                          <Input
+                            autoFocus={true}
+                            required={true}
+                            id="name"
+                            type="text"
+                            inputProps={{ ...input, autoComplete: "off" }}
+                            value={input.value}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
+                    </FormControl>
+
+                    <FormControl className={classes.resInfoLeftField}>
+                      <InputLabel htmlFor="phone">Phone Number</InputLabel>
+                      <Field
+                        name="phone"
+                        className={classes.resInfoLeftInput}
+                        required={true}
+                        render={({ input, meta }) => (
+                          <Input
+                            id="phone"
+                            inputProps={{
+                              ...input,
+                              autoComplete: "off",
+                              type: "tel"
+                            }}
+                            value={input.value}
+                          />
+                        )}
+                      />
+                    </FormControl>
+
+                    <FormControl className={classes.resInfoLeftEmail}>
+                      <InputLabel htmlFor="email">Email</InputLabel>
+                      <Field
+                        name="email"
+                        className={classes.resInfoLeftInput}
+                        render={({ input, meta }) => (
+                          <Input
+                            id="email"
+                            required={true}
+                            inputProps={{
+                              ...input,
+                              autoComplete: "off",
+                              type: "email"
+                            }}
+                            value={input.value}
+                          />
+                        )}
+                      />
+                    </FormControl>
+                  </div>
+                  <div className={classes.resInfoRight}>
+                    <FormControl>
+                      <InputLabel htmlFor="address">Adress</InputLabel>
+                      <Field
+                        name="address"
+                        required={true}
+                        render={({ input, meta }) => (
+                          <Input
+                            id="address"
+                            multiline={true}
+                            rows={5}
+                            type="text"
+                            inputProps={{ ...input, autoComplete: "off" }}
+                            value={input.value}
+                          />
+                        )}
+                      />
+                    </FormControl>
+
+                    <FormControl>
+                      <InputLabel htmlFor="website">Website</InputLabel>
+                      <Field
+                        name="website"
+                        render={({ input, meta }) => (
+                          <Input
+                            required={true}
+                            id="website"
+                            type="url"
+                            inputProps={{
+                              ...input,
+                              autoComplete: "off",
+                              type: "website"
+                            }}
+                            value={input.value}
+                          />
+                        )}
+                      />
+                    </FormControl>
+                  </div>
+                </div>
+                <FormControl className={classes.description}>
                   <InputLabel htmlFor="description">Description</InputLabel>
                   <Field
                     name="description"
@@ -103,14 +190,14 @@ class CreateRestaurant extends Component {
                         id="description"
                         type="text"
                         multiline={true}
-                        rows={8}
+                        rows={6}
                         inputProps={{ ...input, autoComplete: "off" }}
                         value={input.value}
                       />
                     )}
                   />
                 </FormControl>
-                <FormControl>
+                <FormControl className={classes.image}>
                   <InputLabel htmlFor="imageurl">Image URL</InputLabel>
                   <Field
                     name="imageurl"
@@ -128,157 +215,112 @@ class CreateRestaurant extends Component {
                     )}
                   />
                 </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="phone">Phone Number</InputLabel>
-                  <Field
-                    name="phone"
-                    required={true}
-                    render={({ input, meta }) => (
-                      <Input
-                        id="phone"
-                        inputProps={{
-                          ...input,
-                          autoComplete: "off",
-                          type: "tel"
-                        }}
-                        value={input.value}
-                      />
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="address">Adress</InputLabel>
-                  <Field
-                    name="address"
-                    required={true}
-                    render={({ input, meta }) => (
-                      <Input
-                        id="address"
-                        multiline={true}
-                        rows={5}
-                        type="text"
-                        inputProps={{ ...input, autoComplete: "off" }}
-                        value={input.value}
-                      />
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="email">Email</InputLabel>
-                  <Field
-                    name="email"
-                    render={({ input, meta }) => (
-                      <Input
-                        id="email"
-                        required={true}
-                        inputProps={{
-                          ...input,
-                          autoComplete: "off",
-                          type: "email"
-                        }}
-                        value={input.value}
-                      />
-                    )}
-                  />
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="website">Website</InputLabel>
-                  <Field
-                    name="website"
-                    render={({ input, meta }) => (
-                      <Input
-                        required={true}
-                        id="website"
-                        type="url"
-                        inputProps={{
-                          ...input,
-                          autoComplete: "off",
-                          type: "website"
-                        }}
-                        value={input.value}
-                      />
-                    )}
-                  />
-                </FormControl>
-                <Typography component="p">
-                  Select some cuisines for your restaurant (max 3)
-                </Typography>
-                <Field
-                  fullWidth
-                  inputProps={{ autoComplete: "off" }}
-                  name="cuisine1"
-                  render={({ input, meta }) => (
-                    <Select
-                      input={<Input id="select-multiple" />}
-                      id="select-multiple"
-                      inputProps={{
-                        ...input,
-                        autoComplete: "off"
-                      }}
+                <div className={classes.cuisineWrapper}>
+                  <div className={classes.cuisineLeft}>
+                    <div className={classes.cuisineInfo}>
+                      <Typography component="p">
+                        Select some <br />
+                        cuisines for <br />
+                        your restaurant <br />
+                        (max 3)
+                      </Typography>
+                    </div>
+                    <div className={classes.cuisineSelect}>
+                      <FormControl className={classes.cuisine}>
+                        <Field
+                          fullWidth
+                          inputProps={{ autoComplete: "off" }}
+                          name="cuisine1"
+                          render={({ input, meta }) => (
+                            <Select
+                              input={<Input id="select-multiple" />}
+                              id="select-multiple"
+                              inputProps={{
+                                ...input,
+                                autoComplete: "off"
+                              }}
+                            >
+                              {cuisines.map(cuisine => (
+                                <MenuItem
+                                  id={cuisine._id}
+                                  key={cuisine._id}
+                                  value={cuisine.title}
+                                >
+                                  {cuisine.title}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          )}
+                        />
+                      </FormControl>
+                      <FormControl className={classes.cuisine}>
+                        <Field
+                          fullWidth
+                          inputProps={{ autoComplete: "off" }}
+                          name="cuisine2"
+                          render={({ input, meta }) => (
+                            <Select
+                              inputProps={{
+                                ...input,
+                                autoComplete: "off"
+                              }}
+                            >
+                              {cuisines.map(cuisine => (
+                                <MenuItem
+                                  key={cuisine._id}
+                                  value={cuisine.title}
+                                >
+                                  {cuisine.title}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          )}
+                        />
+                      </FormControl>
+                      <FormControl className={classes.cuisine}>
+                        <Field
+                          fullWidth
+                          inputProps={{ autoComplete: "off" }}
+                          name="cuisine3"
+                          formControlProps={{ fullWidth: true }}
+                          render={({ input, meta }) => (
+                            <Select
+                              inputProps={{
+                                ...input,
+                                autoComplete: "off"
+                              }}
+                            >
+                              {cuisines.map(cuisine => (
+                                <MenuItem
+                                  key={cuisine._id}
+                                  value={cuisine.title}
+                                >
+                                  {cuisine.title}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          )}
+                        />
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className={classes.cuisineRight}>
+                    <Button
+                      className={classes.button}
+                      variant="contained"
+                      type="submit"
+                      disabled={pristine || invalid}
                     >
-                      {cuisines.map(cuisine => (
-                        <MenuItem
-                          id={cuisine._id}
-                          key={cuisine._id}
-                          value={cuisine.title}
-                        >
-                          {cuisine.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <Field
-                  fullWidth
-                  inputProps={{ autoComplete: "off" }}
-                  name="cuisine2"
-                  render={({ input, meta }) => (
-                    <Select
-                      inputProps={{
-                        ...input,
-                        autoComplete: "off"
-                      }}
-                    >
-                      {cuisines.map(cuisine => (
-                        <MenuItem key={cuisine._id} value={cuisine.title}>
-                          {cuisine.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <Field
-                  fullWidth
-                  inputProps={{ autoComplete: "off" }}
-                  name="cuisine3"
-                  formControlProps={{ fullWidth: true }}
-                  render={({ input, meta }) => (
-                    <Select
-                      inputProps={{
-                        ...input,
-                        autoComplete: "off"
-                      }}
-                    >
-                      {cuisines.map(cuisine => (
-                        <MenuItem key={cuisine._id} value={cuisine.title}>
-                          {cuisine.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <Button
-                  variant="contained"
-                  type="submit"
-                  disabled={pristine || invalid}
-                >
-                  Update
-                </Button>
+                      <Restaurant />
+                    </Button>
+                  </div>
+                </div>
               </form>
             );
           }}
         />
       </div>
+      // </div>
     );
   }
 }
