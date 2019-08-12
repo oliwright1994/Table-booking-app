@@ -5,10 +5,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
-
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-
 
 import InputLabel from "@material-ui/core/InputLabel";
 import { withStyles } from "@material-ui/core/styles";
@@ -77,19 +75,20 @@ class BookingCard extends Component {
             />
           </Link>
           <div className={classes.bookingWrapper}>
-            <Link component={RouterLink} to={`/restaurant/${restaurant._id}`} className={classes.bookingInfo} >
+            <Link
+              component={RouterLink}
+              to={`/restaurant/${restaurant._id}`}
+              className={classes.bookingInfo}
+            >
               <CardContent className={classes.content}>
-
                 <Typography
                   variant="body2"
                   color="textSecondary"
                   component="h3"
-
                   className={classes.contentInfoTitle}
                 >
                   {restaurant.name}
                 </Typography>
-
 
                 {cuisines ? (
                   <Typography
@@ -102,7 +101,6 @@ class BookingCard extends Component {
                   </Typography>
                 ) : null}
 
-
                 <div className={classes.discountContainer}>
                   <Typography
                     variant="body2"
@@ -114,7 +112,6 @@ class BookingCard extends Component {
                     {table.discount ? table.discount : null}%
                   </Typography>
                 </div>
-
 
                 <Typography
                   variant="body2"
@@ -138,7 +135,6 @@ class BookingCard extends Component {
               </CardContent>
             </Link>
 
-
             <div className={classes.bookingSeats}>
               <div className={classes.bookingSeatsWrapper}>
                 <Typography
@@ -146,15 +142,17 @@ class BookingCard extends Component {
                   color="textSecondary"
                   component="p"
                   className={classes.seatAvailable}
-                >{(!expired) ?
-                  (table.placesAvailable > 1 ? (
-                    <p>
-                      {table.placesAvailable}
-                      <p> seats left</p>
-                    </p>
-                  ) : (
+                >
+                  {!expired ? (
+                    table.placesAvailable > 1 ? (
+                      <p>
+                        {table.placesAvailable}
+                        <p> seats left</p>
+                      </p>
+                    ) : (
                       `${table.placesAvailable} seat left`
-                    )) : null}
+                    )
+                  ) : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&
@@ -171,8 +169,9 @@ class BookingCard extends Component {
                           }
                           disabled={expired}
                         >
-                          {console.log(expired)}
-                          {(expired || expired === undefined) ? "Table Expired" : "Cancel Book"}
+                          {expired || expired === undefined
+                            ? "Table Expired"
+                            : "Cancel Book"}
                         </Button>
                       </CardActions>
                     </div>
@@ -239,7 +238,6 @@ class BookingCard extends Component {
                     </CardActions>
                   </div>)}
               </div>
-
             </div>
           </div>
         </Card>
