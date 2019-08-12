@@ -40,15 +40,11 @@ class BookingCard extends Component {
     ).guests;
     Meteor.call("tables.cancelBooking", tableId, userId, numberofGuests);
   };
-  setToExpire = (tableId) => {
+  setToExpire = tableId => {
     Meteor.call("tables.setTableToExpired", tableId);
   };
 
   render() {
-<<<<<<< HEAD
-    console.log("this is the booking card");
-=======
->>>>>>> d8986107869c28cf874d9abc8adacbba4deda801
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
@@ -173,10 +169,6 @@ class BookingCard extends Component {
                           }
                           disabled={expired}
                         >
-<<<<<<< HEAD
-                          {console.log(expired)}
-=======
->>>>>>> d8986107869c28cf874d9abc8adacbba4deda801
                           {expired || expired === undefined
                             ? "Table Expired"
                             : "Cancel Book"}
@@ -227,8 +219,6 @@ class BookingCard extends Component {
                       </CardActions>
                     </div>
                   )}
-<<<<<<< HEAD
-=======
 
                 {Meteor.user().profile.usertype == "restaurant" && (
                   <div>
@@ -237,17 +227,13 @@ class BookingCard extends Component {
                         size="small"
                         className={classes.Button}
                         disabled={expired}
-                        onClick={() =>
-                          this.setToExpire(
-                            table._id,
-                          )
-                        }
+                        onClick={() => this.setToExpire(table._id)}
                       >
                         Set Table To Expire
-                  </Button>
+                      </Button>
                     </CardActions>
-                  </div>)}
->>>>>>> d8986107869c28cf874d9abc8adacbba4deda801
+                  </div>
+                )}
               </div>
             </div>
           </div>
