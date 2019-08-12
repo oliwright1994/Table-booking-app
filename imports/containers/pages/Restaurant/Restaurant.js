@@ -10,6 +10,9 @@ import Link from "@material-ui/core/Link";
 import BookingCard from "../../Component/BookingCard";
 import ReviewCard from "../../Component/ReviewCard";
 import ReviewForm from "../../Component/ReviewForm";
+import GoogleMapContainer from "../../Component/GoogleMap";
+import GoogleMap from "../../Component/GoogleMap";
+import Geocode from "react-geocode";
 
 const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const {
@@ -38,7 +41,14 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     }
   };
 
-
+  displayMap = () => {
+    Geocode.setApiKey("AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo");
+    Geocode.fromAddress({ address }).then(response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(lat, lng);
+      return <GoogleMap lat={lat} lng={lng} />;
+    });
+  };
   return (
     <div className={classes.root}>
       <img
@@ -81,8 +91,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                  <p>No reviews yet, be the first!</p>
-                )}
+                <p>No reviews yet, be the first!</p>
+              )}
             </div>
           </div>
 
@@ -94,8 +104,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                  <p>No table available right now.</p>
-                )}
+                <p>No table available right now.</p>
+              )}
             </div>
             <div>
               <Typography component="p">Address: {address}</Typography>
@@ -116,6 +126,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
           </div>
         </div>
       </div>
+      {displayMap()}
     </div>
   );
 };
