@@ -40,12 +40,11 @@ class BookingCard extends Component {
     ).guests;
     Meteor.call("tables.cancelBooking", tableId, userId, numberofGuests);
   };
-  setToExpire = (tableId) => {
+  setToExpire = tableId => {
     Meteor.call("tables.setTableToExpired", tableId);
   };
 
   render() {
-
     const { classes, restaurant, table, expired } = this.props;
     const tableDefaultNotes =
       "This is nice restautant, come eat here. We have food and table and seats";
@@ -144,16 +143,11 @@ class BookingCard extends Component {
                   component="p"
                   className={classes.seatAvailable}
                 >
-                  {!expired ? (
-                    table.placesAvailable > 1 ? (
-                      <p>
-                        {table.placesAvailable}
-                        <p> seats left</p>
-                      </p>
-                    ) : (
-                      `${table.placesAvailable} seat left`
-                    )
-                  ) : null}
+                  {!expired
+                    ? table.placesAvailable > 1
+                      ? `${table.placesAvailable} seats left`
+                      : `${table.placesAvailable} seat left`
+                    : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&
@@ -221,7 +215,6 @@ class BookingCard extends Component {
                     </div>
                   )}
 
-
                 {Meteor.user().profile.usertype == "restaurant" && (
                   <div>
                     <CardActions>
@@ -229,17 +222,13 @@ class BookingCard extends Component {
                         size="small"
                         className={classes.Button}
                         disabled={expired}
-                        onClick={() =>
-                          this.setToExpire(
-                            table._id,
-                          )
-                        }
+                        onClick={() => this.setToExpire(table._id)}
                       >
                         Set Table To Expire
-                  </Button>
+                      </Button>
                     </CardActions>
-                  </div>)}
-
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ import {
 
 import { withTracker } from "meteor/react-meteor-data";
 import { Cuisines } from "../../../api/cuisines/cuisines";
+import ResetIcon from "@material-ui/icons/refresh";
 
 class BookingFilter extends Component {
   constructor({ props }) {
@@ -26,8 +27,9 @@ class BookingFilter extends Component {
 
     return (
       <div>
-        <FormControl>
+        <FormControl className={classes.filterContainer}>
           <Select
+            className={classes.filterDiscount}
             onChange={event => this.props.handleChange(event, "minDiscount")}
             inputProps={{ name: "minDiscount", id: "minDiscount" }}
             name="minDiscount"
@@ -44,6 +46,7 @@ class BookingFilter extends Component {
             ))}
           </Select>
           <Select
+            className={classes.filterCuisine}
             onChange={event =>
               this.props.handleChange(event, "selectedCuisine")
             }
@@ -61,11 +64,12 @@ class BookingFilter extends Component {
             ))}
           </Select>
           <Button
+            className={classes.button}
             type="button"
             color="primary"
             onClick={() => this.props.resetFilters()}
           >
-            Reset
+            <ResetIcon />
           </Button>
         </FormControl>
       </div>
