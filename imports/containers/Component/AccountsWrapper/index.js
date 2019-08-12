@@ -34,23 +34,11 @@ class AccountsUIWrapper extends Component {
 
   logIn = user => {
     const { email, password } = user;
-
-    Meteor.call("users.logIn", email, password);
-
-    Meteor.loginWithPassword(email, password, error => {
-      if (error) console.log(error);
-      else console.log(Meteor.userId());
-    });
-  };
-
-  logIn = user => {
-    const { email, password } = user;
     Meteor.loginWithPassword(email, password, error => {
       if (error) this.setState({ error: error.reason });
       else console.log(Meteor.userId());
     });
   };
-
 
   handleChange = event => {
     this.setState({ usertype: event.target.value });

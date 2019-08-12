@@ -1,5 +1,11 @@
 const styles = theme => ({
-  root: { width: 250, height: 300, display: "flex", flexDirection: "column" },
+  root: {
+    width: 250,
+    height: 300,
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "40px"
+  },
   reviewHeadline: {
     display: "flex",
     alignItems: "center"
