@@ -25,6 +25,10 @@ const styles = theme => ({
   },
   date: {
     wordSpacing: 10
+  },
+  profilePic: {
+    borderRadius: "50%",
+    marginRight: 10
   }
 });
 

@@ -55,9 +55,6 @@ class AccountsUIWrapper extends Component {
             usertype: this.state.usertype
           };
           this.state.formToggle ? this.logIn(user) : this.signUp(user);
-
-          console.log(user);
-          console.log("usertype is: ", this.state.usertype);
         }}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>

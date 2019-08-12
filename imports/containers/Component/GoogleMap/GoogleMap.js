@@ -38,13 +38,13 @@ class GoogleMap extends Component {
   render() {
     if (this.state.center.lat === null || this.state.center.lng === null) {
       return (
-        <div style={{ height: 400, width: 300 }}>
+        <div style={{ height: 300, width: 500 }}>
           <Loader />
         </div>
       );
     } else {
       return (
-        <div style={{ height: 400, width: 300 }}>
+        <div style={{ height: 300, width: 500 }}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: GOOGLE_API_KEY
