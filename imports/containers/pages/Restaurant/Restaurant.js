@@ -95,6 +95,10 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                 <p>No reviews yet, be the first!</p>
               )}
             </div>
+
+            <div className={classes.reviewForm}>
+              {showReviewForm(reviews, user, restaurant)}
+            </div>
           </div>
 
           <div className={classes.wrapperRight}>
@@ -129,11 +133,9 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               </Typography>
             </div>
 
-            <div className={classes.reviewForm}>
-              {showReviewForm(reviews, user, restaurant)}
+            <div className={classes.map}>
               <GoogleMap address={address} />
             </div>
-
           </div>
         </div>
       </div>
