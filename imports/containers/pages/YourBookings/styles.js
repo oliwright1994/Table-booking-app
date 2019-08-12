@@ -1,11 +1,4 @@
 const styles = theme => ({
-  background: {
-    backgroundImage: "url('/assets/images/boom.jpg')",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
-  },
-
   container: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",

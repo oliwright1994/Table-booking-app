@@ -106,10 +106,12 @@ class BookingCard extends Component {
                     variant="body2"
                     color="textSecondary"
                     component="p"
-                    className={classes.contentInfo}
+                    className={classes.contentInfoDiscount}
                   >
                     {`Discount: `}
-                    {table.discount ? table.discount : null}%
+                    <div className={classes.discountColor}>
+                      {table.discount ? table.discount : null}%
+                    </div>
                   </Typography>
                 </div>
 
@@ -140,15 +142,15 @@ class BookingCard extends Component {
                 <Typography
                   variant="body2"
                   color="textSecondary"
-                  component="p"
+                  component="div"
                   className={classes.seatAvailable}
                 >
                   {!expired ? (
                     table.placesAvailable > 1 ? (
-                      <p>
+                      <div className={classes.seatsLeft}>
                         {table.placesAvailable}
                         <p> seats left</p>
-                      </p>
+                      </div>
                     ) : (
                       `${table.placesAvailable} seat left`
                     )
