@@ -44,7 +44,6 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     Geocode.setApiKey("AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo");
     Geocode.fromAddress({ address }).then(response => {
       const { lat, lng } = response.results[0].geometry.location;
-      console.log(lat, lng);
       return <GoogleMap lat={lat} lng={lng} />;
     });
   };
@@ -75,6 +74,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                     <ListItem
                       className={classes.cuisineListItem}
                       key={cuisine._id}
+                      component="li"
                     >
                       <ListItemText primary={`•  ${cuisine}`} />
                     </ListItem>
@@ -133,7 +133,6 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {showReviewForm(reviews, user, restaurant)}
               <GoogleMap address={address} />
             </div>
-
           </div>
         </div>
       </div>

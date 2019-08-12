@@ -30,14 +30,12 @@ class CreateRestaurant extends Component {
       values,
       this.props.userId,
       (err, res) => {
-        console.log(res[0]._id);
         this.props.history.push(`/restaurant/${res[0]._id}`);
       }
     );
   }
 
   displayHeaderText(restaurant) {
-    console.log(restaurant);
     if (!restaurant) {
       return (
         <div>

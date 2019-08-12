@@ -24,7 +24,7 @@ class GoogleMap extends Component {
 
   componentDidMount() {
     const { address } = this.props;
-    console.log(address);
+
     Geocode.setApiKey(GOOGLE_API_KEY);
     Geocode.fromAddress(address).then(
       response => {
