@@ -48,7 +48,7 @@ class TableForm extends Component {
       const newDate = new Date(table.expireTime);
       return newDate > now
     })
-    if (tables.length === 0) {
+    if (currentTable === undefined) {
       return (
         <div className={classes.tableForm}>
           <Form
