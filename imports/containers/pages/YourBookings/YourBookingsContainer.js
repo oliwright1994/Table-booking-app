@@ -13,7 +13,9 @@ class YourBookingsContainer extends Component {
       tables.length === 0 ||
       !!Meteor.userId() === false
     ) {
-      return <Loader />;
+
+      return <p>Loading......</p>;
+
     } else {
       return <YourBookings restaurants={restaurants} tables={tables} />;
     }
