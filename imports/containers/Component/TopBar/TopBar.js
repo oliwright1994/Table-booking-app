@@ -177,13 +177,13 @@ const TopBarContent = props => {
               </MenuItem>
             )}
           {Meteor.user() && Meteor.user().profile.usertype === "restaurant" && (
-            <MenuItem>
+            <MenuItem 
+            onClick={() =>
+              this.resetNotification(props.currentNumOfCustomers)
+            }>
               <IconButton
                 aria-label="show 11 new notifications"
                 color="inherit"
-                onClick={() =>
-                  this.resetNotification(props.currentNumOfCustomers)
-                }
               >
                 <Badge
                   badgeContent={props.currentNumOfCustomers}
