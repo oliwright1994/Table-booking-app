@@ -12,6 +12,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
+import PropTypes from 'prop-types';
 
 
 class TopBar extends Component {
@@ -63,6 +64,11 @@ class TopBar extends Component {
       />
     );
   }
+}
+TopBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
 }
 export default withTracker(() => {
   Meteor.subscribe("restaurants");
@@ -173,3 +179,12 @@ const TopBarContent = props => {
     </div>
   );
 };
+TopBarContent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired,
+  currentNumOfCustomers: PropTypes.number.isRequired,
+  resetNotification: PropTypes.func.isRequired
+}
+

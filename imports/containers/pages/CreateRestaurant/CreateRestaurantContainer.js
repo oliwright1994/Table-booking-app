@@ -3,6 +3,7 @@ import CreateRestaurant from "./CreateRestaurant";
 import { withTracker } from "meteor/react-meteor-data";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { Cuisines } from "../../../api/cuisines/cuisines";
+import PropTypes from 'prop-types';
 
 class CreateRestaurantContainer extends Component {
   render() {
@@ -20,6 +21,10 @@ class CreateRestaurantContainer extends Component {
       );
     }
   }
+}
+CreateRestaurantContainer.propTypes = {
+  restaurants: PropTypes.array.isRequired,
+  cuisines: PropTypes.array.isRequired,
 }
 
 export default withTracker(() => {
