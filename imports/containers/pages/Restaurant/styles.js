@@ -95,6 +95,10 @@ const styles = theme => ({
   reviewForm: {
     width: "400px",
     textAlign: "center"
+  },
+
+  bio: {
+    textAlign: "center"
   }
 });
 

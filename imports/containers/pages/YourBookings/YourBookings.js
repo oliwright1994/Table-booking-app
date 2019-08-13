@@ -8,8 +8,7 @@ import PastIcon from "@material-ui/icons/timeroff";
 
 const YourBookings = ({ classes, restaurants, tables }) => {
   return (
-    <div className={classes.test}>
-
+    
     <div className={classes.container}>
       <div className={classes.current}>
         <p className={classes.title}>
@@ -26,14 +25,6 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                 const now = new Date();
                 const tableExpiryDate = new Date(table.expireTime);
                 const expired = !!(now > tableExpiryDate);
-                if (
-                  table.customers.find(
-                    customer => customer.customerId == Meteor.userId()
-                  )
-                ) {
-                  const now = new Date();
-                  const tableExpiryDate = new Date(table.expireTime);
-                  const expired = !!(now > tableExpiryDate);
                   if (
                     table.expireTime &&
                     now <= tableExpiryDate &&
@@ -93,11 +84,10 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                 }
               })
             : null}
-        </div>
       </div>
     </div>
   );
-};
+}
 
 YourBookings.propTypes = {
   classes: PropTypes.object.isRequired,
