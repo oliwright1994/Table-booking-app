@@ -1,6 +1,6 @@
 # UberSeats
 
-![alt text](public/assets/screenshots/screenshots.png)
+![alt text](public/assets/screenshots/screenshot.png)
 
 UberSeats is an an app that helps restaurants to fill up any empty seats, with providing discounts to those who book.
 This app also benefits customer who have to book a restaurant last minute. What makes UberSeats convenient is the ability
