@@ -39,15 +39,17 @@ const styles = theme => ({
 
   reviews: {
     padding: "20px",
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gridGap: "25px"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   reviewHead: {
     fontSize: 25,
     marginBottom: 20,
-    color: "#AA0054"
+    color: "#AA0054",
+    textAlign: "center"
   },
 
   wrapperRight: {

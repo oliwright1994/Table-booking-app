@@ -23,7 +23,7 @@ const styles = theme => ({
 
   container: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     margin: "10% 15%"
   }
 });
