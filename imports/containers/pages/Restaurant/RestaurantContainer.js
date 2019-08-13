@@ -6,6 +6,7 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
 import { Redirect } from "react-router";
 import Loader from "../../Component/Loader";
+import PropTypes from 'prop-types';
 
 class RestaurantContainer extends Component {
   render() {
@@ -44,21 +45,22 @@ class RestaurantContainer extends Component {
     }
   }
 }
-
+RestaurantContainer.propTypes = {
+  classes: PropTypes.object,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
+}
 export default withTracker(() => {
   Meteor.subscribe("reviews");
   Meteor.subscribe("tables");
-  // Meteor.subscribe("users");
   Meteor.subscribe("restaurants");
-
-  //The line below needs to be replaced with the correct id from the url
 
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
     reviews: Reviews.find({}).fetch(),
     tables: Tables.find({}).fetch(),
-    // users: Users.find({}).fetch(),
     restaurants: Restaurants.find({}).fetch()
   };
 })(RestaurantContainer);

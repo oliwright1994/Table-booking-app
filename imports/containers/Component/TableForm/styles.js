@@ -41,7 +41,31 @@ const styles = theme => ({
 
   submitIcon: {
     fontSize: "2rem"
+  },
+  newTableForm: {
+    flexWrap: "wrap",
+    padding: "20px",
+    fontSize: "18px",
+    flexDirection: "column"
+  },
+  buttonsLarge: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  buttonLarge: {
+    width: "150px",
+    height: "50px",
+    cursor: "pointer",
+    backgroundColor: "unset",
+    fontSize: "14px",
+    margin: "20px",
+    backgroundColor: "#8B2323",
+    color: "rgb(255,250,205)"
+
   }
 });
+
 
 export default styles;

@@ -13,7 +13,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Meteor } from "meteor/meteor";
 import styles from "./styles";
-
+import PropTypes from 'prop-types';
 class AccountsUIWrapper extends Component {
   constructor(props) {
     super(props);
@@ -169,5 +169,9 @@ class AccountsUIWrapper extends Component {
     );
   }
 }
+AccountsUIWrapper.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
 
 export default withStyles(styles)(AccountsUIWrapper);

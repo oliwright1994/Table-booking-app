@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PropTypes from 'prop-types';
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -237,4 +237,12 @@ class BookingCard extends Component {
     );
   }
 }
+BookingCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurant: PropTypes.object.isRequired,
+  table: PropTypes.object.isRequired,
+  expired: PropTypes.bool
+}
+
+
 export default withStyles(styles)(BookingCard);

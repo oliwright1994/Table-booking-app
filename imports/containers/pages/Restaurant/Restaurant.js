@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-
+import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -95,8 +95,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                <p>No reviews yet, be the first!</p>
-              )}
+                  <p>No reviews yet, be the first!</p>
+                )}
             </div>
           </div>
 
@@ -108,8 +108,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                <p>No table available right now.</p>
-              )}
+                  <p>No table available right now.</p>
+                )}
             </div>
             <div className={classes.resInfo}>
               <Typography component="p" className={classes.rightTitle}>
@@ -141,5 +141,13 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     </div>
   );
 };
+
+Restaurant.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurant: PropTypes.object.isRequired,
+  table: PropTypes.object,
+  reviews: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+}
 
 export default withStyles(styles)(Restaurant);
