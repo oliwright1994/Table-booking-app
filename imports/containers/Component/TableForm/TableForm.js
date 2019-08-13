@@ -16,7 +16,10 @@ import SubmitIcon from "@material-ui/icons/checkcircle";
 import { Tables } from "../../../api/tables/tables";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
+import ExpiredIcon from "@material-ui/icons/alarmoff";
+import TableIcon from "@material-ui/icons/forward";
 import PropTypes from 'prop-types';
+
 
 class TableForm extends Component {
   async onSubmit(newTable, restaurants) {
@@ -53,72 +56,27 @@ class TableForm extends Component {
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
                 <FormControl>
-                  <div>
-                    <Field
-                      name="discount"
-                      render={({ input, meta }) => (
-                        <label>
-                          <TextField
-                            id="discount"
-                            inputProps={{ ...input }}
-                            label="Insert discount here..."
-                            value={input.value}
-                            margin="normal"
-                            type="number"
-                            className={classes.discount}
-                          />
-                        </label>
-                      )}
-                    />
-                  </div>
-
-                  <div>
-                    <Field
-                      name="notes"
-                      render={({ input, meta }) => (
-                        <label>
-                          <TextField
-                            id="notes"
-                            inputProps={{ ...input }}
-                            label="Descriptions for table..."
-                            value={input.value}
-                            margin="normal"
-                            className={classes.description}
-                          />
-                        </label>
-                      )}
-                    />
-                  </div>
-                  <div>
-                    <FormControl>
+                  <div className={classes.topWrapper}>
+                    <div>
                       <Field
-                        name="expire"
+                        name="discount"
                         render={({ input, meta }) => (
-                          <div>
-                            <Select
-                              onChange={this.handleChange}
+                          <label>
+                            <TextField
+                              id="discount"
                               inputProps={{ ...input }}
-                              displayEmpty
-                              name="expireTime"
-                              id="expireTime"
-                            >
-                              <MenuItem value="">
-                                <p>Table Expired Time</p>
-                              </MenuItem>
-                              <MenuItem value={1}>1 Hour</MenuItem>
-                              <MenuItem value={2}>2 Hours</MenuItem>
-                              <MenuItem value={3}>3 Hours</MenuItem>
-                              <MenuItem value={4}>4 Hours</MenuItem>
-                            </Select>
-                            {/* <FormHelperText>Table Expired Time</FormHelperText> */}
-                          </div>
+                              label="Insert discount..."
+                              value={input.value}
+                              margin="normal"
+                              type="number"
+                              className={classes.discount}
+                            />
+                          </label>
                         )}
                       />
-                    </FormControl>
-                  </div>
+                    </div>
 
-                  <div className={classes.bottomWrapper}>
-                    <FormControl>
+                  <FormControl>
                       <Field
                         name="maxPlaces"
                         render={({ input, meta }) => (
@@ -145,8 +103,57 @@ class TableForm extends Component {
                       />
                     </FormControl>
 
+                  </div>
+
+                  <div>
+                    <Field
+                      name="notes"
+                      render={({ input, meta }) => (
+                        <label>
+                          <TextField
+                            id="notes"
+                            inputProps={{ ...input }}
+                            label="Descriptions for table..."
+                            value={input.value}
+                            margin="normal"
+                            className={classes.description}
+                          />
+                        </label>
+                      )}
+                    />
+                  </div>
+
+                  <div className={classes.bottomWrapper}>
+                    <div>
+                      <FormControl>
+                        <Field
+                          name="expire"
+                          render={({ input, meta }) => (
+                            <div>
+                              <Select
+                                className={classes.expired}
+                                onChange={this.handleChange}
+                                inputProps={{ ...input }}
+                                displayEmpty
+                                name="expireTime"
+                                id="expireTime"
+                              >
+                                <MenuItem value="">
+                                  <p>Table Expired Time</p>
+                                </MenuItem>
+                                <MenuItem value={1}>1 Hour</MenuItem>
+                                <MenuItem value={2}>2 Hours</MenuItem>
+                                <MenuItem value={3}>3 Hours</MenuItem>
+                                <MenuItem value={4}>4 Hours</MenuItem>
+                              </Select>
+                            </div>
+                          )}
+                        />
+                      </FormControl>
+                    </div>
+
                     <button
-                      className={classes.button}
+                      className={classes.buttonIcon}
                       type="submit"
                       disabled={pristine || invalid}
                     >
@@ -161,24 +168,39 @@ class TableForm extends Component {
       )
     } else {
       return (
-        <div>
-          <p>You already have a table avalible!</p>
-          <p>You can set the current table to expired then create a new table</p>
-          <button
-            className={classes.button}
-          ><Link component={RouterLink} to={`/restaurant/${restaurants[0]._id}`}>
-              Go To My Table
-                </Link>
+      <div className={classes.tableForm2}>
+
+        <div className={classes.text}>
+          <p> You already have a table avalible! <br />
+            You can set the current table to expired <br />
+            then create a new table</p>
+        </div>
+
+        <div className={classes.buttonWrapper}>
+          <button className={classes.button}>
+            <Link component={RouterLink} to={`/restaurant/${restaurants[0]._id}`} className={classes.buttonFont}>
+              <TableIcon />
+              <div className={classes.smallText}> 
+                Go To 
+                <br />
+                My Table
+              </div>
+            </Link>
           </button>
 
           <button
             className={classes.button}
             onClick={() => this.setToExpire(currentTable._id)}
           >
-            Set Current Table To Expired
+            <div className={classes.buttonFont}>
+              <ExpiredIcon />
+              <div>
+                Set Current Table To Expired
+              </div>
+            </div>
           </button>
         </div>
-
+      </div>
       )
     }
   }

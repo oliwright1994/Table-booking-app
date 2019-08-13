@@ -17,7 +17,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
   const {
     name,
     imageurl,
-    bio,
+    description,
     cuisine1,
     cuisine2,
     cuisine3,
@@ -61,7 +61,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
         <Typography component="h1" className={classes.restaurantName}>
           {name}
         </Typography>
-        <Typography component="p">{bio}</Typography>
+        <Typography component="p">{description}</Typography>
         <div className={classes.resWrapper}>
           <div className={classes.wrapperLeft}>
             {cuisines.length > 0 ? (
