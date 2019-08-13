@@ -64,28 +64,10 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
         <Typography component="div" className={classes.bio}>{description}</Typography>
         <div className={classes.resWrapper}>
           <div className={classes.wrapperLeft}>
-            {cuisines.length > 0 ? (
-              <div className={classes.cuisine}>
-                <Typography className={classes.cuisineList}>
-                  Cuisines:{" "}
-                </Typography>
-                <List dense>
-                  {cuisines.map(cuisine => (
-                    <ListItem
-                      className={classes.cuisineListItem}
-                      key={cuisine._id}
-                      component="li"
-                    >
-                      <ListItemText primary={`•  ${cuisine}`} />
-                    </ListItem>
-                  ))}
-                </List>
-              </div>
-            ) : null}
-
             <Typography className={classes.reviewHead} component="h2">
               Reviews
             </Typography>
+
             <div className={classes.reviewForm}>
               {showReviewForm(reviews, user, restaurant)}
             </div>
@@ -101,6 +83,48 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
           </div>
 
           <div className={classes.wrapperRight}>
+            <div className={classes.topWrapper}>
+              {cuisines.length > 0 ? (
+                <div className={classes.cuisine}>
+                  <Typography className={classes.cuisineTitle}>
+                    Cuisines:{" "}
+                  </Typography>
+                  <List dense className={classes.cuisineList}>
+                    {cuisines.map(cuisine => (
+                      <ListItem
+                        className={classes.cuisineListItem}
+                        key={cuisine._id}
+                        component="li"
+                      >
+                        <ListItemText primary={`•  ${cuisine}`} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </div>
+              ) : null}
+
+              <div className={classes.resInfo}>
+                <Typography component="p" className={classes.rightTitle}>
+                  Address:
+                  <Typography component="span" className={classes.address}>
+                    {address}
+                  </Typography>
+                </Typography>
+                <Typography component="p" className={classes.rightTitle}>
+                  Website:
+                  <Link className={classes.website} href={website}>
+                    {website}
+                  </Link>
+                </Typography>
+                <Typography component="p" className={classes.rightTitle}>
+                  Phone:
+                  <Typography component="span" className={classes.phone}>
+                    {phone}
+                  </Typography>
+                </Typography>
+              </div>
+            </div>
+
             <div>
               <Typography className={classes.bookingHead} component="h2">
                 Current Booking:
@@ -111,27 +135,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                   <p>No table available right now.</p>
                 )}
             </div>
-            <div className={classes.resInfo}>
-              <Typography component="p" className={classes.rightTitle}>
-                Address:
-                <Typography component="span" className={classes.address}>
-                  {address}
-                </Typography>
-              </Typography>
-              <Typography component="p" className={classes.rightTitle}>
-                Website:
-                <Link className={classes.website} href={website}>
-                  {website}
-                </Link>
-              </Typography>
-              <Typography component="p" className={classes.rightTitle}>
-                Phone:
-                <Typography component="span" className={classes.phone}>
-                  {phone}
-                </Typography>
-              </Typography>
-            </div>
-
+            
             <div className={classes.map}>
               <GoogleMap address={address} />
             </div>

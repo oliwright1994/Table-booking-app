@@ -317,7 +317,6 @@ class CreateRestaurant extends Component {
           }}
         />
       </div>
-      // </div>
     );
   }
 }

@@ -37,7 +37,21 @@ const styles = theme => ({
 
   brand: {
     fontSize: 24
+  },
+
+  menuItems: {
+    display: "flex",
+    alignItems: "center"
+  },
+
+  text: {
+    paddingLeft: "15px"
+  },
+
+  link: {
+    textDecoration: "none"
   }
+
 });
 
 export default styles;

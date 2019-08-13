@@ -1,7 +1,7 @@
 const styles = theme => ({
   root: {
     width: "500px",
-    height: "390px",
+    height: "450px",
     justifySelf: "center"
   },
 
