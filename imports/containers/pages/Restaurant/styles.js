@@ -1,17 +1,17 @@
 import { flexbox } from "@material-ui/system";
 
 const styles = theme => ({
-  root: { width: "100%", padding: 0 },
+  root: { width: "100%", padding: 0, marginBottom: 50 },
 
   image: {
     width: "100vw",
-    height: "300px",
+    height: "60vh",
     objectFit: "cover"
   },
 
   restaurantName: {
     textAlign: "center",
-    marginBottom: 30,
+    margin: 30,
     fontSize: 40
   },
 
