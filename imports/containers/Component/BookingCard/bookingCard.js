@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PropTypes from 'prop-types';
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -106,10 +106,12 @@ class BookingCard extends Component {
                     variant="body2"
                     color="textSecondary"
                     component="p"
-                    className={classes.contentInfo}
+                    className={classes.contentInfoDiscount}
                   >
                     {`Discount: `}
-                    {table.discount ? table.discount : null}%
+                    <div className={classes.discountColor}>
+                      {table.discount ? table.discount : null}%
+                    </div>
                   </Typography>
                 </div>
 
@@ -122,7 +124,7 @@ class BookingCard extends Component {
                   {table.notes ? table.notes : tableDefaultNotes}
                 </Typography>
 
-                <div variant="body2" color="textSecondary" component="p">
+                <div >
                   <Box
                     component="fieldset"
                     mb={3}
@@ -140,14 +142,13 @@ class BookingCard extends Component {
                 <Typography
                   variant="body2"
                   color="textSecondary"
-                  component="p"
-                  className={classes.seatAvailable}
+                  component="div"
                 >
-                  {!expired
-                    ? table.placesAvailable > 1
-                      ? `${table.placesAvailable} seats left`
-                      : `${table.placesAvailable} seat left`
-                    : null}
+                  {!expired 
+                    ? table.placesAvailable > 1 
+                    ? `${table.placesAvailable} seats left`
+                    : `${table.placesAvailable} seat left`
+                  : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&
@@ -237,4 +238,12 @@ class BookingCard extends Component {
     );
   }
 }
+BookingCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurant: PropTypes.object.isRequired,
+  table: PropTypes.object.isRequired,
+  expired: PropTypes.bool
+}
+
+
 export default withStyles(styles)(BookingCard);

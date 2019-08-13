@@ -7,27 +7,81 @@ import HamburgerMenu from "@material-ui/icons/fastfood";
 import Gravatar from "react-gravatar";
 import { Meteor } from "meteor/meteor";
 import { Restaurants } from "../../../api/restaurants/restaurants";
+import { Tables } from "../../../api/tables/tables";
 import { withTracker } from "meteor/react-meteor-data";
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import PropTypes from 'prop-types';
+
 
 class TopBar extends Component {
   constructor({ props }) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentNumOfCustomers: 0,
+      prevNumOfCustomers: 0
+    };
+  }
+  resetNotification = () => {
+    this.setState({
+      prevNumOfCustomers: this.state.currentNumOfCustomers,
+      currentNumOfCustomers: 0
+    })
+
+  }
+
+  componentDidUpdate(prevProps) {
+    const currentTables = this.props.tables;
+    const preTables = prevProps.tables;
+    if (!!currentTables.length && !!preTables.length) {
+      currentTables.map(currentTable => {
+        const table = preTables.find(preTable => currentTable._id === preTable._id);
+        if (!!table && table.customers.length - currentTable.customers.length < 0) {
+          this.setState({
+            currentNumOfCustomers: currentTable.customers.length - this.state.prevNumOfCustomers,
+          })
+
+        } else if (!!table && table.customers.length - currentTable.customers.length > 0) {
+          this.setState({
+            currentNumOfCustomers: currentTable.customers.length
+          })
+        }
+      })
+
+    }
   }
   render() {
+
     return (
       <TopBarContent
         classes={this.props.classes}
         restaurants={this.props.restaurants}
         location={this.props.location}
+        tables={this.props.tables}
+        currentNumOfCustomers={this.state.currentNumOfCustomers}
+        resetNotification={this.resetNotification}
       />
     );
   }
 }
+TopBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
+}
 export default withTracker(() => {
   Meteor.subscribe("restaurants");
+  Meteor.subscribe("tables");
   return {
-    restaurants: Restaurants.find({ owner: Meteor.userId() }).fetch()
+    restaurants: Restaurants.find({ owner: Meteor.userId() }).fetch(),
+    tables: Tables.find({}).fetch().filter(table => {
+      const now = new Date();
+      const expireTime = new Date(table.expireTime);
+      if (expireTime > now) {
+        return table
+      }
+    })
   };
 })(withRouter(withStyles(styles)(TopBar)));
 
@@ -40,7 +94,11 @@ const TopBarContent = props => {
   function handleClose() {
     setAnchorEl(null);
   }
-  const { restaurants, classes, location } = props;
+  const { restaurants, classes, location, tables } = props;
+  resetNotification = (currentNumOfCustomers) => {
+    props.resetNotification();
+    alert(`you have ${currentNumOfCustomers} bookings changed`);
+  }
   return (
     <div className={classes.container}>
       <div>
@@ -54,8 +112,8 @@ const TopBarContent = props => {
             <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
           </Link>
         ) : (
-          <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
-        )}
+              <img src="/assets/images/logo.svg" alt="Food Logo" className={classes.logo} />
+            )}
 
       </div>
       <div className={classes.smallcontainer}>
@@ -85,6 +143,20 @@ const TopBarContent = props => {
               </MenuItem>
             )}
           {Meteor.user() &&
+            Meteor.user().profile.usertype === "restaurant" && (
+              <MenuItem>
+                <IconButton aria-label="show 11 new notifications" color="inherit"
+                  onClick={() => this.resetNotification(props.currentNumOfCustomers)}
+                >
+                  <Badge badgeContent={props.currentNumOfCustomers} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+
+                </IconButton>
+                <p>Notifications</p>
+              </MenuItem>
+            )}
+          {Meteor.user() &&
             Meteor.user().profile.usertype === "restaurant" &&
             location.pathname !== "/create-restaurant" && (
               <MenuItem onClick={handleClose}>
@@ -105,3 +177,12 @@ const TopBarContent = props => {
     </div>
   );
 };
+TopBarContent.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired,
+  currentNumOfCustomers: PropTypes.number.isRequired,
+  resetNotification: PropTypes.func.isRequired
+}
+

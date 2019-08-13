@@ -18,10 +18,10 @@ import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import ExpiredIcon from "@material-ui/icons/alarmoff";
 import TableIcon from "@material-ui/icons/forward";
+import PropTypes from 'prop-types';
 
 
 class TableForm extends Component {
-
   async onSubmit(newTable, restaurants) {
     const restaurantId = restaurants[0]._id;
     Meteor.call(
@@ -41,7 +41,6 @@ class TableForm extends Component {
   setToExpire = (tableId) => {
     Meteor.call("tables.setTableToExpired", tableId);
   };
-
   render() {
     const { classes, restaurants, tables } = this.props;
     const currentTable = tables.find(table => {
@@ -49,7 +48,7 @@ class TableForm extends Component {
       const newDate = new Date(table.expireTime);
       return newDate > now
     })
-    if (currentTable === undefined) {
+    if (tables.length === 0) {
       return (
         <div className={classes.tableForm}>
           <Form
@@ -201,13 +200,16 @@ class TableForm extends Component {
             </div>
           </button>
         </div>
-
       </div>
       )
     }
-
-
   }
+}
+
+TableForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired
 }
 
 

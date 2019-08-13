@@ -1,6 +1,5 @@
 import { withStyles } from "@material-ui/core/styles";
-import { Form, Field, FormSpy } from "react-final-form";
-import TextField from "@material-ui/core/TextField";
+import { Form, Field } from "react-final-form";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styles from "./styles";
@@ -9,11 +8,9 @@ import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Checkbox from "@material-ui/core/Checkbox";
-import ListItemText from "@material-ui/core/ListItemText";
 import Restaurant from "@material-ui/icons/restaurantmenu";
-
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 class CreateRestaurant extends Component {
   constructor({ props }) {
@@ -30,14 +27,12 @@ class CreateRestaurant extends Component {
       values,
       this.props.userId,
       (err, res) => {
-        console.log(res[0]._id);
         this.props.history.push(`/restaurant/${res[0]._id}`);
       }
     );
   }
 
   displayHeaderText(restaurant) {
-    console.log(restaurant);
     if (!restaurant) {
       return (
         <div>
@@ -66,7 +61,6 @@ class CreateRestaurant extends Component {
         <div className={classes.title}>
           {this.displayHeaderText(restaurant)}
         </div>
-        {/* <div className={classes.forms}> */}
         <Form
           onSubmit={values => this.updateRestaurant(values)}
           initialValues={restaurant ? { ...restaurant } : null}
@@ -327,5 +321,9 @@ class CreateRestaurant extends Component {
     );
   }
 }
-
+CreateRestaurant.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurant: PropTypes.object.isRequired,
+  cuisines: PropTypes.array.isRequired,
+}
 export default withStyles(styles)(CreateRestaurant);

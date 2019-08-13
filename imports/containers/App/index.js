@@ -9,8 +9,6 @@ import { Restaurants } from "../../api/restaurants/restaurants";
 import AppRoutes from "../Routes";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "../../../client/theme";
-
-import AccountsUIWrapper from "../Component/AccountsWrapper";
 import { Meteor } from "meteor/meteor";
 
 class App extends Component {
@@ -28,7 +26,6 @@ class App extends Component {
 export default withTracker(() => {
   Meteor.subscribe("reviews");
   Meteor.subscribe("tables");
-  // Meteor.subscribe("users");
   Meteor.subscribe("restaurants");
 
   return {
@@ -36,9 +33,7 @@ export default withTracker(() => {
     currentUserId: Meteor.userId(),
     reviews: Reviews.find({}).fetch(),
     tables: Tables.find({}).fetch(),
-    // users: Users.find({}).fetch(),
     restaurant: Restaurants.find({}).fetch()
   };
 })(App);
 
-// export default App;

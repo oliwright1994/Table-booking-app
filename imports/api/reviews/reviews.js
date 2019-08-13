@@ -12,9 +12,10 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  "reviews.createReview"(values, userId, restaurantId) {
+  "reviews.createReview"(values, userId, restaurantId, authorEmail) {
     Reviews.insert({
       author: userId,
+      authorEmail: authorEmail,
       restaurantId: restaurantId,
       date: new Date(),
       rating: values.rating,
@@ -28,7 +29,8 @@ Meteor.methods({
     ).fetch();
     const restaurantRaitings = restaurantReviews.map(review => review.rating);
     const newRating =
-      restaurantRaitings.reduce(((a, b) => a += b), 0) / restaurantRaitings.length;
+      restaurantRaitings.reduce((a, b) => (a += b), 0) /
+      restaurantRaitings.length;
     Restaurants.update({ _id: restaurantId }, { $set: { rating: newRating } });
   }
 });

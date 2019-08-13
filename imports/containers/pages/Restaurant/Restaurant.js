@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-
+import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -44,7 +44,6 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     Geocode.setApiKey("AIzaSyCTarxeCZCyhhU-T_S8BlG4sTyMyE_RaVo");
     Geocode.fromAddress({ address }).then(response => {
       const { lat, lng } = response.results[0].geometry.location;
-      console.log(lat, lng);
       return <GoogleMap lat={lat} lng={lng} />;
     });
   };
@@ -75,6 +74,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
                     <ListItem
                       className={classes.cuisineListItem}
                       key={cuisine._id}
+                      component="li"
                     >
                       <ListItemText primary={`•  ${cuisine}`} />
                     </ListItem>
@@ -86,14 +86,17 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
             <Typography className={classes.reviewHead} component="h2">
               Reviews
             </Typography>
+            <div className={classes.reviewForm}>
+              {showReviewForm(reviews, user, restaurant)}
+            </div>
             <div className={classes.reviews}>
               {reviews.length !== 0 ? (
                 reviews.map(review => (
                   <ReviewCard review={review} key={review._id} />
                 ))
               ) : (
-                <p>No reviews yet, be the first!</p>
-              )}
+                  <p>No reviews yet, be the first!</p>
+                )}
             </div>
 
             <div className={classes.reviewForm}>
@@ -109,8 +112,8 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
               {table && table.placesAvailable > 0 ? (
                 <BookingCard restaurant={restaurant} table={table} />
               ) : (
-                <p>No table available right now.</p>
-              )}
+                  <p>No table available right now.</p>
+                )}
             </div>
             <div className={classes.resInfo}>
               <Typography component="p" className={classes.rightTitle}>
@@ -142,5 +145,13 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
     </div>
   );
 };
+
+Restaurant.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurant: PropTypes.object.isRequired,
+  table: PropTypes.object,
+  reviews: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+}
 
 export default withStyles(styles)(Restaurant);

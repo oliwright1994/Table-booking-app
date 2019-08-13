@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { Form, Field } from "react-final-form";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import {
   FormControl,
   Select,
   MenuItem,
-  Typography,
   Button
 } from "@material-ui/core";
-
+import PropTypes from 'prop-types';
 import { withTracker } from "meteor/react-meteor-data";
 import { Cuisines } from "../../../api/cuisines/cuisines";
 import ResetIcon from "@material-ui/icons/refresh";
@@ -75,6 +73,13 @@ class BookingFilter extends Component {
       </div>
     );
   }
+}
+
+BookingFilter.propTypes = {
+  classes: PropTypes.object.isRequired,
+  cuisines: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired,
 }
 
 export default withTracker(() => {
