@@ -1,3 +1,3 @@
-import CreateTable from "./CreateTableContainer";
+import CreateTableContainer from "./CreateTableContainer";
 
-export default CreateTable;
+export default CreateTableContainer;

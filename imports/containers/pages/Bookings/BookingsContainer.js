@@ -5,6 +5,7 @@ import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
 import Loader from "../../Component/Loader";
 import BookingFilter from "../../Component/BookingFilter";
+import PropTypes from 'prop-types';
 
 class BookingsContainer extends Component {
   constructor({ props }) {
@@ -70,6 +71,11 @@ class BookingsContainer extends Component {
       );
     }
   }
+}
+BookingsContainer.propTypes = {
+  classes: PropTypes.object,
+  restaurants: PropTypes.array.isRequired,
+  table: PropTypes.array,
 }
 
 export default withTracker(() => {

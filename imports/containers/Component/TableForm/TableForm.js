@@ -16,6 +16,7 @@ import SubmitIcon from "@material-ui/icons/checkcircle";
 import { Tables } from "../../../api/tables/tables";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
+import PropTypes from 'prop-types';
 
 class TableForm extends Component {
   async onSubmit(newTable, restaurants) {
@@ -34,18 +35,17 @@ class TableForm extends Component {
       }
     );
   }
-  setToExpire = tableId => {
+  setToExpire = (tableId) => {
     Meteor.call("tables.setTableToExpired", tableId);
   };
-
   render() {
     const { classes, restaurants, tables } = this.props;
     const currentTable = tables.find(table => {
       const now = new Date();
       const newDate = new Date(table.expireTime);
-      return newDate > now;
-    });
-    if (currentTable === undefined) {
+      return newDate > now
+    })
+    if (tables.length === 0) {
       return (
         <div className={classes.tableForm}>
           <Form
@@ -60,10 +60,11 @@ class TableForm extends Component {
                         <label>
                           <TextField
                             id="discount"
-                            inputProps={{ ...input, type: "number" }}
+                            inputProps={{ ...input }}
                             label="Insert discount here..."
                             value={input.value}
                             margin="normal"
+                            type="number"
                             className={classes.discount}
                           />
                         </label>
@@ -109,6 +110,7 @@ class TableForm extends Component {
                               <MenuItem value={3}>3 Hours</MenuItem>
                               <MenuItem value={4}>4 Hours</MenuItem>
                             </Select>
+                            {/* <FormHelperText>Table Expired Time</FormHelperText> */}
                           </div>
                         )}
                       />
@@ -136,12 +138,6 @@ class TableForm extends Component {
                               <MenuItem value={2}>2</MenuItem>
                               <MenuItem value={3}>3</MenuItem>
                               <MenuItem value={4}>4</MenuItem>
-                              <MenuItem value={5}>5</MenuItem>
-                              <MenuItem value={6}>6</MenuItem>
-                              <MenuItem value={7}>7</MenuItem>
-                              <MenuItem value={8}>8</MenuItem>
-                              <MenuItem value={9}>9</MenuItem>
-                              <MenuItem value={10}>10</MenuItem>
                             </Select>
                             <FormHelperText>Number of Seats</FormHelperText>
                           </div>
@@ -162,22 +158,17 @@ class TableForm extends Component {
             )}
           />
         </div>
-      );
+      )
     } else {
       return (
         <div>
           <p>You already have a table avalible!</p>
-          <p>
-            You can set the current table to expired then create a new table
-          </p>
-
-          <button className={classes.button}>
-            <Link
-              component={RouterLink}
-              to={`/restaurant/${restaurants[0]._id}`}
-            >
+          <p>You can set the current table to expired then create a new table</p>
+          <button
+            className={classes.button}
+          ><Link component={RouterLink} to={`/restaurant/${restaurants[0]._id}`}>
               Go To My Table
-            </Link>
+                </Link>
           </button>
 
           <button
@@ -187,10 +178,18 @@ class TableForm extends Component {
             Set Current Table To Expired
           </button>
         </div>
-      );
+
+      )
     }
   }
 }
+
+TableForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired
+}
+
 
 export default withTracker(() => {
   Meteor.subscribe("restaurants");

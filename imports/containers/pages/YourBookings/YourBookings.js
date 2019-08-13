@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import BookingCard from "../../Component/BookingCard";
+import PropTypes from 'prop-types';
 import CurrentIcon from "@material-ui/icons/timer";
 import PastIcon from "@material-ui/icons/timeroff";
 
@@ -14,7 +15,6 @@ const YourBookings = ({ classes, restaurants, tables }) => {
           <CurrentIcon />
           &nbsp; Current Booking
         </p>
-
         {tables.length !== 0
           ? tables.map(table => {
               if (
@@ -89,5 +89,11 @@ const YourBookings = ({ classes, restaurants, tables }) => {
     </div>
   );
 };
+
+YourBookings.propTypes = {
+  classes: PropTypes.object.isRequired,
+  restaurants: PropTypes.array.isRequired,
+  tables: PropTypes.array.isRequired,
+}
 
 export default withStyles(styles)(YourBookings);
