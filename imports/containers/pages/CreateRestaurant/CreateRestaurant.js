@@ -311,7 +311,10 @@ class CreateRestaurant extends Component {
                       type="submit"
                       disabled={pristine || invalid}
                     >
-                      <Restaurant />
+                      <div >
+                        <Restaurant />
+                        <span>Update</span>
+                      </div>
                     </Button>
                   </div>
                 </div>
