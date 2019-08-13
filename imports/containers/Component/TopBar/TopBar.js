@@ -167,15 +167,6 @@ const TopBarContent = props => {
                 <Link to="/your-bookings">Profile</Link>
               </MenuItem>
             )}
-<<<<<<< HEAD
-          {Meteor.user() &&
-            Meteor.user().profile.usertype === "restaurant" && (
-              <MenuItem
-              onClick={() => this.resetNotification(props.currentNumOfCustomers)}
-              >
-                <IconButton aria-label="show 11 new notifications" color="inherit"
-                  
-=======
           {Meteor.user() && Meteor.user().profile.usertype === "restaurant" && (
             <MenuItem>
               <IconButton
@@ -188,7 +179,6 @@ const TopBarContent = props => {
                 <Badge
                   badgeContent={props.currentNumOfCustomers}
                   color="secondary"
->>>>>>> ab21406b028e13e14d7bfdec9c5a281bd316d509
                 >
                   <NotificationsIcon />
                 </Badge>
