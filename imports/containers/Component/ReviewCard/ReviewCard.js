@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Gravatar from "react-gravatar";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
+import PropTypes from 'prop-types';
 
 const ReviewCard = ({ classes, review }) => {
   const { text, date, rating, impression, authorEmail } = review;
@@ -32,5 +33,10 @@ const ReviewCard = ({ classes, review }) => {
     </Card>
   );
 };
+ReviewCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  review: PropTypes.object.isRequired
+}
+
 
 export default withStyles(styles)(ReviewCard);

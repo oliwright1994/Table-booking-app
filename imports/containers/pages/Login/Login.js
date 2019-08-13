@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import AccountsUIWrapper from "../../Component/AccountsWrapper";
+import PropTypes from 'prop-types';
 
 const Login = ({ classes }) => {
   return (
@@ -24,5 +25,9 @@ const Login = ({ classes }) => {
     </div>
   );
 };
+Login.propTypes = {
+  classes: PropTypes.object.isRequired,
+
+}
 
 export default withStyles(styles)(Login);

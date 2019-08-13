@@ -4,7 +4,7 @@ import Geocode from "react-geocode";
 import Loader from "../../Component/Loader";
 import LocationOn from "@material-ui/icons/LocationOn";
 import { GOOGLE_API_KEY } from "../../../../googleapi";
-
+import PropTypes from 'prop-types';
 const MapMarker = () => (
   <div>
     <LocationOn />
@@ -31,7 +31,7 @@ class GoogleMap extends Component {
 
         this.setState({ center: { lat: lat, lng: lng } });
       },
-      error => {}
+      error => { }
     );
   }
 
@@ -62,5 +62,7 @@ class GoogleMap extends Component {
     }
   }
 }
-
+GoogleMap.propsTypes = {
+  address: PropTypes.string.isRequired
+}
 export default GoogleMap;

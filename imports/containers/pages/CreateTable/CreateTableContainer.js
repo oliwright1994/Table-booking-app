@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import CreateTable from "./CreateTable";
 import TableForm from "../../Component/TableForm";
 import { withTracker } from "meteor/react-meteor-data";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
 
 class CreateTableContainer extends Component {
   render() {
 
-    const { tables, currentUserId, restaurants, classes,  history  } = this.props;
+    const { classes, history } = this.props;
 
     return (
       <div className={classes.root}>
@@ -18,13 +18,15 @@ class CreateTableContainer extends Component {
           <h1 className={classes.title}>Lets fill those empty tables!</h1>
           <div className={classes.container}>
             <TableForm history={history} />
-            <CreateTable />
           </div>
         </div>
-
       </div>
     );
   }
+}
+CreateTableContainer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 export default withTracker(() => {
   Meteor.subscribe("tables");
