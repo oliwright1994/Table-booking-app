@@ -16,9 +16,6 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
-    // "&hover": {
-    //   background: "red"
-    // }
   },
 
   bookingSeats: {
@@ -29,8 +26,9 @@ const styles = theme => ({
   },
 
   contentInfoTitle: {
-    color: "red",
-    paddingBottom: "5px"
+    color: "black",
+    paddingBottom: "5px",
+    fontSize: "20px"
   },
 
   contentInfo: {
@@ -61,8 +59,25 @@ const styles = theme => ({
     width: "50px"
   },
 
+  seatsLeft: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingLeft: "20px"
+  },
+
   cancelBookingButton: {
     padding: "unset"
+  },
+
+  contentInfoDiscount: {
+    display: "flex",
+    paddingBottom: "5px"
+  },
+
+  discountColor: {
+    color: "red",
+    paddingLeft: "5px"
   }
 });
 
