@@ -169,7 +169,7 @@ const TopBarContent = props => {
             location.pathname !== "/your-bookings" && (
               <MenuItem onClick={handleClose} >
                 <Link to="/your-bookings" className={classes.link} > 
-                  <div className={classes.profile}>
+                  <div className={classes.menuItems}>
                     <ProfileIcon />
                     <p className={classes.text}>Profile</p>
                   </div>

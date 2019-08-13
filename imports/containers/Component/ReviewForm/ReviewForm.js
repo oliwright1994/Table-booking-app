@@ -110,7 +110,6 @@ class ReviewForm extends Component {
                     type="submit"
                     variant="contained"
                     disabled={submitting || pristine}
-                  // onClick={() => this.resetForm(form)}
                   >
                     Post Review
                 </Button>

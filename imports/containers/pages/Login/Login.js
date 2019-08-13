@@ -12,7 +12,7 @@ const Login = ({ classes }) => {
         <img src="/assets/images/welcome-2.svg" alt="Login-Banner" />
       </div>
       <div className={classes.header}>
-        <h1>Welcome to Food</h1>
+        <h1>Welcome to UberSeats.</h1>
         <img
           src="/assets/images/logo.svg"
           alt="logo"

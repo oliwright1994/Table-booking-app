@@ -79,9 +79,7 @@ BookingsContainer.propTypes = {
 }
 
 export default withTracker(() => {
-  // Meteor.subscribe("reviews");
   Meteor.subscribe("tables");
-  // Meteor.subscribe("users");
   Meteor.subscribe("restaurants");
 
   return {
