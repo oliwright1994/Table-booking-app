@@ -25,15 +25,26 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     width: "50%",
-    marginLeft: "50px"
+    marginLeft: "50px",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  cuisine: {
+    paddingRight: "50px"
+  },
+
+  cuisineTitle: {
+    color: "#AA0054",
+    paddingTop: "5px"
   },
 
   cuisineList: {
-    color: "#AA0054"
+    padding: "unset"
   },
 
   cuisineListItem: {
-    paddingLeft: "20px",
+    padding: "0 20px",
     listStyleType: "disc"
   },
 
@@ -68,7 +79,9 @@ const styles = theme => ({
   },
 
   resInfo: {
-    padding: "20px"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between"
   },
 
   rightTitle: {
@@ -99,6 +112,15 @@ const styles = theme => ({
 
   bio: {
     textAlign: "center"
+  },
+
+  topWrapper: {
+    display: "flex",
+    marginBottom: "40px"
+  },
+
+  map: {
+    marginTop: "50px"
   }
 });
 
