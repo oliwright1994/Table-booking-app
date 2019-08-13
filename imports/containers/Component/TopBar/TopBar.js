@@ -19,7 +19,11 @@ import { withTracker } from "meteor/react-meteor-data";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; 
+import ProfileIcon from "@material-ui/icons/assignmentind";
+import LogoutIcon from "@material-ui/icons/powersettingsnew";
+import TableIcon from "@material-ui/icons/restaurant";
+import Restaurant from "@material-ui/icons/storemalldirectory"
 
 
 class TopBar extends Component {
@@ -163,8 +167,13 @@ const TopBarContent = props => {
           {Meteor.user() &&
             Meteor.user().profile.usertype === "customer" &&
             location.pathname !== "/your-bookings" && (
-              <MenuItem onClick={handleClose}>
-                <Link to="/your-bookings">Profile</Link>
+              <MenuItem onClick={handleClose} >
+                <Link to="/your-bookings" className={classes.link} > 
+                  <div className={classes.profile}>
+                    <ProfileIcon />
+                    <p className={classes.text}>Profile</p>
+                  </div>
+                </Link>
               </MenuItem>
             )}
           {Meteor.user() && Meteor.user().profile.usertype === "restaurant" && (
@@ -180,7 +189,7 @@ const TopBarContent = props => {
                   badgeContent={props.currentNumOfCustomers}
                   color="secondary"
                 >
-                  <NotificationsIcon />
+                  <NotificationsIcon /> 
                 </Badge>
               </IconButton>
               <p>Notifications</p>
@@ -190,7 +199,12 @@ const TopBarContent = props => {
             Meteor.user().profile.usertype === "restaurant" &&
             location.pathname !== "/create-restaurant" && (
               <MenuItem onClick={handleClose}>
-                <Link to="/create-restaurant">Edit Restaurant</Link>
+                <Link to="/create-restaurant" className={classes.link}>
+                  <div className={classes.menuItems}>
+                    <Restaurant />
+                    <p className={classes.text}>Edit Restaurant</p>
+                  </div>
+                </Link>
               </MenuItem>
             )}
           {Meteor.user() &&
@@ -198,10 +212,20 @@ const TopBarContent = props => {
             restaurants.length > 0 &&
             location.pathname !== "/create-table" && (
               <MenuItem onClick={handleClose}>
-                <Link to="/create-table">Create A Table</Link>
+                <Link to="/create-table" className={classes.link}>
+                  <div className={classes.menuItems}>
+                    <TableIcon />
+                    <p className={classes.text}>Create A Table</p>
+                  </div>
+                </Link>
               </MenuItem>
             )}
-          <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
+          <MenuItem onClick={() => Meteor.logout()}>
+            <div className={classes.menuItems}>
+              <LogoutIcon /> 
+              <p className={classes.text}>Logout</p>
+            </div>
+          </MenuItem>
         </Menu>
       </div>
     </div>
