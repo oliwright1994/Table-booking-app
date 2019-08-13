@@ -25,14 +25,6 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                 const now = new Date();
                 const tableExpiryDate = new Date(table.expireTime);
                 const expired = !!(now > tableExpiryDate);
-                if (
-                  table.customers.find(
-                    customer => customer.customerId == Meteor.userId()
-                  )
-                ) {
-                  const now = new Date();
-                  const tableExpiryDate = new Date(table.expireTime);
-                  const expired = !!(now > tableExpiryDate);
                   if (
                     table.expireTime &&
                     now <= tableExpiryDate &&
@@ -53,7 +45,6 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                     );
                   }
                 }
-              }
               })
             : null}
         </div>

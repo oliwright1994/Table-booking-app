@@ -61,7 +61,7 @@ const Restaurant = ({ classes, restaurant, reviews, table, user }) => {
         <Typography component="h1" className={classes.restaurantName}>
           {name}
         </Typography>
-        <Typography component="p">{description}</Typography>
+        <Typography component="div" className={classes.bio}>{description}</Typography>
         <div className={classes.resWrapper}>
           <div className={classes.wrapperLeft}>
             {cuisines.length > 0 ? (
