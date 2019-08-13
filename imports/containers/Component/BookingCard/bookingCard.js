@@ -124,7 +124,7 @@ class BookingCard extends Component {
                   {table.notes ? table.notes : tableDefaultNotes}
                 </Typography>
 
-                <div variant="body2" color="textSecondary" component="p">
+                <div >
                   <Box
                     component="fieldset"
                     mb={3}
@@ -143,18 +143,12 @@ class BookingCard extends Component {
                   variant="body2"
                   color="textSecondary"
                   component="div"
-                  className={classes.seatAvailable}
                 >
-                  {!expired ? (
-                    table.placesAvailable > 1 ? (
-                      <div className={classes.seatsLeft}>
-                        {table.placesAvailable}
-                        <p> seats left</p>
-                      </div>
-                    ) : (
-                      `${table.placesAvailable} seat left`
-                    )
-                  ) : null}
+                  {!expired 
+                    ? table.placesAvailable > 1 
+                    ? `${table.placesAvailable} seats left`
+                    : `${table.placesAvailable} seat left`
+                  : null}
                 </Typography>
 
                 {Meteor.user().profile.usertype == "customer" &&
