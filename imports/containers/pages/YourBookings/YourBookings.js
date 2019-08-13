@@ -8,8 +8,7 @@ import PastIcon from "@material-ui/icons/timeroff";
 
 const YourBookings = ({ classes, restaurants, tables }) => {
   return (
-    <div className={classes.test}>
-
+    
     <div className={classes.container}>
       <div className={classes.current}>
         <p className={classes.title}>
@@ -54,6 +53,7 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                     );
                   }
                 }
+              }
               })
             : null}
         </div>
@@ -93,11 +93,10 @@ const YourBookings = ({ classes, restaurants, tables }) => {
                 }
               })
             : null}
-        </div>
       </div>
     </div>
   );
-};
+}
 
 YourBookings.propTypes = {
   classes: PropTypes.object.isRequired,
