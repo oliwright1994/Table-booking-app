@@ -3,6 +3,7 @@ import YourBookings from "./YourBookings";
 import { Tables } from "../../../api/tables/tables";
 import { Restaurants } from "../../../api/restaurants/restaurants";
 import { withTracker } from "meteor/react-meteor-data";
+import Loader from "../../Component/Loader";
 
 class YourBookingsContainer extends Component {
   render() {
@@ -12,7 +13,9 @@ class YourBookingsContainer extends Component {
       tables.length === 0 ||
       !!Meteor.userId() === false
     ) {
+
       return <p>Loading......</p>;
+
     } else {
       return <YourBookings restaurants={restaurants} tables={tables} />;
     }
