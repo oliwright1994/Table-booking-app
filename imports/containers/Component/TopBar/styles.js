@@ -15,7 +15,8 @@ const styles = theme => ({
 
   logo: {
     height: "50px",
-    width: "50px"
+    width: "50px",
+    marginRight: 5
   },
 
   avatar: {
@@ -27,6 +28,15 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+
+  logoWrapper: {
+    display: "flex",
+    alignItems: "center"
+  },
+
+  brand: {
+    fontSize: 24
   }
 });
 

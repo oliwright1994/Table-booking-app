@@ -18,7 +18,7 @@ const ReviewCard = ({ classes, review }) => {
             email={`"${authorEmail}"`}
             size={40}
           />
-          <p>{impression ? impression : "No overall impression yet"}</p>
+          <p>{impression ? `"${impression}"` : "No overall impression yet"}</p>
         </div>
         <Rating value={rating} readOnly />
       </div>
